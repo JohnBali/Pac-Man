@@ -1,0 +1,50 @@
+﻿Build started 20/05/2015 10:38:50 p.m..
+     1>Project "C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Pacman\Pacman.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\Pacman.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\John\Documents\SFML-2.2-windows-vc10-32-bit\SFML-2.2\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Pacman.cpp game.cpp
+         game.cpp
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(10): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(13): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(14): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(14): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(19): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(23): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(23): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(37): warning C4482: nonstandard extension used: enum 'Map::Tile' used in qualified name
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(37): warning C4482: nonstandard extension used: enum 'Map::Tile' used in qualified name
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(37): warning C4482: nonstandard extension used: enum 'Map::Tile' used in qualified name
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(40): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\game.cpp(40): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Pacman.cpp
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\pacman.cpp(18): warning C4244: 'return' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\pacman.cpp(23): warning C4244: 'return' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\pacman.cpp(66): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\john\documents\visual studio 2010\projects\pacman\pacman\pacman.cpp(66): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Generating Code...
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Pacman.exe.embed.manifest.res" Debug\Pacman_manifest.rc 
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\John\Documents\SFML-2.2-windows-vc10-32-bit\SFML-2.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Pacman.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.lib" /MACHINE:X86 Debug\Pacman.exe.embed.manifest.res
+         Debug\game.obj
+         Debug\Map.obj
+         Debug\Pacman.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Pacman.exe.embed.manifest" /manifest Debug\Pacman.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Pacman.exe.embed.manifest.res" Debug\Pacman_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\John\Documents\SFML-2.2-windows-vc10-32-bit\SFML-2.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Pacman.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.lib" /MACHINE:X86 Debug\Pacman.exe.embed.manifest.res
+         Debug\game.obj
+         Debug\Map.obj
+         Debug\Pacman.obj
+         Pacman.vcxproj -> C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Debug\Pacman.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\Pacman.unsuccessfulbuild".
+         Touching "Debug\Pacman.lastbuildstate".
+     1>Done Building Project "C:\Users\John\Documents\Visual Studio 2010\Projects\Pacman\Pacman\Pacman.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.87
