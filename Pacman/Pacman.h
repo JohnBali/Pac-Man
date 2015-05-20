@@ -31,7 +31,7 @@ class Pacman
 	private:
 		Facing facing;
 
-		int frame;
+		int frame = 0;
 
 		static const int left[FRAMES];
 		static const int right[FRAMES];
