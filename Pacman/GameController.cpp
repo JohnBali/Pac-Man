@@ -1,14 +1,17 @@
 #include "GameController.h"
 #include "Pacman.h"
 #include "Map.h"
+#include "HomeScreen.h"
 
-void Game::Start(void)
+void GameController::Start(void)
 {
 	if (_gameState != Uninitialized)
 		return;
 
 	_window.create(sf::VideoMode(448, 496), "Pacman");
 	_window.setFramerateLimit(60);
+
+	_gameState = GameController::DisplayingHomeScreen;
 
 	while (!IsExiting())
 	{
@@ -17,15 +20,15 @@ void Game::Start(void)
 	_window.close();
 }
 
-bool Game::IsExiting()
+bool GameController::IsExiting()
 {
-	if (_gameState == Game::Exiting)
+	if (_gameState == GameController::Exiting)
 		return true;
 	else
 		return false;
 }
 
-void drawEmptyTiles(Map &map, sf::RenderWindow &window)
+void GameController::drawEmptyTiles(Map &map, sf::RenderWindow &window)
 {
 	for (int row = 0; row < map.COLUMN_COUNT; row++)
 	{
@@ -46,7 +49,7 @@ void drawEmptyTiles(Map &map, sf::RenderWindow &window)
 	}
 }
 
-void drawGrid(sf::RenderWindow &window)
+void GameController::drawGrid(sf::RenderWindow &window)
 {
 	for (int y = 16; y < window.getSize().y; y += 16)
 	{
@@ -67,7 +70,14 @@ void drawGrid(sf::RenderWindow &window)
 	}
 }
 
-void Game::GameLoop()
+void GameController::DisplayHomeScreen()
+{
+	HomeScreen homeScreen;
+	homeScreen.Show(_window);
+	_gameState = GameController::Playing;
+}
+
+void GameController::GameLoop()
 {
 	bool debug = true;
 	bool drawGridCells = true;
@@ -78,101 +88,113 @@ void Game::GameLoop()
 
 	pacman.setPosition(1, 1);
 
-	sf::Event event;
-	while (_window.pollEvent(event))
+	switch (_gameState)
 	{
-		// "close requested" event: we close the window
-		if (event.type == sf::Event::Closed)
+		case GameController::DisplayingHomeScreen:
 		{
-			_window.close();
+			DisplayHomeScreen();
+			break;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		case GameController::Playing:
 		{
-			if (pacman.rowBoundary())
+			sf::Event event;
+			while (_window.pollEvent(event))
 			{
-				if (!map.isCollision(pacman.getRow(), pacman.getColumn() + 1))
+				// "close requested" event: we close the window
+				if (event.type == sf::Event::Closed)
 				{
-					pacman.setFacing(Pacman::RIGHT);
-					pacman.walk(map);
+					_window.close();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				{
+					if (pacman.rowBoundary())
+					{
+						if (!map.isCollision(pacman.getRow(), pacman.getColumn() + 1))
+						{
+							pacman.setFacing(Pacman::RIGHT);
+							pacman.walk(map);
+						}
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				{
+					if (pacman.rowBoundary())
+					{
+						if (!map.isCollision(pacman.getRow(), pacman.getColumn() - 1))
+						{
+							pacman.setFacing(Pacman::LEFT);
+							pacman.walk(map);
+						}
+					}
+
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				{
+					if (pacman.columnBoundary())
+					{
+						if (!map.isCollision(pacman.getRow() + 1, pacman.getColumn()))
+						{
+							pacman.setFacing(Pacman::DOWN);
+
+							pacman.walk(map);
+						}
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				{
+					if (pacman.columnBoundary())
+					{
+						std::cout << "row:" << pacman.rowBoundary() << std::endl;
+
+						if (!map.isCollision(pacman.getRow() - 1, pacman.getColumn()))
+						{
+							pacman.setFacing(Pacman::UP);
+							pacman.walk(map);
+						}
+					}
 				}
 			}
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			if (pacman.rowBoundary())
+
+			_window.clear();
+
+			if (debug)
 			{
-				if (!map.isCollision(pacman.getRow(), pacman.getColumn() - 1))
-				{
-					pacman.setFacing(Pacman::LEFT);
-					pacman.walk(map);
-				}
+				std::cout << "actual position: (" << pacman.getSprite().getPosition().x << ", " << pacman.getSprite().getPosition().y << ")" << std::endl;
+				std::cout << "grid position: (" << pacman.getRow() << "," << pacman.getColumn() << ")" << std::endl;
+
+				std::cout << "map tile: " << map.getTile(pacman.getRow(), pacman.getColumn()) << std::endl;
 			}
 
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			if (pacman.columnBoundary())
+			_window.draw(map.getSprite());
+
+			if (drawGridCells)
 			{
-				if (!map.isCollision(pacman.getRow() + 1, pacman.getColumn()))
+				if (drawEmptyPath)
 				{
-					pacman.setFacing(Pacman::DOWN);
-
-					pacman.walk(map);
+					drawEmptyTiles(map, _window);
 				}
+
+				drawGrid(_window);
 			}
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			if (pacman.columnBoundary())
+
+			_window.draw(pacman.getSprite());
+			if (debug)
 			{
-				std::cout << "row:" << pacman.rowBoundary() << std::endl;
+				sf::RectangleShape boundingBox;
+				boundingBox.setSize(sf::Vector2f(32, 32));
+				boundingBox.setOrigin(8, 8);
+				boundingBox.setPosition(pacman.getSprite().getPosition());
+				boundingBox.setFillColor(sf::Color(0, 0, 0, 0));
+				boundingBox.setOutlineColor(sf::Color::Red);
+				boundingBox.setOutlineThickness(3);
 
-				if (!map.isCollision(pacman.getRow() - 1, pacman.getColumn()))
-				{
-					pacman.setFacing(Pacman::UP);
-					pacman.walk(map);
-				}
+				_window.draw(boundingBox);
 			}
+			_window.display();
+			break;
 		}
-	}
-
-	_window.clear();
-
-	if (debug)
-	{
-		std::cout << "actual position: (" << pacman.getSprite().getPosition().x << ", " << pacman.getSprite().getPosition().y << ")" << std::endl;
-		std::cout << "grid position: (" << pacman.getRow() << "," << pacman.getColumn() << ")" << std::endl;
-
-		std::cout << "map tile: " << map.getTile(pacman.getRow(), pacman.getColumn()) << std::endl;
-	}
-
-	_window.draw(map.getSprite());
-
-	if (drawGridCells)
-	{
-		if (drawEmptyPath)
-		{
-			drawEmptyTiles(map, _window);
-		}
-
-		drawGrid(_window);
-	}
-
-	_window.draw(pacman.getSprite());
-	if (debug)
-	{
-		sf::RectangleShape boundingBox;
-		boundingBox.setSize(sf::Vector2f(32, 32));
-		boundingBox.setOrigin(8, 8);
-		boundingBox.setPosition(pacman.getSprite().getPosition());
-		boundingBox.setFillColor(sf::Color(0, 0, 0, 0));
-		boundingBox.setOutlineColor(sf::Color::Red);
-		boundingBox.setOutlineThickness(3);
-
-		_window.draw(boundingBox);
-	}
-	_window.display();
+	}	
 }
 
-Game::GameState Game::_gameState = Uninitialized;
-sf::RenderWindow Game::_window;
+GameController::GameState GameController::_gameState = Uninitialized;
+sf::RenderWindow GameController::_window;

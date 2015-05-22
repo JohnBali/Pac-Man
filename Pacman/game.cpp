@@ -6,7 +6,7 @@
 
 int main()
 {
-	Game::Start();
+	GameController::Start();
 }
 
 

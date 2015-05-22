@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="HomeScreen.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Pacman.cpp" />
   </ItemGroup>
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="HomeScreen.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Pacman.h" />
   </ItemGroup>
