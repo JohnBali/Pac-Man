@@ -96,6 +96,13 @@ void GameController::DisplayMenu()
 	}
 }
 
+sf::Event GameController::GetInput()
+{
+	sf::Event event;
+	_window.pollEvent(event);
+	return event;
+}
+
 void GameController::GameLoop()
 {
 	bool debug = true;
@@ -126,54 +133,7 @@ void GameController::GameLoop()
 				{
 					_window.close();
 				}
-				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				{
-					if (_pacman.rowBoundary())
-					{
-						if (!map.isCollision(_pacman.getRow(), _pacman.getColumn() + 1))
-						{
-							_pacman.setFacing(Pacman::RIGHT);
-							_pacman.walk(map);
-						}
-					}
-				}
-				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				{
-					if (_pacman.rowBoundary())
-					{
-						if (!map.isCollision(_pacman.getRow(), _pacman.getColumn() - 1))
-						{
-							_pacman.setFacing(Pacman::LEFT);
-							_pacman.walk(map);
-						}
-					}
-
-				}
-				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				{
-					if (_pacman.columnBoundary())
-					{
-						if (!map.isCollision(_pacman.getRow() + 1, _pacman.getColumn()))
-						{
-							_pacman.setFacing(Pacman::DOWN);
-
-							_pacman.walk(map);
-						}
-					}
-				}
-				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				{
-					if (_pacman.columnBoundary())
-					{
-						std::cout << "row:" << _pacman.rowBoundary() << std::endl;
-
-						if (!map.isCollision(_pacman.getRow() - 1, _pacman.getColumn()))
-						{
-							_pacman.setFacing(Pacman::UP);
-							_pacman.walk(map);
-						}
-					}
-				}
+				_pacman.Update();
 			}
 
 			_window.clear();

@@ -19,6 +19,8 @@ class Pacman : public GameObject
 			DOWN
 		};
 
+		void Update();
+
 		bool rowBoundary();
 		bool columnBoundary();
 
@@ -28,6 +30,7 @@ class Pacman : public GameObject
 		void setFacing(Facing facing);
 
 	private:
+		Map map;
 		Facing facing;
 
 		int frame = 0;

@@ -19,6 +19,8 @@ private:
 	static void DisplayHomeScreen();
 	static void DisplayMenu();
 
+	static sf::Event GetInput();
+
 	enum GameState { Uninitialized, DisplayingHomeScreen, Paused, DisplayingMenu, Playing, Exiting };
 
 	static void drawEmptyTiles(Map &map, sf::RenderWindow &window);

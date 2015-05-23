@@ -65,3 +65,8 @@ sf::Vector2f GameObject::GetPosition()
 {
 	return _sprite.getPosition();
 }
+
+void GameObject::Update()
+{
+
+}

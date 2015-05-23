@@ -56,6 +56,58 @@ void Pacman::setFacing(Facing facing)
 	this->facing = facing;
 }
 
+void Pacman::Update()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		if (rowBoundary())
+		{
+			if (!map.isCollision(getRow(), getColumn() + 1))
+			{
+				setFacing(Pacman::RIGHT);
+				walk(map);
+			}
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		if (rowBoundary())
+		{
+			if (!map.isCollision(getRow(), getColumn() - 1))
+			{
+				setFacing(Pacman::LEFT);
+				walk(map);
+			}
+		}
+
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		if (columnBoundary())
+		{
+			if (!map.isCollision(getRow() + 1, getColumn()))
+			{
+				setFacing(Pacman::DOWN);
+
+				walk(map);
+			}
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		if (columnBoundary())
+		{
+			std::cout << "row:" << rowBoundary() << std::endl;
+
+			if (!map.isCollision(getRow() - 1, getColumn()))
+			{
+				setFacing(Pacman::UP);
+				walk(map);
+			}
+		}
+	}
+}
+
 Pacman::Pacman()
 {
 	Load("assets/pacman.png");
@@ -78,9 +130,6 @@ Pacman::Pacman()
 	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	this->facing = RIGHT;
 }
-
-
-
 
 Pacman::~Pacman()
 {
