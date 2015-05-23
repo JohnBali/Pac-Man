@@ -7,6 +7,7 @@
 
 void GameController::Start(void)
 {
+	//create objects
 	Pacman *pacman = new Pacman();	
 	Map *map = new Map();
 
@@ -16,6 +17,7 @@ void GameController::Start(void)
 		_gameObjectManager.Add("Outline", debug);
 	}
 
+	//add to game object manager
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("Map", map);
 	
