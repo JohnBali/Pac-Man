@@ -13,7 +13,7 @@ private:
 	static void GameLoop();
 
 	static void DisplayHomeScreen();
-	static void ShowMenu();
+	static void DisplayMenu();
 
 	enum GameState { Uninitialized, DisplayingHomeScreen, Paused, DisplayingMenu, Playing, Exiting };
 

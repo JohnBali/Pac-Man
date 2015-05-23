@@ -2,6 +2,7 @@
 #include "Pacman.h"
 #include "Map.h"
 #include "HomeScreen.h"
+#include "MainMenu.h"
 
 void GameController::Start(void)
 {
@@ -74,7 +75,22 @@ void GameController::DisplayHomeScreen()
 {
 	HomeScreen homeScreen;
 	homeScreen.Show(_window);
-	_gameState = GameController::Playing;
+	_gameState = GameController::DisplayingMenu;
+}
+
+void GameController::DisplayMenu()
+{
+	MainMenu mainMenu;
+	MainMenu::MenuResult result = mainMenu.Show(_window);
+	switch (result)
+	{
+	case MainMenu::Exit:
+		_gameState = GameController::Exiting;
+		break;
+	case MainMenu::Play:
+		_gameState = GameController::Playing;
+		break;
+	}
 }
 
 void GameController::GameLoop()
@@ -93,6 +109,11 @@ void GameController::GameLoop()
 		case GameController::DisplayingHomeScreen:
 		{
 			DisplayHomeScreen();
+			break;
+		}
+		case GameController::DisplayingMenu:
+		{
+			DisplayMenu();
 			break;
 		}
 		case GameController::Playing:

@@ -33,10 +33,25 @@
     <ClCompile Include="HomeScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\map.bmp">
       <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\homeScreen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\MainMenu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\map.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\pacman.png">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +65,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HomeScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
