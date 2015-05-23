@@ -2,6 +2,10 @@
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include "Map.h"
+#include "Pacman.h"
+#include "HomeScreen.h"
+#include "MainMenu.h"
+#include "GameController.h"
 
 class GameController
 {
@@ -22,4 +26,5 @@ private:
 
 	static GameState _gameState;
 	static sf::RenderWindow _window;
+	static Pacman _pacman;
 };

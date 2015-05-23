@@ -1,13 +1,16 @@
 #pragma once
+#include "GameObject.h"
+#include "Map.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Map.h"
 
 const int FRAMES = 3;
 
-class Pacman
-{
+class Pacman : public GameObject
+{	
 	public:
+		Pacman();
+		~Pacman();
 		enum Facing
 		{
 			LEFT,
@@ -22,11 +25,7 @@ class Pacman
 		int getColumn();
 		int getRow();
 		void walk(Map map);
-		sf::Sprite getSprite();
 		void setFacing(Facing facing);
-		void setPosition(int row, int column);
-		Pacman();
-		~Pacman();
 
 	private:
 		Facing facing;
@@ -37,7 +36,6 @@ class Pacman
 		static const int right[FRAMES];
 		static const int down[FRAMES];
 		static const int up[FRAMES];
-		sf::Sprite sprite;
 		sf::Texture texture;
 
 };

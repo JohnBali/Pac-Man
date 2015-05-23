@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="GameObejct.cpp" />
     <ClCompile Include="HomeScreen.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -101,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="HomeScreen.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />

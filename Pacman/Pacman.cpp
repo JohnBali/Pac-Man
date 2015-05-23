@@ -7,53 +7,48 @@ const int Pacman::down[FRAMES] = { 0,1,2 };
 const int Pacman::up[FRAMES] = { 9,10,11 };
 bool Pacman::rowBoundary()
 {
-	return ((int)sprite.getPosition().y % 16 == 0);
+	return ((int)GetPosition().y % 16 == 0);
 }
 bool Pacman::columnBoundary()
 {
-	return ((int)sprite.getPosition().x % 16 == 0);
+	return ((int)GetPosition().x % 16 == 0);
 }
 int Pacman::getColumn()
 {
-	return sprite.getPosition().x / 16;
+	return GetPosition().x / 16;
 }
 
 int Pacman::getRow()
 {
-	return sprite.getPosition().y / 16;
+	return GetPosition().y / 16;
 }
 
 void Pacman::walk(Map map)
 {
-	sf::Vector2f pos = sprite.getPosition();
+	sf::Vector2f pos = GetPosition();
 
 	if (facing == RIGHT)
 	{
 		pos.x += 8;
-		this->sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
+		this->SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == LEFT)
 	{
 		pos.x -= 8;
-		this->sprite.setTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
+		this->SetTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == DOWN)
 	{
 		pos.y += 8;
-		this->sprite.setTextureRect(sf::IntRect(down[frame] * 16, 0, 16, 16));
+		this->SetTextureRect(sf::IntRect(down[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == UP)
 	{
 		pos.y -= 8;
-		this->sprite.setTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
+		this->SetTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
 	}
-	sprite.setPosition(pos);
+	SetPosition(pos.x, pos.y);
 	frame = (frame + 1) % 2;
-}
-
-sf::Sprite Pacman::getSprite()
-{
-	return sprite;
 }
 
 void Pacman::setFacing(Facing facing)
@@ -61,14 +56,9 @@ void Pacman::setFacing(Facing facing)
 	this->facing = facing;
 }
 
-void Pacman::setPosition(int row, int column)
-{
-	sprite.setPosition(row * 16, column * 16);
-}
-
 Pacman::Pacman()
 {
-	
+	Load("assets/pacman.png");
 	if (!texture.loadFromFile("assets/pacman.png"))
 	{
 		std::cout << "Error loading resource pacman.png" << std::endl;
@@ -82,13 +72,11 @@ Pacman::Pacman()
 		std::cout << "Error masking image resource pacman.png" << std::endl;
 	}
 
-	this->sprite.setTexture(texture);
-	this->sprite.setScale(2, 2);
-	this->sprite.setOrigin(4,4);
-	
+	SetTexture(texture);
+	SetScale(2, 2);
+	SetOrigin(4, 4);		
+	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	this->facing = RIGHT;
-
-	this->sprite.setTextureRect(sf::IntRect(right[frame]*16, 0,16,16));
 }
 
 

@@ -6,6 +6,9 @@
 
 void GameController::Start(void)
 {
+	_pacman.Load("assets/pacman.png");
+	_pacman.SetPosition(16, 16);
+
 	if (_gameState != Uninitialized)
 		return;
 
@@ -99,10 +102,7 @@ void GameController::GameLoop()
 	bool drawGridCells = true;
 	bool drawEmptyPath = true;
 
-	Pacman pacman;
 	Map map;
-
-	pacman.setPosition(1, 1);
 
 	switch (_gameState)
 	{
@@ -128,49 +128,49 @@ void GameController::GameLoop()
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 				{
-					if (pacman.rowBoundary())
+					if (_pacman.rowBoundary())
 					{
-						if (!map.isCollision(pacman.getRow(), pacman.getColumn() + 1))
+						if (!map.isCollision(_pacman.getRow(), _pacman.getColumn() + 1))
 						{
-							pacman.setFacing(Pacman::RIGHT);
-							pacman.walk(map);
+							_pacman.setFacing(Pacman::RIGHT);
+							_pacman.walk(map);
 						}
 					}
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 				{
-					if (pacman.rowBoundary())
+					if (_pacman.rowBoundary())
 					{
-						if (!map.isCollision(pacman.getRow(), pacman.getColumn() - 1))
+						if (!map.isCollision(_pacman.getRow(), _pacman.getColumn() - 1))
 						{
-							pacman.setFacing(Pacman::LEFT);
-							pacman.walk(map);
+							_pacman.setFacing(Pacman::LEFT);
+							_pacman.walk(map);
 						}
 					}
 
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 				{
-					if (pacman.columnBoundary())
+					if (_pacman.columnBoundary())
 					{
-						if (!map.isCollision(pacman.getRow() + 1, pacman.getColumn()))
+						if (!map.isCollision(_pacman.getRow() + 1, _pacman.getColumn()))
 						{
-							pacman.setFacing(Pacman::DOWN);
+							_pacman.setFacing(Pacman::DOWN);
 
-							pacman.walk(map);
+							_pacman.walk(map);
 						}
 					}
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
-					if (pacman.columnBoundary())
+					if (_pacman.columnBoundary())
 					{
-						std::cout << "row:" << pacman.rowBoundary() << std::endl;
+						std::cout << "row:" << _pacman.rowBoundary() << std::endl;
 
-						if (!map.isCollision(pacman.getRow() - 1, pacman.getColumn()))
+						if (!map.isCollision(_pacman.getRow() - 1, _pacman.getColumn()))
 						{
-							pacman.setFacing(Pacman::UP);
-							pacman.walk(map);
+							_pacman.setFacing(Pacman::UP);
+							_pacman.walk(map);
 						}
 					}
 				}
@@ -180,10 +180,10 @@ void GameController::GameLoop()
 
 			if (debug)
 			{
-				std::cout << "actual position: (" << pacman.getSprite().getPosition().x << ", " << pacman.getSprite().getPosition().y << ")" << std::endl;
-				std::cout << "grid position: (" << pacman.getRow() << "," << pacman.getColumn() << ")" << std::endl;
+				std::cout << "actual position: (" << _pacman.GetPosition().x << ", " << _pacman.GetPosition().y << ")" << std::endl;
+				std::cout << "grid position: (" << _pacman.getRow() << "," << _pacman.getColumn() << ")" << std::endl;
 
-				std::cout << "map tile: " << map.getTile(pacman.getRow(), pacman.getColumn()) << std::endl;
+				std::cout << "map tile: " << map.getTile(_pacman.getRow(), _pacman.getColumn()) << std::endl;
 			}
 
 			_window.draw(map.getSprite());
@@ -198,13 +198,13 @@ void GameController::GameLoop()
 				drawGrid(_window);
 			}
 
-			_window.draw(pacman.getSprite());
+			_pacman.Draw(_window);
 			if (debug)
 			{
 				sf::RectangleShape boundingBox;
 				boundingBox.setSize(sf::Vector2f(32, 32));
 				boundingBox.setOrigin(8, 8);
-				boundingBox.setPosition(pacman.getSprite().getPosition());
+				boundingBox.setPosition(_pacman.GetPosition());
 				boundingBox.setFillColor(sf::Color(0, 0, 0, 0));
 				boundingBox.setOutlineColor(sf::Color::Red);
 				boundingBox.setOutlineThickness(3);
@@ -219,3 +219,4 @@ void GameController::GameLoop()
 
 GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
+Pacman GameController::_pacman;
