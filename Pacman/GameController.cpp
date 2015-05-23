@@ -1,11 +1,24 @@
 #include "GameController.h"
 #include "Pacman.h"
 #include "Map.h"
+#include "Debug.h"
 #include "HomeScreen.h"
 #include "MainMenu.h"
 
 void GameController::Start(void)
 {
+	Pacman *pacman = new Pacman();	
+	Map *map = new Map();
+
+	if (_debug)
+	{
+		Debug *debug = new Debug(_gameObjectManager);
+		_gameObjectManager.Add("Outline", debug);
+	}
+
+	_gameObjectManager.Add("Pacman", pacman);
+	_gameObjectManager.Add("Map", map);
+	
 	if (_gameState != Uninitialized)
 		return;
 
@@ -27,48 +40,6 @@ bool GameController::IsExiting()
 		return true;
 	else
 		return false;
-}
-
-void GameController::drawEmptyTiles(Map &map, sf::RenderWindow &window)
-{
-	for (int row = 0; row < map.COLUMN_COUNT; row++)
-	{
-		for (int col = 0; col < map.ROW_COUNT; col++)
-		{
-			Map::Tile tile = map.getTile(col, row);
-			if ((tile == Map::Tile::TileEmpty || tile == Map::Tile::TileDot) || tile == Map::Tile::TileEnergizer)
-			{
-				sf::RectangleShape rectangle;
-				rectangle.setPosition(row * 16, col * 16);
-				rectangle.setSize(sf::Vector2f(16, 16));
-
-				rectangle.setFillColor(sf::Color::Cyan);
-
-				window.draw(rectangle);
-			}
-		}
-	}
-}
-
-void GameController::drawGrid(sf::RenderWindow &window)
-{
-	for (int y = 16; y < window.getSize().y; y += 16)
-	{
-		sf::Vertex line[2] = {
-			sf::Vertex(sf::Vector2f(0.0f, y), sf::Color(159, 159, 159, 255)),
-			sf::Vertex(sf::Vector2f(window.getSize().x, y), sf::Color(159, 159, 159, 255))
-		};
-		window.draw(line, 2, sf::Lines);
-	}
-
-	for (int x = 16; x < window.getSize().x; x += 16)
-	{
-		sf::Vertex line[2] = {
-			sf::Vertex(sf::Vector2f(x, 0), sf::Color(159, 159, 159, 255)),
-			sf::Vertex(sf::Vector2f(x, window.getSize().y), sf::Color(159, 159, 159, 255))
-		};
-		window.draw(line, 2, sf::Lines);
-	}
 }
 
 void GameController::DisplayHomeScreen()
@@ -102,7 +73,6 @@ sf::Event GameController::GetInput()
 
 void GameController::GameLoop()
 {
-	bool debug = true;
 	bool drawGridCells = true;
 	bool drawEmptyPath = true;
 
@@ -128,44 +98,26 @@ void GameController::GameLoop()
 				{
 					_window.close();
 				}
-				_pacman.Update();
+				_gameObjectManager.UpdateAll();
 			}
 
-			_window.clear();
+			_window.clear();		
+			_gameObjectManager.DrawAll(_window);
 
-			if (debug)
+			if (_debug)
 			{
-				std::cout << "actual position: (" << _pacman.GetPosition().x << ", " << _pacman.GetPosition().y << ")" << std::endl;
-				std::cout << "grid position: (" << _pacman.getRow() << "," << _pacman.getColumn() << ")" << std::endl;
-
-				std::cout << "map tile: " << _map.getTile(_pacman.getRow(), _pacman.getColumn()) << std::endl;
-			}
-
-			_map.Draw(_window);
-
-			if (drawGridCells)
-			{
-				if (drawEmptyPath)
-				{
-					drawEmptyTiles(_map, _window);
-				}
-
-				drawGrid(_window);
-			}
-
-			_pacman.Draw(_window);
-			if (debug)
-			{
+				GameObject pacman = *_gameObjectManager.Get("Pacman");
 				sf::RectangleShape boundingBox;
 				boundingBox.setSize(sf::Vector2f(32, 32));
 				boundingBox.setOrigin(8, 8);
-				boundingBox.setPosition(_pacman.GetPosition());
+				boundingBox.setPosition(pacman.GetPosition());
 				boundingBox.setFillColor(sf::Color(0, 0, 0, 0));
 				boundingBox.setOutlineColor(sf::Color::Red);
 				boundingBox.setOutlineThickness(3);
 
 				_window.draw(boundingBox);
 			}
+			
 			_window.display();
 			break;
 		}
@@ -174,5 +126,6 @@ void GameController::GameLoop()
 
 GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
-Pacman GameController::_pacman;
 Map GameController::_map;
+GameObjectManager GameController::_gameObjectManager;
+bool GameController::_debug = true;

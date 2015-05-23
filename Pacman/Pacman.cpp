@@ -106,10 +106,25 @@ void Pacman::Update()
 			}
 		}
 	}
+
+	if (debug)
+	{
+		Debug();
+	}
+}
+
+void Pacman::Debug()
+{
+		std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
+		std::cout << "grid position: (" << getRow() << "," << getColumn() << ")" << std::endl;
+		std::cout << "map tile: " << map.getTile(getRow(), getColumn()) << std::endl;
 }
 
 Pacman::Pacman()
 {
+	//turn debug on or off
+	debug = true;
+
 	Load("assets/pacman.png");
 	SetScale(2, 2);
 	SetOrigin(4, 4);	

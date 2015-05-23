@@ -32,6 +32,7 @@ class Pacman : public GameObject
 	private:
 		Map map;
 		Facing facing;
+		bool debug;
 
 		int frame = 0;
 
@@ -39,5 +40,7 @@ class Pacman : public GameObject
 		static const int right[FRAMES];
 		static const int down[FRAMES];
 		static const int up[FRAMES];
+
+		void Debug();
 };
 

@@ -6,6 +6,7 @@
 #include "HomeScreen.h"
 #include "MainMenu.h"
 #include "GameController.h"
+#include "GameObjectManager.h"
 
 class GameController
 {
@@ -23,11 +24,9 @@ private:
 
 	enum GameState { Uninitialized, DisplayingHomeScreen, Paused, DisplayingMenu, Playing, Exiting };
 
-	static void drawEmptyTiles(Map &map, sf::RenderWindow &window);
-	static void drawGrid(sf::RenderWindow &window);
-
 	static GameState _gameState;
 	static sf::RenderWindow _window;
-	static Pacman _pacman;
 	static Map _map;
+	static GameObjectManager _gameObjectManager;
+	static bool _debug;
 };
