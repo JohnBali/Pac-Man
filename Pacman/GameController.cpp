@@ -6,9 +6,6 @@
 
 void GameController::Start(void)
 {
-	_pacman.Load("assets/pacman.png");
-	_pacman.SetPosition(16, 16);
-
 	if (_gameState != Uninitialized)
 		return;
 
@@ -109,8 +106,6 @@ void GameController::GameLoop()
 	bool drawGridCells = true;
 	bool drawEmptyPath = true;
 
-	Map map;
-
 	switch (_gameState)
 	{
 		case GameController::DisplayingHomeScreen:
@@ -143,16 +138,16 @@ void GameController::GameLoop()
 				std::cout << "actual position: (" << _pacman.GetPosition().x << ", " << _pacman.GetPosition().y << ")" << std::endl;
 				std::cout << "grid position: (" << _pacman.getRow() << "," << _pacman.getColumn() << ")" << std::endl;
 
-				std::cout << "map tile: " << map.getTile(_pacman.getRow(), _pacman.getColumn()) << std::endl;
+				std::cout << "map tile: " << _map.getTile(_pacman.getRow(), _pacman.getColumn()) << std::endl;
 			}
 
-			_window.draw(map.getSprite());
+			_map.Draw(_window);
 
 			if (drawGridCells)
 			{
 				if (drawEmptyPath)
 				{
-					drawEmptyTiles(map, _window);
+					drawEmptyTiles(_map, _window);
 				}
 
 				drawGrid(_window);
@@ -180,3 +175,4 @@ void GameController::GameLoop()
 GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
 Pacman GameController::_pacman;
+Map GameController::_map;

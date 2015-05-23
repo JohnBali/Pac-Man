@@ -2,8 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "GameObject.h"
 
-class Map
+class Map : public GameObject
 {
 public:
 	static const int ROW_COUNT = 31;
@@ -25,7 +26,7 @@ public:
 
 	Tile getTile(int row, int column);
 	bool isCollision(int row, int column);
-	sf::Sprite getSprite();
+
 	Map();
 	~Map();
 

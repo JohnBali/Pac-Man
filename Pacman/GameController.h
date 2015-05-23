@@ -29,4 +29,5 @@ private:
 	static GameState _gameState;
 	static sf::RenderWindow _window;
 	static Pacman _pacman;
+	static Map _map;
 };

@@ -39,7 +39,5 @@ class Pacman : public GameObject
 		static const int right[FRAMES];
 		static const int down[FRAMES];
 		static const int up[FRAMES];
-		sf::Texture texture;
-
 };
 

@@ -111,22 +111,9 @@ void Pacman::Update()
 Pacman::Pacman()
 {
 	Load("assets/pacman.png");
-	if (!texture.loadFromFile("assets/pacman.png"))
-	{
-		std::cout << "Error loading resource pacman.png" << std::endl;
-	}
-
-	sf::Image pacmanImage = texture.copyToImage();
-	pacmanImage.createMaskFromColor(sf::Color(0, 0, 0), 0);
-
-	if (!texture.loadFromImage(pacmanImage))
-	{
-		std::cout << "Error masking image resource pacman.png" << std::endl;
-	}
-
-	SetTexture(texture);
 	SetScale(2, 2);
-	SetOrigin(4, 4);		
+	SetOrigin(4, 4);	
+	GameObject::SetPosition(16, 16);
 	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	this->facing = RIGHT;
 }

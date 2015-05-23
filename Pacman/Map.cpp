@@ -52,20 +52,10 @@ bool Map::isCollision(int row, int column)
 	return true;
 }
 
-sf::Sprite Map::getSprite()
-{
-	return sprite;
-}
-
 Map::Map()
 {
-	if (!texture.loadFromFile("assets/map.png"))
-	{
-		std::cout << "Error loading resource map.bmp" << std::endl;
-	}
-
-	sprite.setTexture(texture);
-	sprite.setScale(2, 2);
+	Load("assets/map.png");
+	SetScale(2, 2);
 }
 
 
