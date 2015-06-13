@@ -122,10 +122,10 @@ bool GameObject::ColumnBoundary()
 
 int GameObject::GetColumn()
 {
-	return _sprite.getPosition().y / 16;
+	return _sprite.getPosition().x / 16;
 }
 
 int GameObject::GetRow()
 {
-	return _sprite.getPosition().x / 16;
+	return _sprite.getPosition().y / 16;
 }
