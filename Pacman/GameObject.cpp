@@ -1,4 +1,11 @@
 #include "GameObject.h"
+#include "Map.h"
+
+const int GameObject::left[FRAMES] = { 6, 7, 8 };
+const int GameObject::right[FRAMES] = { 3, 4, 5 };
+const int GameObject::down[FRAMES] = { 0, 1, 2 };
+const int GameObject::up[FRAMES] = { 9, 10, 11 };
+
 
 GameObject::GameObject()
 	: _isLoaded(false)
@@ -7,7 +14,6 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-
 }
 
 void GameObject::Load(std::string filename)
@@ -69,4 +75,57 @@ sf::Vector2f GameObject::GetPosition()
 void GameObject::Update()
 {
 
+}
+
+// Merge of GameObject and Spriteclass
+
+void GameObject::SetFacing(Facing facing)
+{
+	this->facing = facing;
+}
+
+GameObject::Facing GameObject::GetFacing()
+{
+	return this->facing;
+}
+
+
+void GameObject::SetTile(sf::Vector2f pos)
+{
+	this->tile.x = (int)pos.x / 16;
+	this->tile.y = (int)pos.y / 16;
+}
+
+sf::Vector2i GameObject::GetTile()
+{
+	return this->tile;
+}
+
+void GameObject::SetSpeed(float speed)
+{
+	this->speed = speed;
+}
+
+float GameObject::GetSpeed()
+{
+	return this->speed;
+}
+
+bool GameObject::RowBoundary()
+{
+	return ((int)_sprite.getPosition().y % 16 == 0);
+}
+bool GameObject::ColumnBoundary()
+{
+	return ((int)_sprite.getPosition().x % 16 == 0);
+}
+
+int GameObject::GetColumn()
+{
+	return _sprite.getPosition().y / 16;
+}
+
+int GameObject::GetRow()
+{
+	return _sprite.getPosition().x / 16;
 }

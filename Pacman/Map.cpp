@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#include "GameObject.h"
 
 const int Map::DEFAULT_MAP[ROW_COUNT][COLUMN_COUNT] = {
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },

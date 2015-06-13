@@ -30,7 +30,7 @@ GameObject* GameObjectManager::Get(std::string name) const
 	std::map<std::string, GameObject*>::const_iterator results = _gameObjects.find(name);
 	if (results == _gameObjects.end())
 		return NULL;
-		return results->second;
+	return results->second;
 }
 
 int GameObjectManager::GetObjectCount() const

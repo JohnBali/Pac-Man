@@ -1,81 +1,57 @@
 #include "Pacman.h"
-#include <cmath>
-
-const int Pacman::left[FRAMES] = { 6,7,8 };
-const int Pacman::right[FRAMES] = { 3,4,5 };
-const int Pacman::down[FRAMES] = { 0,1,2 };
-const int Pacman::up[FRAMES] = { 9,10,11 };
-bool Pacman::rowBoundary()
-{
-	return ((int)GetPosition().y % 16 == 0);
-}
-bool Pacman::columnBoundary()
-{
-	return ((int)GetPosition().x % 16 == 0);
-}
-int Pacman::getColumn()
-{
-	return GetPosition().x / 16;
-}
-
-int Pacman::getRow()
-{
-	return GetPosition().y / 16;
-}
 
 void Pacman::walk(Map map)
 {
-	sf::Vector2f pos = GetPosition();
+	sf::Vector2f pos = _sprite.getPosition();
 
 	if (facing == RIGHT)
 	{
-		pos.x += 8;
-		this->SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
+		pos.x += this->GetSpeed();
+		this->SetTile(pos);
+		this->_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == LEFT)
 	{
-		pos.x -= 8;
-		this->SetTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
+		pos.x -= this->GetSpeed();
+		this->SetTile(pos);
+		this->_sprite.setTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == DOWN)
 	{
-		pos.y += 8;
-		this->SetTextureRect(sf::IntRect(down[frame] * 16, 0, 16, 16));
+		pos.y += this->GetSpeed();
+		this->SetTile(pos);
+		this->_sprite.setTextureRect(sf::IntRect(down[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == UP)
 	{
-		pos.y -= 8;
-		this->SetTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
+		pos.y -= this->GetSpeed();
+		this->SetTile(pos);
+		this->_sprite.setTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
 	}
-	SetPosition(pos.x, pos.y);
-	frame = (frame + 1) % 2;
-}
-
-void Pacman::setFacing(Facing facing)
-{
-	this->facing = facing;
+	_sprite.setPosition(pos);
+	frame = (frame + 1) % 3;
 }
 
 void Pacman::Update()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		if (rowBoundary())
+		if (RowBoundary())
 		{
-			if (!map.isCollision(getRow(), getColumn() + 1))
+			if (!map.isCollision(GetRow(), GetColumn() + 1))
 			{
-				setFacing(Pacman::RIGHT);
+				SetFacing(Pacman::RIGHT);
 				walk(map);
 			}
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if (rowBoundary())
+		if (RowBoundary())
 		{
-			if (!map.isCollision(getRow(), getColumn() - 1))
+			if (!map.isCollision(GetRow(), GetColumn() - 1))
 			{
-				setFacing(Pacman::LEFT);
+				SetFacing(Pacman::LEFT);
 				walk(map);
 			}
 		}
@@ -83,25 +59,24 @@ void Pacman::Update()
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		if (columnBoundary())
+		if (ColumnBoundary())
 		{
-			if (!map.isCollision(getRow() + 1, getColumn()))
+			if (!map.isCollision(GetRow() + 1, GetColumn()))
 			{
-				setFacing(Pacman::DOWN);
-
+				SetFacing(Pacman::DOWN);
 				walk(map);
 			}
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		if (columnBoundary())
+		if (ColumnBoundary())
 		{
-			std::cout << "row:" << rowBoundary() << std::endl;
+			std::cout << "row:" << RowBoundary() << std::endl;
 
-			if (!map.isCollision(getRow() - 1, getColumn()))
+			if (!map.isCollision(GetRow() - 1, GetColumn()))
 			{
-				setFacing(Pacman::UP);
+				SetFacing(Pacman::UP);
 				walk(map);
 			}
 		}
@@ -116,8 +91,8 @@ void Pacman::Update()
 void Pacman::Debug()
 {
 		std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
-		std::cout << "grid position: (" << getRow() << "," << getColumn() << ")" << std::endl;
-		std::cout << "map tile: " << map.getTile(getRow(), getColumn()) << std::endl;
+		std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
+		std::cout << "map tile: " << map.getTile(GetRow(), GetColumn()) << std::endl;
 }
 
 Pacman::Pacman()
@@ -130,6 +105,7 @@ Pacman::Pacman()
 	SetOrigin(4, 4);	
 	GameObject::SetPosition(16, 16);
 	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
+	SetSpeed(4);
 	this->facing = RIGHT;
 }
 
