@@ -9,16 +9,16 @@ MainMenu::MenuResult MainMenu::Show(sf::RenderWindow& window)
 	image.loadFromFile("assets/mainMenu.png");
 	sf::Sprite sprite(image);
 	MenuItem playButton;
-	playButton.rect.top = 92;
-	playButton.rect.height = 155;
+	playButton.rect.top = 11;
+	playButton.rect.height = 99;
 	playButton.rect.left = 0;
 	playButton.rect.width = 448;
 	playButton.action = Play;
 	MenuItem exitButton;
+	exitButton.rect.top = 268;
+	exitButton.rect.height = 99;
 	exitButton.rect.left = 0;
 	exitButton.rect.width = 448;
-	exitButton.rect.top = 247;
-	exitButton.rect.height = 119;
 	exitButton.action = Exit;
 	
 	_menuItems.push_back(playButton);

@@ -20,7 +20,7 @@ void GameController::Start(void)
 	//add to game object manager
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("Map", map);
-	
+
 	if (_gameState != Uninitialized)
 		return;
 
@@ -100,7 +100,8 @@ void GameController::GameLoop()
 				{
 					_window.close();
 				}
-				_gameObjectManager.UpdateAll();
+				sf::Vector2f pacPos = _gameObjectManager.GetPosition("Pacman");
+				_gameObjectManager.UpdateAll(pacPos);
 			}
 
 			_window.clear();		
@@ -130,4 +131,4 @@ GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
 Map GameController::_map;
 GameObjectManager GameController::_gameObjectManager;
-bool GameController::_debug = true;
+bool GameController::_debug = false;

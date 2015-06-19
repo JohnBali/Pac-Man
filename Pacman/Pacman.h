@@ -9,7 +9,7 @@ class Pacman : public GameObject
 		~Pacman();
 
 		//methods
-		void Update();
+		void Update(sf::Vector2f pacPos);
 		void walk(Map map);
 
 	private:

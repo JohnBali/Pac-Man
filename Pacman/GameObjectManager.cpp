@@ -38,14 +38,21 @@ int GameObjectManager::GetObjectCount() const
 	return _gameObjects.size();
 }
 
-void GameObjectManager::UpdateAll()
+void GameObjectManager::UpdateAll(sf::Vector2f pacPos)
 {
 	std::map<std::string, GameObject*>::const_iterator itr = _gameObjects.begin();
 	while (itr != _gameObjects.end())
 	{
-		itr->second->Update();
+		itr->second->Update(pacPos);
 		itr++;
 	}
+}
+
+sf::Vector2f GameObjectManager::GetPosition(std::string name)
+{
+	sf::Vector2f pos;
+	std::map<std::string, GameObject*>::const_iterator results = _gameObjects.find(name);
+	return results->second->GetPosition();
 }
 
 void GameObjectManager::DrawAll(sf::RenderWindow &window)

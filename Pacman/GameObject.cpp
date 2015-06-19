@@ -72,7 +72,7 @@ sf::Vector2f GameObject::GetPosition()
 	return _sprite.getPosition();
 }
 
-void GameObject::Update()
+void GameObject::Update(sf::Vector2f pacPos)
 {
 
 }

@@ -29,10 +29,10 @@ void Pacman::walk(Map map)
 		this->_sprite.setTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
 	}
 	_sprite.setPosition(pos);
-	frame = (frame + 1) % 3;
+	frame = (frame + 1) % 2;
 }
 
-void Pacman::Update()
+void Pacman::Update(sf::Vector2f pacPos)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
