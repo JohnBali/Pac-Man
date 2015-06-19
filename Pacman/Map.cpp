@@ -52,6 +52,47 @@ bool Map::isCollision(int row, int column)
 	return true;
 }
 
+std::vector<sf::Vector2i> Map::getExits(int row, int column)
+{
+	// create vector to return
+	std::vector<sf::Vector2i> exits;
+
+	// find exits
+	if (row + 1 <= ROW_COUNT)
+	{
+		Map::Tile tile = getTile(row + 1, column);
+		if (tile != Map::Tile::TileWall)
+		{
+			exits.push_back(sf::Vector2i(row + 1, column));
+		}
+	}
+	if (row - 1 >= 0)
+	{
+		Map::Tile tile = getTile(row - 1, column);
+		if (tile != Map::Tile::TileWall)		//  && tile != Map::Tile::TileGate
+		{
+			exits.push_back(sf::Vector2i(row - 1, column));
+		}
+	}
+	if (column + 1 <= COLUMN_COUNT)
+	{
+		Map::Tile tile = getTile(row, column + 1);
+		if (tile != Map::Tile::TileWall)
+		{
+			exits.push_back(sf::Vector2i(row, column + 1));
+		}
+	}
+	if (column - 1 >= 0)
+	{
+		Map::Tile tile = getTile(row, column - 1);
+		if (tile != Map::Tile::TileWall)
+		{
+			exits.push_back(sf::Vector2i(row, column - 1));
+		}
+	}
+	return exits;
+}
+
 Map::Map()
 {
 	Load("assets/map.png");

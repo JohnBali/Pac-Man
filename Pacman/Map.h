@@ -23,6 +23,7 @@ public:
 
 	Tile getTile(int row, int column);
 	bool isCollision(int row, int column);
+	std::vector<sf::Vector2i> getExits(int row, int column);
 
 	Map();
 	~Map();

@@ -55,13 +55,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,11 +85,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Blinky.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="Ghostclass.cpp" />
     <ClCompile Include="HomeScreen.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -103,10 +105,12 @@
     <Image Include="assets\pacman.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blinky.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="Ghostclass.h" />
     <ClInclude Include="HomeScreen.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
