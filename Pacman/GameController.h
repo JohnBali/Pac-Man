@@ -29,4 +29,5 @@ private:
 	static Map _map;
 	static GameObjectManager _gameObjectManager;
 	static bool _debug;
+	static sf::Clock _clock;
 };

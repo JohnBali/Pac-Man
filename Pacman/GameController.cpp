@@ -101,7 +101,8 @@ void GameController::GameLoop()
 					_window.close();
 				}
 				sf::Vector2f pacPos = _gameObjectManager.GetPosition("Pacman");
-				_gameObjectManager.UpdateAll(pacPos);
+				sf::Time elapsed = _clock.restart();
+				_gameObjectManager.UpdateAll(pacPos, elapsed);
 			}
 
 			_window.clear();		
@@ -132,3 +133,4 @@ sf::RenderWindow GameController::_window;
 Map GameController::_map;
 GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
+sf::Clock GameController::_clock;

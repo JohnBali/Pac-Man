@@ -32,60 +32,65 @@ void Pacman::walk(Map map)
 	frame = (frame + 1) % 2;
 }
 
-void Pacman::Update(sf::Vector2f pacPos)
+void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	timeBetweenMoves -= elapsed;
+	if (timeBetweenMoves <= sf::Time::Zero)
 	{
-		if (RowBoundary())
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			if (!map.isCollision(GetRow(), GetColumn() + 1))
+			if (RowBoundary())
 			{
-				SetFacing(Pacman::RIGHT);
-				walk(map);
+				if (!map.isCollision(GetRow(), GetColumn() + 1))
+				{
+					SetFacing(Pacman::RIGHT);
+					walk(map);
+				}
 			}
 		}
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		if (RowBoundary())
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			if (!map.isCollision(GetRow(), GetColumn() - 1))
+			if (RowBoundary())
 			{
-				SetFacing(Pacman::LEFT);
-				walk(map);
+				if (!map.isCollision(GetRow(), GetColumn() - 1))
+				{
+					SetFacing(Pacman::LEFT);
+					walk(map);
+				}
 			}
-		}
 
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		if (ColumnBoundary())
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			if (!map.isCollision(GetRow() + 1, GetColumn()))
+			if (ColumnBoundary())
 			{
-				SetFacing(Pacman::DOWN);
-				walk(map);
+				if (!map.isCollision(GetRow() + 1, GetColumn()))
+				{
+					SetFacing(Pacman::DOWN);
+					walk(map);
+				}
 			}
 		}
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		if (ColumnBoundary())
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			std::cout << "row:" << RowBoundary() << std::endl;
-
-			if (!map.isCollision(GetRow() - 1, GetColumn()))
+			if (ColumnBoundary())
 			{
-				SetFacing(Pacman::UP);
-				walk(map);
+				std::cout << "row:" << RowBoundary() << std::endl;
+
+				if (!map.isCollision(GetRow() - 1, GetColumn()))
+				{
+					SetFacing(Pacman::UP);
+					walk(map);
+				}
 			}
 		}
-	}
+		timeBetweenMoves = sf::milliseconds(25);
 
-	if (debug)
-	{
-		Debug();
-	}
+		if (debug)
+		{
+			Debug();
+		}
+	}	
 }
 
 void Pacman::Debug()
@@ -107,6 +112,7 @@ Pacman::Pacman()
 	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetSpeed(4);
 	this->facing = RIGHT;
+	timeBetweenMoves = sf::milliseconds(25);
 }
 
 Pacman::~Pacman()

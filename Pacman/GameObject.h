@@ -23,7 +23,7 @@ public:
 
 	virtual void Load(std::string filename);
 	virtual void Draw(sf::RenderWindow &window);
-	virtual void Update(sf::Vector2f pacPos);
+	virtual void Update(sf::Vector2f pacPos, sf::Time elapsed);
 
 	virtual void SetPosition(float x, float y);
 	virtual sf::Vector2f GetPosition();

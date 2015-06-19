@@ -13,7 +13,7 @@ public:
 	int GetObjectCount() const;
 	GameObject* Get(std::string name) const;
 
-	void UpdateAll(sf::Vector2f pacPos);
+	void UpdateAll(sf::Vector2f pacPos, sf::Time elapsed);
 	void DrawAll(sf::RenderWindow &window);
 	sf::Vector2f GetPosition(std::string name);
 	
