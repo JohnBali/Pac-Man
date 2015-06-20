@@ -1,4 +1,4 @@
-﻿Build started 19/06/2015 10:19:40 p.m..
+﻿Build started 20/06/2015 1:06:14 p.m..
      1>Project "C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Pacman\Pacman.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Pacman.cpp
@@ -18,4 +18,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.10
+Time Elapsed 00:00:01.29

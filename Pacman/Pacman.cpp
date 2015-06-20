@@ -41,7 +41,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (RowBoundary())
 			{
-				if (!map.isCollision(GetRow(), GetColumn() + 1))
+				if (!map.isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary())
 				{
 					SetFacing(Pacman::RIGHT);
 					walk(map);
@@ -52,7 +52,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (RowBoundary())
 			{
-				if (!map.isCollision(GetRow(), GetColumn() - 1))
+				if (!map.isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary())
 				{
 					SetFacing(Pacman::LEFT);
 					walk(map);
@@ -64,7 +64,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (ColumnBoundary())
 			{
-				if (!map.isCollision(GetRow() + 1, GetColumn()))
+				if (!map.isCollision(GetRow() + 1, GetColumn()) || !RowBoundary())
 				{
 					SetFacing(Pacman::DOWN);
 					walk(map);
@@ -77,7 +77,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 			{
 				std::cout << "row:" << RowBoundary() << std::endl;
 
-				if (!map.isCollision(GetRow() - 1, GetColumn()))
+				if (!map.isCollision(GetRow() - 1, GetColumn()) || !RowBoundary())
 				{
 					SetFacing(Pacman::UP);
 					walk(map);
