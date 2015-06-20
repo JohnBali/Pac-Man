@@ -4,7 +4,7 @@
 class Blinky : public Ghostclass
 {
 public:
-	void pathing(sf::Vector2f PacPos);
+	void Update(sf::Vector2f pacPos, sf::Time elapsed);
 
 	// constructors
 	Blinky();

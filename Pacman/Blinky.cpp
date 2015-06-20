@@ -1,28 +1,28 @@
 #include "Blinky.h"
 
 // Set the path
-void Blinky::pathing(sf::Vector2f PacPos)
+void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed)
 {
 	int mode = this->getMode();
 	switch (mode)
 	{
 	case 0:							// Stopped
 		this->SetSpeed(0);
-		this->walk(map, PacPos);
+		this->walk(map, pacPos);
 		break;
 	case 1:							// Scatter mode
 		this->SetSpeed(4);
-		PacPos.x = (int)this->getScatterTile().x * 16;
-		PacPos.y = (int)this->getScatterTile().y * 16;
-		this->walk(map, PacPos);
+		pacPos.x = (int)this->getScatterTile().x * 16;
+		pacPos.y = (int)this->getScatterTile().y * 16;
+		this->walk(map, pacPos);
 		break;
 	case 2:							// Chase mode
 		this->SetSpeed(4);
-		this->walk(map, PacPos);
+		this->walk(map, pacPos);
 		break;
 	case 3:							// Fritened mode
 		this->SetSpeed(4);
-		this->walk(map, PacPos);
+		this->walk(map, pacPos);
 		break;
 	}
 }
