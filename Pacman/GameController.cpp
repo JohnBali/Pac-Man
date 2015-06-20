@@ -11,7 +11,8 @@ void GameController::Start(void)
 	//create objects
 	Pacman *pacman = new Pacman();	
 	Blinky *blinky = new Blinky();
-	Map *map = new Map();
+	//Map *map = new Map();
+	Map::instance();
 
 	if (_debug)
 	{
@@ -22,7 +23,7 @@ void GameController::Start(void)
 	//add to game object manager
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("Blinky", blinky);
-	_gameObjectManager.Add("Map", map);
+	_gameObjectManager.Add("Map", _map);
 
 	if (_gameState != Uninitialized)
 		return;
@@ -134,7 +135,7 @@ void GameController::GameLoop()
 
 GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
-Map GameController::_map;
+Map* GameController::_map = Map::instance();
 GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
 sf::Clock GameController::_clock;

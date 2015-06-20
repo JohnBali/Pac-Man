@@ -6,6 +6,7 @@ class Map : public GameObject
 public:
 	static const int ROW_COUNT = 31;
 	static const int COLUMN_COUNT = 28;
+	static Map* instance();
 
 	enum Tile {
 		TileOut = -1,
@@ -25,13 +26,16 @@ public:
 	bool isCollision(int row, int column);
 	std::vector<sf::Vector2i> getExits(int row, int column);
 
-	Map();
 	~Map();
 
 	private:
+		Map();
 		sf::Texture texture;
 		sf::Sprite sprite;
 		static const int Map::DEFAULT_MAP[Map::ROW_COUNT][COLUMN_COUNT];
+
+		static Map* _instance;
+		
 	
 };
 

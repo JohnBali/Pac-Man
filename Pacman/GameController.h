@@ -26,7 +26,7 @@ private:
 
 	static GameState _gameState;
 	static sf::RenderWindow _window;
-	static Map _map;
+	static Map* _map;
 	static GameObjectManager _gameObjectManager;
 	static bool _debug;
 	static sf::Clock _clock;

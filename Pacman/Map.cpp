@@ -93,6 +93,17 @@ std::vector<sf::Vector2i> Map::getExits(int row, int column)
 	return exits;
 }
 
+Map* Map::_instance = NULL;
+
+Map* Map::instance()
+{
+	if (!_instance)
+	{
+		_instance = new Map;
+	}
+	return _instance;
+}
+
 Map::Map()
 {
 	Load("assets/map.png");

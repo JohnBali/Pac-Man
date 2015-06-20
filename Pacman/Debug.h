@@ -11,5 +11,5 @@ public:
 
 private:
 	GameObjectManager _gameObjectManager;
-	static Map _map;	
+	static Map* _map;	
 };

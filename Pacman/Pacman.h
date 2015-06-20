@@ -10,10 +10,10 @@ class Pacman : public GameObject
 
 		//methods
 		void Update(sf::Vector2f pacPos, sf::Time elapsed);
-		void walk(Map map);
+		void walk(Map* map);
 
 	private:
-		Map map;
+		Map* map;
 		bool debug;
 		sf::Time timeBetweenMoves;
 

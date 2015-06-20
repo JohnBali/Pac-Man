@@ -2,14 +2,14 @@
 #include "VectorMath.h"
 
 // Walk
-void Ghostclass::walk(Map &map, sf::Vector2f pacPos)
+void Ghostclass::walk(Map* &map, sf::Vector2f pacPos)
 {
 	if (this->RowBoundary() && this->ColumnBoundary())
 	{
 		float target = 0.0;
 		sf::Vector2i pos = this->GetTile();
 		sf::Vector2i prev = this->getPrevTile();
-		std::vector<sf::Vector2i> exits = map.getExits(pos.x, pos.y);
+		std::vector<sf::Vector2i> exits = map->getExits(pos.x, pos.y);
 		std::vector<sf::Vector2i>::iterator it;
 
 		for (it = exits.begin(); it != exits.end(); it++)

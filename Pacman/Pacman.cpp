@@ -1,6 +1,6 @@
 #include "Pacman.h"
 
-void Pacman::walk(Map map)
+void Pacman::walk(Map* map)
 {
 	sf::Vector2f pos = _sprite.getPosition();
 
@@ -50,7 +50,7 @@ void Pacman::walk(Map map)
 		this->_sprite.setTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
 	}
 	_sprite.setPosition(pos);
-	frame = (frame + 1) % 2;
+	frame = (frame + 1) % 3;
 }
 
 void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
@@ -62,7 +62,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (RowBoundary())
 			{
-				if (!map.isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0))
+				if (!map->isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0))
 				{
 					SetFacing(Pacman::RIGHT);
 					walk(map);
@@ -73,7 +73,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (RowBoundary())
 			{
-				if (!map.isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary() || (GetColumn() - 1) < 0)
+				if (!map->isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary() || (GetColumn() - 1) < 0)
 				{
 					SetFacing(Pacman::LEFT);
 					walk(map);
@@ -85,7 +85,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (ColumnBoundary())
 			{
-				if (!map.isCollision(GetRow() + 1, GetColumn()) || !RowBoundary())
+				if (!map->isCollision(GetRow() + 1, GetColumn()) || !RowBoundary())
 				{
 					SetFacing(Pacman::DOWN);
 					walk(map);
@@ -98,7 +98,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 			{
 				std::cout << "row:" << RowBoundary() << std::endl;
 
-				if (!map.isCollision(GetRow() - 1, GetColumn()) || !RowBoundary())
+				if (!map->isCollision(GetRow() - 1, GetColumn()) || !RowBoundary())
 				{
 					SetFacing(Pacman::UP);
 					walk(map);
@@ -118,7 +118,7 @@ void Pacman::Debug()
 {
 		std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
 		std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
-		std::cout << "map tile: " << map.getTile(GetRow(), GetColumn()) << std::endl;
+		std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
 }
 
 Pacman::Pacman()
@@ -129,7 +129,7 @@ Pacman::Pacman()
 	Load("assets/pacman.png");
 	SetScale(2, 2);
 	SetOrigin(4, 4);	
-	GameObject::SetPosition(16, 16);
+	GameObject::SetPosition(216, 80);
 	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetSpeed(4);
 	this->facing = RIGHT;

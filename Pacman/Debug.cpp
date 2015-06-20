@@ -7,13 +7,13 @@ Debug::Debug(GameObjectManager &gameObjectManager)
 
 void Debug::Draw(sf::RenderWindow &window)
 {
-	Map _map = Map();
+	Map* _map = Map::instance();
 	//draw tiles that show the path along which pacman and ghosts can travel
-	for (int row = 0; row < _map.COLUMN_COUNT; row++)
+	for (int row = 0; row < _map->COLUMN_COUNT; row++)
 	{
-		for (int col = 0; col < _map.ROW_COUNT; col++)
+		for (int col = 0; col < _map->ROW_COUNT; col++)
 		{
-			Map::Tile tile = _map.getTile(col, row);
+			Map::Tile tile = _map->getTile(col, row);
 			if ((tile == Map::Tile::TileEmpty || tile == Map::Tile::TileDot) || tile == Map::Tile::TileEnergizer)
 			{
 				sf::RectangleShape rectangle;
@@ -46,4 +46,4 @@ void Debug::Draw(sf::RenderWindow &window)
 		window.draw(line, 2, sf::Lines);
 	}
 }
-Map Debug::_map;
+Map* Debug::_map;
