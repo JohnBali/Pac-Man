@@ -7,13 +7,34 @@ void Pacman::walk(Map map)
 	if (facing == RIGHT)
 	{
 		pos.x += this->GetSpeed();
-		this->SetTile(pos);
+
+		//this code cause pacman to wrap around to the other side of the screen when going through the right side gate
+		if (GetColumn() < 29)
+		{
+			this->SetTile(pos);
+		}
+		else
+		{
+			pos.x = -32;
+			this->SetTile(pos);
+		}
 		this->_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == LEFT)
 	{
 		pos.x -= this->GetSpeed();
-		this->SetTile(pos);
+
+		//this code cause pacman to wrap around to the other side of the screen when going through the left side gate
+		if (GetColumn() >= -1)
+		{
+			this->SetTile(pos);
+		}
+		else
+		{
+			pos.x = 448;
+			this->SetTile(pos);
+		}
+		
 		this->_sprite.setTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == DOWN)
@@ -41,7 +62,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (RowBoundary())
 			{
-				if (!map.isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary())
+				if (!map.isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0))
 				{
 					SetFacing(Pacman::RIGHT);
 					walk(map);
@@ -52,7 +73,7 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		{
 			if (RowBoundary())
 			{
-				if (!map.isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary())
+				if (!map.isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary() || (GetColumn() - 1) < 0)
 				{
 					SetFacing(Pacman::LEFT);
 					walk(map);
