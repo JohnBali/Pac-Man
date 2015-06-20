@@ -104,11 +104,11 @@ void GameController::GameLoop()
 				{
 					_window.close();
 				}
-				GameObject pacman = *_gameObjectManager.Get("Pacman");
-				sf::Vector2f pacPos = pacman.GetPosition();
-				sf::Time elapsed = _clock.restart();
-				_gameObjectManager.UpdateAll(pacPos, elapsed);
 			}
+			GameObject pacman = *_gameObjectManager.Get("Pacman");
+			sf::Vector2f pacPos = pacman.GetPosition();
+			sf::Time elapsed = _clock.restart();
+			_gameObjectManager.UpdateAll(pacPos, elapsed);
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);

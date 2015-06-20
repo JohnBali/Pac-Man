@@ -98,6 +98,11 @@
     <ClCompile Include="Pacman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\ghostCyan.png" />
+    <Image Include="assets\ghostMask.png" />
+    <Image Include="assets\ghostOrange.png" />
+    <Image Include="assets\ghostPink.png" />
+    <Image Include="assets\ghostRed.png" />
     <Image Include="assets\homeScreen.png" />
     <Image Include="assets\MainMenu.png" />
     <Image Include="assets\map.bmp" />

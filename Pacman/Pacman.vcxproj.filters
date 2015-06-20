@@ -68,6 +68,21 @@
     <Image Include="assets\pacman.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\ghostCyan.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ghostRed.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ghostMask.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ghostOrange.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ghostPink.png">
+      <Filter>assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pacman.h">
