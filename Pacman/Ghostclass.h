@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Map.h"
 
 class Ghostclass : public GameObject
 {
@@ -7,6 +8,7 @@ public:
 	// Walk
 	//virtual void pathing(Map &map, sf::Vector2f pacPos) = 0;
 	void walk(Map &map, sf::Vector2f pacPos);
+	//void walk(Map map, sf::Vector2f pacPos);
 
 	// Setters/Getters
 	void setPrevPosition(sf::Vector2f pos);
@@ -40,4 +42,5 @@ protected:
 	sf::Vector2i previousTile;
 	sf::Vector2i nextTile;
 	sf::Vector2i scatterTile;
+	Map map;
 };

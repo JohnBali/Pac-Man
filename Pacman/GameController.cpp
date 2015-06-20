@@ -4,11 +4,13 @@
 #include "Debug.h"
 #include "HomeScreen.h"
 #include "MainMenu.h"
+#include "Blinky.h"
 
 void GameController::Start(void)
 {
 	//create objects
 	Pacman *pacman = new Pacman();	
+	Blinky *blinky = new Blinky();
 	Map *map = new Map();
 
 	if (_debug)
@@ -19,6 +21,7 @@ void GameController::Start(void)
 
 	//add to game object manager
 	_gameObjectManager.Add("Pacman", pacman);
+	_gameObjectManager.Add("Blinky", blinky);
 	_gameObjectManager.Add("Map", map);
 
 	if (_gameState != Uninitialized)
@@ -100,7 +103,8 @@ void GameController::GameLoop()
 				{
 					_window.close();
 				}
-				sf::Vector2f pacPos = _gameObjectManager.GetPosition("Pacman");
+				GameObject pacman = *_gameObjectManager.Get("Pacman");
+				sf::Vector2f pacPos = pacman.GetPosition();
 				sf::Time elapsed = _clock.restart();
 				_gameObjectManager.UpdateAll(pacPos, elapsed);
 			}

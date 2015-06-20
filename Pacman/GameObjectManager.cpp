@@ -48,13 +48,6 @@ void GameObjectManager::UpdateAll(sf::Vector2f pacPos, sf::Time elapsed)
 	}
 }
 
-sf::Vector2f GameObjectManager::GetPosition(std::string name)
-{
-	sf::Vector2f pos;
-	std::map<std::string, GameObject*>::const_iterator results = _gameObjects.find(name);
-	return results->second->GetPosition();
-}
-
 void GameObjectManager::DrawAll(sf::RenderWindow &window)
 {
 	std::map<std::string, GameObject*>::const_iterator itr = _gameObjects.begin();

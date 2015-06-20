@@ -15,7 +15,6 @@ public:
 
 	void UpdateAll(sf::Vector2f pacPos, sf::Time elapsed);
 	void DrawAll(sf::RenderWindow &window);
-	sf::Vector2f GetPosition(std::string name);
 	
 private:
 	std::map<std::string, GameObject*> _gameObjects;

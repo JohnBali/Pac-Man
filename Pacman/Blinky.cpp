@@ -1,7 +1,7 @@
 #include "Blinky.h"
 
 // Set the path
-void Blinky::pathing(Map &map, sf::Vector2f PacPos)
+void Blinky::pathing(sf::Vector2f PacPos)
 {
 	int mode = this->getMode();
 	switch (mode)
