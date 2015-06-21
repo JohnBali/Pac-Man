@@ -9,4 +9,9 @@ public:
 	// constructors
 	Blinky();
 	~Blinky();
+
+private:
+	bool debug;
+	void Debug();
+
 };
