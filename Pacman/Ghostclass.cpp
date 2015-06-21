@@ -14,7 +14,7 @@ void Ghostclass::walk(Map* &map, sf::Vector2f pacPos)
 
 		for (it = exits.begin(); it != exits.end(); it++)
 		{
-			if (it->x != prev.x && it->y != prev.y);
+			if (it->x != prev.x && it->y != prev.y)
 			{
 				float distance = vm::magnitude(sf::Vector2f(it->x - pacPos.x, it->y - pacPos.y));
 				if (target == 0.0)

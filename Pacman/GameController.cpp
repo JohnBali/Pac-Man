@@ -21,9 +21,9 @@ void GameController::Start(void)
 	}
 
 	//add to game object manager
+	_gameObjectManager.Add("Map", _map);
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("Blinky", blinky);
-	_gameObjectManager.Add("Map", _map);
 
 	if (_gameState != Uninitialized)
 		return;
@@ -106,6 +106,7 @@ void GameController::GameLoop()
 				}
 			}
 			GameObject pacman = *_gameObjectManager.Get("Pacman");
+			GameObject blinky = *_gameObjectManager.Get("Blinky");
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Time elapsed = _clock.restart();
 			_gameObjectManager.UpdateAll(pacPos, elapsed);
@@ -115,11 +116,10 @@ void GameController::GameLoop()
 
 			if (_debug)
 			{
-				GameObject pacman = *_gameObjectManager.Get("Pacman");
 				sf::RectangleShape boundingBox;
 				boundingBox.setSize(sf::Vector2f(32, 32));
 				boundingBox.setOrigin(8, 8);
-				boundingBox.setPosition(pacman.GetPosition());
+				boundingBox.setPosition(blinky.GetPosition());
 				boundingBox.setFillColor(sf::Color(0, 0, 0, 0));
 				boundingBox.setOutlineColor(sf::Color::Red);
 				boundingBox.setOutlineThickness(3);
@@ -137,5 +137,5 @@ GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
 Map* GameController::_map = Map::instance();
 GameObjectManager GameController::_gameObjectManager;
-bool GameController::_debug = false;
+bool GameController::_debug = true;
 sf::Clock GameController::_clock;

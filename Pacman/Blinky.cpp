@@ -30,15 +30,16 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed)
 // Constructors
 Blinky::Blinky()
 {
-	this->Load("assets/ghostRed.png");
-	this->SetScale(2, 2);
-	this->SetOrigin(4, 4);
-	this->facing = RIGHT;
-	this->SetSpeed(1);
-	this->setMode(1);
-	this->setScatterTile(sf::Vector2i(27, 1));
-	this->_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
-	this->SetPosition(13, 11);
+	Load("assets/ghostRed.png");
+	SetScale(2, 2);
+	SetOrigin(4, 4);
+	SetFacing(RIGHT);
+	SetSpeed(1);
+	setMode(1);
+	setScatterTile(sf::Vector2i(27, 1));
+	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
+	SetPosition(208, 176);
+	SetTile(GetPosition());
 }
 
 Blinky::~Blinky()
