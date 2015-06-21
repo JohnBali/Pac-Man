@@ -23,7 +23,7 @@ void GameController::Start(void)
 	//add to game object manager
 	_gameObjectManager.Add("Map", _map);
 	_gameObjectManager.Add("Pacman", pacman);
-	_gameObjectManager.Add("Blinky", blinky);
+	_gameObjectManager.Add("_Blinky", blinky);
 
 	if (_gameState != Uninitialized)
 		return;
@@ -106,7 +106,7 @@ void GameController::GameLoop()
 				}
 			}
 			GameObject pacman = *_gameObjectManager.Get("Pacman");
-			GameObject blinky = *_gameObjectManager.Get("Blinky");
+			GameObject blinky = *_gameObjectManager.Get("_Blinky");
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Time elapsed = _clock.restart();
 			_gameObjectManager.UpdateAll(pacPos, elapsed);

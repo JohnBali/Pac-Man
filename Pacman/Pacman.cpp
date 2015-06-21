@@ -55,64 +55,6 @@ void Pacman::walk(Map* map)
 
 void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 {
-	/*timeBetweenMoves -= elapsed;
-	if (timeBetweenMoves <= sf::Time::Zero)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			if (RowBoundary())
-			{
-				if (!map->isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0))
-				{
-					SetFacing(Pacman::RIGHT);
-					walk(map);
-				}
-			}
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			if (RowBoundary())
-			{
-				if (!map->isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary() || (GetColumn() - 1) < 0)
-				{
-					SetFacing(Pacman::LEFT);
-					walk(map);
-				}
-			}
-
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			if (ColumnBoundary())
-			{
-				if (!map->isCollision(GetRow() + 1, GetColumn()) || !RowBoundary())
-				{
-					SetFacing(Pacman::DOWN);
-					walk(map);
-				}
-			}
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			if (ColumnBoundary())
-			{
-				std::cout << "row:" << RowBoundary() << std::endl;
-
-				if (!map->isCollision(GetRow() - 1, GetColumn()) || !RowBoundary())
-				{
-					SetFacing(Pacman::UP);
-					walk(map);
-				}
-			}
-		}
-		timeBetweenMoves = sf::milliseconds(25);
-
-		if (debug)
-		{
-			Debug();
-		}
-	}*/	
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		if (!map->isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0))
