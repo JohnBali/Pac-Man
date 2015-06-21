@@ -57,28 +57,28 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		if (!map->isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0))
+		if ((!map->isCollision(GetRow(), GetColumn() + 1) || !ColumnBoundary() || (GetColumn() >= 27 || GetColumn() < 0)) && RowBoundary())
 		{
 			SetFacing(Pacman::RIGHT);
 		}		
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if (!map->isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary() || (GetColumn() - 1) < 0)
+		if ((!map->isCollision(GetRow(), GetColumn() - 1) || !ColumnBoundary() || (GetColumn() - 1) < 0) && RowBoundary())
 		{
 			SetFacing(Pacman::LEFT);
 		}		
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		if (!map->isCollision(GetRow() + 1, GetColumn()) || !RowBoundary())
+		if ((!map->isCollision(GetRow() + 1, GetColumn()) || !RowBoundary()) && ColumnBoundary())
 		{
 			SetFacing(Pacman::DOWN);
 		}		
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		if (!map->isCollision(GetRow() - 1, GetColumn()) || !RowBoundary())
+		if ((!map->isCollision(GetRow() - 1, GetColumn()) || !RowBoundary()) && ColumnBoundary())
 		{
 			SetFacing(Pacman::UP);
 		}		
