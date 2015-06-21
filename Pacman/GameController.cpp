@@ -5,14 +5,14 @@
 #include "HomeScreen.h"
 #include "MainMenu.h"
 #include "Blinky.h"
+#include "Food.h"
 
 void GameController::Start(void)
 {
 	//create objects
 	Pacman *pacman = new Pacman();	
 	Blinky *blinky = new Blinky();
-	//Map *map = new Map();
-	Map::instance();
+	Food *food = new Food();
 
 	if (_debug)
 	{
@@ -22,6 +22,7 @@ void GameController::Start(void)
 
 	//add to game object manager
 	_gameObjectManager.Add("Map", _map);
+	_gameObjectManager.Add("nFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("_Blinky", blinky);
 
@@ -137,5 +138,5 @@ GameController::GameState GameController::_gameState = Uninitialized;
 sf::RenderWindow GameController::_window;
 Map* GameController::_map = Map::instance();
 GameObjectManager GameController::_gameObjectManager;
-bool GameController::_debug = true;
+bool GameController::_debug = false;
 sf::Clock GameController::_clock;

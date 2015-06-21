@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="Blinky.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -112,6 +113,7 @@
   <ItemGroup>
     <ClInclude Include="Blinky.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
