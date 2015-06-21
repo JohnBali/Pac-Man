@@ -7,7 +7,7 @@ class Ghostclass : public GameObject
 public:
 	// Walk
 	//virtual void pathing(Map &map, sf::Vector2f pacPos) = 0;
-	void walk(Map* &map, sf::Vector2f pacPos);
+	void walk(sf::Vector2f pacPos);
 	//void walk(Map map, sf::Vector2f pacPos);
 
 	// Setters/Getters

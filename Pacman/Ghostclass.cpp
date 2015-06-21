@@ -2,7 +2,7 @@
 #include "VectorMath.h"
 
 // Walk
-void Ghostclass::walk(Map* &map, sf::Vector2f pacPos)
+void Ghostclass::walk(sf::Vector2f pacPos)
 {
 	if (this->RowBoundary() && this->ColumnBoundary())
 	{
