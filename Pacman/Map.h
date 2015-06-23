@@ -22,6 +22,7 @@ public:
 		TileOrange = 9
 	};
 
+	void updateTileToEmpty(int row, int column);
 	Tile getTile(int row, int column);
 	bool isCollision(int row, int column);
 	std::vector<sf::Vector2i> getExits(int row, int column);
@@ -32,7 +33,7 @@ public:
 		Map();
 		sf::Texture texture;
 		sf::Sprite sprite;
-		static const int Map::DEFAULT_MAP[Map::ROW_COUNT][COLUMN_COUNT];
+		static int Map::DEFAULT_MAP[Map::ROW_COUNT][COLUMN_COUNT];
 
 		static Map* _instance;
 		

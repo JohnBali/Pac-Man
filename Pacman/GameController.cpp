@@ -22,7 +22,7 @@ void GameController::Start(void)
 
 	//add to game object manager
 	_gameObjectManager.Add("Map", _map);
-	_gameObjectManager.Add("nFood", food);
+	_gameObjectManager.Add("NFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("_Blinky", blinky);
 

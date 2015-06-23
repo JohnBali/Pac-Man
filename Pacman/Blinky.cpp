@@ -37,7 +37,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed)
 Blinky::Blinky()
 {
 	//turn debug on or off
-	debug = true;
+	debug = false;
 
 	Load("assets/ghostRed.png");
 	SetScale(2, 2);
