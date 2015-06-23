@@ -90,10 +90,10 @@ GameObject::Facing GameObject::GetFacing()
 }
 
 
-void GameObject::SetTile(sf::Vector2f pos)
+void GameObject::SetTile()
 {
-	this->tile.x = (int)pos.x / 16;
-	this->tile.y = (int)pos.y / 16;
+	this->tile.x = GetRow();
+	this->tile.y = GetColumn();
 }
 
 sf::Vector2i GameObject::GetTile()
