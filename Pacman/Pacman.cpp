@@ -149,7 +149,7 @@ void Pacman::Debug()
 Pacman::Pacman()
 {
 	//turn debug on or off
-	debug = true;
+	debug = false;
 
 	Load("assets/pacman.png");
 	SetScale(2, 2);

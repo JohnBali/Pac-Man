@@ -13,6 +13,7 @@ void GameController::Start(void)
 	Pacman *pacman = new Pacman();	
 	Blinky *blinky = new Blinky();
 	Food *food = new Food();
+	_score = food->getScore();
 
 	if (_debug)
 	{
@@ -22,7 +23,7 @@ void GameController::Start(void)
 
 	//add to game object manager
 	_gameObjectManager.Add("Map", _map);
-	_gameObjectManager.Add("nFood", food);
+	_gameObjectManager.Add("NFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("_Blinky", blinky);
 
@@ -95,6 +96,16 @@ void GameController::GameLoop()
 			DisplayMenu();
 			break;
 		}
+		case GameController::Win:
+		{
+			std::cout << "WIN" << std::endl;
+			break;
+		}
+		case GameController::Lose:
+		{
+			std::cout << "LOSE" << std::endl;
+			break;
+		}
 		case GameController::Playing:
 		{
 			sf::Event event;
@@ -108,6 +119,12 @@ void GameController::GameLoop()
 			}
 			GameObject pacman = *_gameObjectManager.Get("Pacman");
 			GameObject blinky = *_gameObjectManager.Get("_Blinky");
+			
+			//check if all dots are eaten and game is won
+			if (*_score == 246)
+			{
+				_gameState = GameController::Win;
+			}
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Time elapsed = _clock.restart();
 			_gameObjectManager.UpdateAll(pacPos, elapsed);
@@ -140,3 +157,4 @@ Map* GameController::_map = Map::instance();
 GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
 sf::Clock GameController::_clock;
+int* GameController::_score;
