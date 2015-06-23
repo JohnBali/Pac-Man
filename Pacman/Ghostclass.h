@@ -6,16 +6,9 @@ class Ghostclass : public GameObject
 {
 public:
 	// Walk
-	//virtual void pathing(Map &map, sf::Vector2f pacPos) = 0;
 	void walk(sf::Vector2f pacPos);
-	//void walk(Map map, sf::Vector2f pacPos);
 
 	// Setters/Getters
-	void setPrevPosition(sf::Vector2f pos);
-	sf::Vector2f getPrevPosition();
-
-	void setNextPosition(sf::Vector2f pos);
-	sf::Vector2f getNextPosition();
 
 	void setPrevTile(sf::Vector2i pos);
 	sf::Vector2i getPrevTile();
@@ -43,4 +36,7 @@ protected:
 	sf::Vector2i nextTile;
 	sf::Vector2i scatterTile;
 	Map* map;
+	bool debug;
+
+	void Ghostclass::Debug(std::vector<sf::Vector2i> exits);
 };

@@ -35,7 +35,7 @@ public:
 	void SetFacing(Facing facing);
 	Facing GetFacing();
 
-	void SetTile(sf::Vector2f pos);
+	void SetTile();
 	sf::Vector2i GetTile();
 
 	void SetSpeed(float speed);

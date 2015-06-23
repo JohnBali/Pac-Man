@@ -26,11 +26,6 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		break;
 	}
 
-	if (debug)
-	{
-		Debug();
-	}
-
 }
 
 // Constructors
@@ -48,14 +43,8 @@ Blinky::Blinky()
 	setScatterTile(sf::Vector2i(27, 1));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(208, 176);
-	SetTile(GetPosition());
-}
-
-void Blinky::Debug()
-{
-	std::cout << "actual position: (" << GetPosition().x << ", " << GetPosition().y << ")" << std::endl;
-	std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
-	std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
+	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
+	SetTile();
 }
 
 Blinky::~Blinky()

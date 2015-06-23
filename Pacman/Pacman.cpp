@@ -11,12 +11,10 @@ void Pacman::walk(Map* map)
 		//this code cause pacman to wrap around to the other side of the screen when going through the right side gate
 		if (GetColumn() < 29)
 		{
-			this->SetTile(pos);
 		}
 		else
 		{
 			pos.x = -32;
-			this->SetTile(pos);
 		}
 		this->_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	}
@@ -27,12 +25,10 @@ void Pacman::walk(Map* map)
 		//this code cause pacman to wrap around to the other side of the screen when going through the left side gate
 		if (GetColumn() >= -1)
 		{
-			this->SetTile(pos);
 		}
 		else
 		{
 			pos.x = 448;
-			this->SetTile(pos);
 		}
 		
 		this->_sprite.setTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
@@ -40,16 +36,15 @@ void Pacman::walk(Map* map)
 	else if (facing == DOWN)
 	{
 		pos.y += this->GetSpeed();
-		this->SetTile(pos);
 		this->_sprite.setTextureRect(sf::IntRect(down[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == UP)
 	{
 		pos.y -= this->GetSpeed();
-		this->SetTile(pos);
 		this->_sprite.setTextureRect(sf::IntRect(up[frame] * 16, 0, 16, 16));
 	}
 	_sprite.setPosition(pos);
+	SetTile();
 	frame = (frame + 1) % 3;
 }
 
