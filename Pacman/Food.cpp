@@ -47,6 +47,11 @@ void Food::drawEnergizer(int rows, int columns)
 	dots.push_back(dot);
 }
 
+int* Food::getScore()
+{
+	return &score;
+}
+
 void Food::Update(sf::Vector2f pacPos, sf::Time elapsed)
 {
 	//check if the tile contains dot or energizer and eat it
@@ -54,6 +59,7 @@ void Food::Update(sf::Vector2f pacPos, sf::Time elapsed)
 	if (tile == Map::Tile::TileDot || tile == Map::Tile::TileEnergizer)
 	{
 		map->updateTileToEmpty(pacPos.y / 16, pacPos.x / 16);
+		score++;
 		readMap();
 	}
 }

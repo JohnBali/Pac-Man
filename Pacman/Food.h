@@ -8,6 +8,8 @@ public:
 	Food();
 	~Food();
 
+	int* getScore();
+
 private:
 	void readMap();
 	void drawDot(int rows, int columns);
@@ -20,4 +22,5 @@ private:
 	sf::CircleShape energizer;
 	std::vector<sf::CircleShape> dots;
 	std::vector<sf::CircleShape> energizers;
+	int score = 0;
 };

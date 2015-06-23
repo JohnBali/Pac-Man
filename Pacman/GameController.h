@@ -22,8 +22,9 @@ private:
 
 	static sf::Event GetInput();
 
-	enum GameState { Uninitialized, DisplayingHomeScreen, Paused, DisplayingMenu, Playing, Exiting };
+	enum GameState { Uninitialized, DisplayingHomeScreen, Paused, DisplayingMenu, Playing, Win, Lose, Exiting };
 
+	static int* _score;
 	static GameState _gameState;
 	static sf::RenderWindow _window;
 	static Map* _map;
