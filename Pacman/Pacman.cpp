@@ -136,9 +136,14 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 
 void Pacman::Debug()
 {
-		std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
-		std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
-		std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
+	std::cout << std::endl;
+	std::cout << "<<< Pacmans' Data >>>" << std::endl;
+	std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
+	std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
+	std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
+	std::cout << std::endl;
+	std::cout << "<<< END Pacmans' Data >>>" << std::endl;
+	std::cout << std::endl;
 }
 
 Pacman::Pacman()
