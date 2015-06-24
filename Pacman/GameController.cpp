@@ -13,6 +13,8 @@ void GameController::Start(void)
 	Pacman *pacman = new Pacman();	
 	Blinky *blinky = new Blinky();
 	Food *food = new Food();
+
+	//create a pointer to the score in the food class which is used to work out when the level is complete
 	_score = food->getScore();
 
 	if (_debug)
@@ -21,7 +23,7 @@ void GameController::Start(void)
 		_gameObjectManager.Add("Outline", debug);
 	}
 
-	//add to game object manager
+	//add to game object manager. Layers displayed in alphabetical order
 	_gameObjectManager.Add("Map", _map);
 	_gameObjectManager.Add("NFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
@@ -117,14 +119,14 @@ void GameController::GameLoop()
 					_window.close();
 				}
 			}
-			GameObject pacman = *_gameObjectManager.Get("Pacman");
-			GameObject blinky = *_gameObjectManager.Get("_Blinky");
-			
 			//check if all dots are eaten and game is won
 			if (*_score == 246)
 			{
 				_gameState = GameController::Win;
 			}
+
+			GameObject pacman = *_gameObjectManager.Get("Pacman");
+			GameObject blinky = *_gameObjectManager.Get("_Blinky");
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Time elapsed = _clock.restart();
 			_gameObjectManager.UpdateAll(pacPos, elapsed);
