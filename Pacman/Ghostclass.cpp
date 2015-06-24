@@ -4,9 +4,13 @@
 // Walk
 void Ghostclass::walk(sf::Vector2f pacPos)
 {
+	// set variables
 	float target = 0.0;
+	float distance = 0.0;
+	sf::Vector2f posPac;
+	posPac.x = pacPos.y;
+	posPac.y = pacPos.x;
 	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
-	sf::Vector2i prev = this->getPrevTile();
 	std::vector<sf::Vector2i> exits = map->getExits(pos.x, pos.y);
 	std::vector<sf::Vector2i>::iterator it;
 
@@ -14,9 +18,13 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 	{
 		for (it = exits.begin(); it != exits.end(); it++)
 		{
-			if (it->x != prev.x && it->y != prev.y)
+			sf::Vector2i prev;
+			prev.x = it->x;
+			prev.y = it->y;
+			if (checkPrevTile(prev));
+			else
 			{
-				float distance = vm::magnitude(sf::Vector2f(it->x*16 - pacPos.x, it->y*16 - pacPos.y));
+				distance = vm::magnitude(sf::Vector2f(it->x * 16 - posPac.x, it->y * 16 - posPac.y));
 				if (target == 0.0)
 				{
 					target = distance;
@@ -47,11 +55,17 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 	if (facing == RIGHT)
 	{
 		ghostPos.x += this->GetSpeed();
+		// Go through side gate (buggy)
+		if (GetColumn() > 27)
+			ghostPos.x = -32;
 		this->_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == LEFT)
 	{
 		ghostPos.x -= this->GetSpeed();
+		// Go through side gate (buggy)
+		if (GetColumn() < 0)
+			ghostPos.x = 448;
 		this->_sprite.setTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == DOWN)
@@ -78,7 +92,7 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 	}
 
 	// Debugging
-	if (debug)
+	if (this->debug)
 	{
 		Debug(exits);
 	}
@@ -88,12 +102,28 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 
 void Ghostclass::setPrevTile(sf::Vector2i pos)
 {
-	this->previousTile = pos;
+	for (int i = 6; i > 0; i--)
+	{
+		previousTile[i] = previousTile[i - 1];
+	}
+	previousTile[0] = pos;
 }
 
 sf::Vector2i Ghostclass::getPrevTile()
 {
-	return this->previousTile;
+	return this->previousTile[0];
+}
+
+bool Ghostclass::checkPrevTile(sf::Vector2i pos)
+{
+	bool valid = false;
+	for (int i = 0; i < 6; i++)
+	{
+		if (pos.x == previousTile[i].x && pos.y == previousTile[i].y)
+			valid = true;
+	}
+
+	return valid;
 }
 
 void Ghostclass::setNextTile(sf::Vector2i pos)
@@ -134,21 +164,29 @@ Ghostclass::~Ghostclass()
 
 void Ghostclass::Debug(std::vector<sf::Vector2i> exits)
 {
-	std::cout << "<<< Blinkys' Data >>>" << std::endl;
-	std::cout << "Blinky's position: (" << GetPosition().x << ", " << GetPosition().y << ")" << std::endl;
+	std::cout << std::endl; 
+	std::cout << "<<< Ghosts' Data >>>" << std::endl;
+	std::cout << "Ghosts' position: (" << GetPosition().x << ", " << GetPosition().y << ")" << std::endl;
 	std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
 	std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
-	std::cout << "" << std::endl;
+	std::cout << std::endl;
 	std::cout << "Set tile: " << GetTile().x << ", " << GetTile().y << std::endl;
 	std::cout << "Next tile: " << getNextTile().x << ", " << getNextTile().y << std::endl;
-	std::cout << "Previous tile: " << getPrevTile().x << ", " << getPrevTile().y << std::endl;
-	std::cout << "" << std::endl;
+
+	for (int i = 0; i < 6; i++)
+	{
+		std::cout << "Previous tile " << i << ": " << previousTile[i].x << ", " << previousTile[i].y << std::endl;
+	}
+	
+	
+	std::cout << std::endl;
 	std::vector<sf::Vector2i>::iterator it;
 
 	for (it = exits.begin(); it != exits.end(); it++)
 	{
-		std::cout << "Exit: " << it->x << ", " << it->y << std::endl;
+		std::cout << "Exit: " << it->x << ", " << it->y << ": Map tile: " << map->getTile(it->x, it->y) << std::endl;
 	}
-
+	std::cout << std::endl;
 	std::cout << "<<< Blinkys' Data END >>>" << std::endl;
+	std::cout << std::endl;
 }

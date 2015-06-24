@@ -12,6 +12,7 @@ public:
 
 	void setPrevTile(sf::Vector2i pos);
 	sf::Vector2i getPrevTile();
+	bool checkPrevTile(sf::Vector2i pos);
 
 	void setNextTile(sf::Vector2i pos);
 	sf::Vector2i getNextTile();
@@ -32,7 +33,7 @@ protected:
 	sf::Clock clock;
 	sf::Vector2f previousPosition;
 	sf::Vector2f nextPosition;
-	sf::Vector2i previousTile;
+	sf::Vector2i previousTile [6];
 	sf::Vector2i nextTile;
 	sf::Vector2i scatterTile;
 	Map* map;

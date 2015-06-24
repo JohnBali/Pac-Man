@@ -48,7 +48,7 @@ void Pacman::walk(Map* map)
 	frame = (frame + 1) % 3;
 }
 
-void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
+void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
@@ -136,9 +136,14 @@ void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed)
 
 void Pacman::Debug()
 {
-		std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
-		std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
-		std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
+	std::cout << std::endl;
+	std::cout << "<<< Pacmans' Data >>>" << std::endl;
+	std::cout << "actual position: (" << GetPosition().x  << ", " << GetPosition().y << ")" << std::endl;
+	std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
+	std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
+	std::cout << std::endl;
+	std::cout << "<<< END Pacmans' Data >>>" << std::endl;
+	std::cout << std::endl;
 }
 
 Pacman::Pacman()

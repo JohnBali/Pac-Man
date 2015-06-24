@@ -4,15 +4,26 @@
 #include "Debug.h"
 #include "HomeScreen.h"
 #include "MainMenu.h"
-#include "Blinky.h"
 #include "Food.h"
+
+// Add ghost includes
+#include "Blinky.h"
+#include "Pinky.h"
+#include "Inky.h"
+#include "Clyde.h"
 
 void GameController::Start(void)
 {
 	//create objects
 	Pacman *pacman = new Pacman();	
+	// Add ghosts
 	Blinky *blinky = new Blinky();
+	Pinky *pinky = new Pinky();
+	Inky *inky = new Inky();
+	Clyde *clyde = new Clyde();
+
 	Food *food = new Food();
+	_score = food->getScore();
 
 	//create a pointer to the score in the food class which is used to work out when the level is complete
 	_score = food->getScore();
@@ -27,7 +38,11 @@ void GameController::Start(void)
 	_gameObjectManager.Add("Map", _map);
 	_gameObjectManager.Add("NFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
+	// Add ghosts
 	_gameObjectManager.Add("_Blinky", blinky);
+	_gameObjectManager.Add("_Pinky", pinky);
+	_gameObjectManager.Add("_Inky", inky);
+	_gameObjectManager.Add("_Clyde", clyde);
 
 	if (_gameState != Uninitialized)
 		return;
@@ -127,9 +142,18 @@ void GameController::GameLoop()
 
 			GameObject pacman = *_gameObjectManager.Get("Pacman");
 			GameObject blinky = *_gameObjectManager.Get("_Blinky");
+			
+			//check if all dots are eaten and game is won
+			if (*_score == 246)
+			{
+				_gameState = GameController::Win;
+			}
+
 			sf::Vector2f pacPos = pacman.GetPosition();
+			sf::Vector2f blinkyPos = blinky.GetPosition();
+			GameObject::Facing facing = pacman.GetFacing();
 			sf::Time elapsed = _clock.restart();
-			_gameObjectManager.UpdateAll(pacPos, elapsed);
+			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos);
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);

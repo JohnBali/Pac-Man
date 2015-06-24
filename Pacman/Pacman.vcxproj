@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blinky.cpp" />
+    <ClCompile Include="Clyde.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="game.cpp" />
@@ -94,9 +95,11 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Ghostclass.cpp" />
     <ClCompile Include="HomeScreen.cpp" />
+    <ClCompile Include="Inky.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Pinky.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\ghostCyan.png" />
@@ -112,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blinky.h" />
+    <ClInclude Include="Clyde.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="GameController.h" />
@@ -119,9 +123,11 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Ghostclass.h" />
     <ClInclude Include="HomeScreen.h" />
+    <ClInclude Include="Inky.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Pinky.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
