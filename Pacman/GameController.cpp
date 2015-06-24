@@ -76,7 +76,41 @@ void GameController::DisplayHomeScreen()
 
 void GameController::DisplayWinScreen()
 {
-	std::cout << "WIN" << std::endl;
+	// Declare and load a font
+	sf::Font font;
+	sf::Vector2f pos;
+	pos.x = 139;
+	pos.y = 264;
+	font.loadFromFile("assets/8-BIT WONDER.ttf");
+	// Create a text
+	sf::Text text("You Win\nPress Space", font);
+	text.setCharacterSize(26);
+	text.setStyle(sf::Text::Bold);
+	text.setColor(sf::Color::Red);
+	text.setPosition(pos);
+	// Draw it
+	sf::Event event;
+	while (_gameState != GameController::DisplayingMenu)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			*_score = 0;
+			_gameObjectManager.Remove("NFood");
+			_gameObjectManager.Remove("Pacman");
+			_gameObjectManager.Remove("_Blinky");
+			_gameObjectManager.Remove("_Pinky");
+			_gameObjectManager.Remove("_Inky");
+			_gameObjectManager.Remove("_Clyde");
+
+			Start();
+			_gameState = GameController::DisplayingMenu;
+		}
+		else
+		{
+			_window.draw(text);
+			_window.display();
+		}
+	}
 }
 
 void GameController::DisplayLoseScreen()
@@ -145,7 +179,7 @@ void GameController::GameLoop()
 				}
 			}
 			//check if all dots are eaten and game is won
-			if (*_score == 246)
+			if (*_score == 10)
 			{				
 				_gameState = GameController::Win;
 			}
