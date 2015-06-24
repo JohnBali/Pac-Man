@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Map.h"
+#include <random>
 
 class Ghostclass : public GameObject
 {
@@ -13,6 +14,7 @@ public:
 	void setPrevTile(sf::Vector2i pos);
 	sf::Vector2i getPrevTile();
 	bool checkPrevTile(sf::Vector2i pos);
+	void clearPrevTiles();
 
 	void setNextTile(sf::Vector2i pos);
 	sf::Vector2i getNextTile();
@@ -22,6 +24,8 @@ public:
 
 	void setMode(int mode);
 	int getMode();
+	void modeSwitch();
+	sf::Vector2i frightMode();
 
 	// constructors
 	Ghostclass();

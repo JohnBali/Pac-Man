@@ -48,6 +48,9 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 			break;
 		case 3:							// Fritened mode
 			this->SetSpeed(4);
+			sf::Vector2i runaway = frightMode();
+			pacPos.x = runaway.x;
+			pacPos.y = runaway.y;
 			this->walk(pacPos);
 			break;
 		}
@@ -66,10 +69,10 @@ Inky::Inky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 
-	setMode(2);
+	setMode(0);
 	setScatterTile(sf::Vector2i(22, 30));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
-	SetPosition(16, 16);	//(184, 224);
+	SetPosition(184, 224);
 	SetTile();
 	setPrevTile(sf::Vector2i(0, 1));
 }

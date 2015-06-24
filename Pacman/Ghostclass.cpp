@@ -126,6 +126,14 @@ bool Ghostclass::checkPrevTile(sf::Vector2i pos)
 	return valid;
 }
 
+void Ghostclass::clearPrevTiles()
+{
+	for (int i = 0; i< 6; i++)
+	{
+		previousTile[i] = sf::Vector2i(0, 0);
+	}
+}
+
 void Ghostclass::setNextTile(sf::Vector2i pos)
 {
 	this->nextTile = pos;
@@ -154,6 +162,38 @@ void Ghostclass::setMode(int mode)
 int Ghostclass::getMode()
 {
 	return this->mode;
+}
+
+void Ghostclass::modeSwitch()
+{
+	clearPrevTiles();
+	Facing facing = GetFacing();
+	switch (facing)
+	{
+	case GameObject::LEFT:
+		SetFacing(RIGHT);
+		break;
+	case GameObject::RIGHT:
+		SetFacing(LEFT);
+		break;
+	case GameObject::UP:
+		SetFacing(DOWN);
+		break;
+	case GameObject::DOWN:
+		SetFacing(UP);
+		break;
+	}
+}
+
+sf::Vector2i Ghostclass::frightMode()
+{
+	// Variables
+	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
+	std::vector<sf::Vector2i> exits = map->getExits(pos.x, pos.y);
+	int sze = exits.size();
+	std::srand((unsigned)time(0));
+	int random_int = std::rand() % sze;
+	return exits.at(random_int);
 }
 
 Ghostclass::Ghostclass()
@@ -187,6 +227,6 @@ void Ghostclass::Debug(std::vector<sf::Vector2i> exits)
 		std::cout << "Exit: " << it->x << ", " << it->y << ": Map tile: " << map->getTile(it->x, it->y) << std::endl;
 	}
 	std::cout << std::endl;
-	std::cout << "<<< Blinkys' Data END >>>" << std::endl;
+	std::cout << "<<< Ghost Data END >>>" << std::endl;
 	std::cout << std::endl;
 }

@@ -28,6 +28,9 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 			break;
 		case 3:							// Fritened mode
 			this->SetSpeed(4);
+			sf::Vector2i runaway = frightMode();
+			pacPos.x = runaway.x;
+			pacPos.y = runaway.y;
 			this->walk(pacPos);
 			break;
 		}
@@ -46,7 +49,7 @@ Blinky::Blinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 	
-	setMode(0);
+	setMode(3);
 	setScatterTile(sf::Vector2i(22, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(216, 176);

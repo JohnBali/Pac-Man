@@ -43,6 +43,9 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 			break;
 		case 3:							// Fritened mode
 			this->SetSpeed(4);
+			sf::Vector2i runaway = frightMode();
+			pacPos.x = runaway.x;
+			pacPos.y = runaway.y;
 			this->walk(pacPos);
 			break;
 		}
@@ -54,7 +57,7 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 Pinky::Pinky()
 {
 	//turn debug on or off
-	debug = true;
+	debug = false;
 
 	Load("assets/ghostPink.png");
 	SetScale(2, 2);
