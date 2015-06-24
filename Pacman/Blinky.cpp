@@ -1,12 +1,15 @@
 #include "Blinky.h"
 
 // Set the path
-void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
+void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
+		// Variables
 		int mode = this->getMode();
+
+		// Mode and path switch
 		switch (mode)
 		{
 		case 0:							// Stopped

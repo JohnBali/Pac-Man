@@ -9,7 +9,7 @@ class Pacman : public GameObject
 		~Pacman();
 
 		//methods
-		void Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing);
+		void Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos);
 		void walk(Map* map);
 
 	private:

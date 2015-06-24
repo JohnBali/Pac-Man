@@ -1,12 +1,15 @@
 #include "Pinky.h"
 
 // Set the path
-void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
+void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
+		// Variables
 		int mode = this->getMode();
+
+		// Mode and path switch
 		switch (mode)
 		{
 		case 0:							// Stopped
@@ -34,8 +37,6 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
 				break;
 			case GameObject::DOWN:
 				pacPos.y += 64;
-				break;
-			default:
 				break;
 			}
 			this->walk(pacPos);

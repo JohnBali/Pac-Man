@@ -52,7 +52,7 @@ int* Food::getScore()
 	return &score;
 }
 
-void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
+void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
 {
 	//check if the tile contains dot or energizer and eat it
 	Map::Tile tile = map->getTile(pacPos.y / 16, pacPos.x / 16);

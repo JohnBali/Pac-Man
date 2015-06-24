@@ -139,10 +139,12 @@ void GameController::GameLoop()
 			{
 				_gameState = GameController::Win;
 			}
+
 			sf::Vector2f pacPos = pacman.GetPosition();
+			sf::Vector2f blinkyPos = blinky.GetPosition();
 			GameObject::Facing facing = pacman.GetFacing();
 			sf::Time elapsed = _clock.restart();
-			_gameObjectManager.UpdateAll(pacPos, elapsed, facing);
+			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos);
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);

@@ -1,12 +1,17 @@
 #include "Clyde.h"
 
 // Set the path
-void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
+void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
+		// Variables
 		int mode = this->getMode();
+		sf::Vector2f ghostPos = GetPosition();
+		float distance = 0.0;
+
+		// Mode and path switch
 		switch (mode)
 		{
 		case 0:							// Stopped
@@ -21,7 +26,13 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
 			break;
 		case 2:							// Chase mode
 			this->SetSpeed(4);
-			this->walk(pacPos);
+			distance = vm::magnitude(sf::Vector2f(ghostPos.x - pacPos.x, ghostPos.y - pacPos.y));
+			if (distance < 128)
+			{
+				pacPos.x = (int)this->getScatterTile().x * 16;
+				pacPos.y = (int)this->getScatterTile().y * 16;
+			}
+			walk(pacPos);
 			break;
 		case 3:							// Fritened mode
 			this->SetSpeed(4);
