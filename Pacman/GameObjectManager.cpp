@@ -38,12 +38,12 @@ int GameObjectManager::GetObjectCount() const
 	return _gameObjects.size();
 }
 
-void GameObjectManager::UpdateAll(sf::Vector2f pacPos, sf::Time elapsed)
+void GameObjectManager::UpdateAll(sf::Vector2f pacPos, sf::Time elapsed, GameObject::Facing facing)
 {
 	std::map<std::string, GameObject*>::const_iterator itr = _gameObjects.begin();
 	while (itr != _gameObjects.end())
 	{
-		itr->second->Update(pacPos, elapsed);
+		itr->second->Update(pacPos, elapsed, facing);
 		itr++;
 	}
 }

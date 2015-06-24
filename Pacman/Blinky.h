@@ -4,14 +4,11 @@
 class Blinky : public Ghostclass
 {
 public:
-	void Update(sf::Vector2f pacPos, sf::Time elapsed);
+	void Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing);
 
 	// constructors
 	Blinky();
 	~Blinky();
 
-private:
-	bool debug;
-	void Debug();
 
 };

@@ -96,26 +96,28 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 
 void Ghostclass::setPrevTile(sf::Vector2i pos)
 {
-	previousTile03 = previousTile02;
-	previousTile02 = previousTile01;
-	previousTile01 = pos;
+	for (int i = 6; i > 0; i--)
+	{
+		previousTile[i] = previousTile[i - 1];
+	}
+	previousTile[0] = pos;
 }
 
 sf::Vector2i Ghostclass::getPrevTile()
 {
-	return this->previousTile01;
+	return this->previousTile[0];
 }
 
 bool Ghostclass::checkPrevTile(sf::Vector2i pos)
 {
-	if (pos.x == previousTile01.x && pos.y == previousTile01.y)
-		return true;
-	else if (pos.x == previousTile02.x && pos.y == previousTile02.y)
-		return true;
-	else if (pos.x == previousTile03.x && pos.y == previousTile03.y)
-		return true;
-	else
-		return false;
+	bool valid = false;
+	for (int i = 0; i < 6; i++)
+	{
+		if (pos.x == previousTile[i].x && pos.y == previousTile[i].y)
+			valid = true;
+	}
+
+	return valid;
 }
 
 void Ghostclass::setNextTile(sf::Vector2i pos)
@@ -157,14 +159,20 @@ Ghostclass::~Ghostclass()
 void Ghostclass::Debug(std::vector<sf::Vector2i> exits)
 {
 	std::cout << std::endl; 
-	std::cout << "<<< Blinkys' Data >>>" << std::endl;
-	std::cout << "Blinky's position: (" << GetPosition().x << ", " << GetPosition().y << ")" << std::endl;
+	std::cout << "<<< Ghosts' Data >>>" << std::endl;
+	std::cout << "Ghosts' position: (" << GetPosition().x << ", " << GetPosition().y << ")" << std::endl;
 	std::cout << "grid position: (" << GetRow() << "," << GetColumn() << ")" << std::endl;
 	std::cout << "map tile: " << map->getTile(GetRow(), GetColumn()) << std::endl;
 	std::cout << std::endl;
 	std::cout << "Set tile: " << GetTile().x << ", " << GetTile().y << std::endl;
 	std::cout << "Next tile: " << getNextTile().x << ", " << getNextTile().y << std::endl;
-	std::cout << "Previous tile: " << getPrevTile().x << ", " << getPrevTile().y << std::endl;
+
+	for (int i = 0; i < 6; i++)
+	{
+		std::cout << "Previous tile " << i << ": " << previousTile[i].x << ", " << previousTile[i].y << std::endl;
+	}
+	
+	
 	std::cout << std::endl;
 	std::vector<sf::Vector2i>::iterator it;
 

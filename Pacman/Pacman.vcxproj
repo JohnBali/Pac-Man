@@ -97,6 +97,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Pinky.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\ghostCyan.png" />
@@ -122,6 +123,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Pinky.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

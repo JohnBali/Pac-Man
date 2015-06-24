@@ -4,14 +4,20 @@
 #include "Debug.h"
 #include "HomeScreen.h"
 #include "MainMenu.h"
+
+// Add ghost includes
 #include "Blinky.h"
+#include "Pinky.h"
 #include "Food.h"
 
 void GameController::Start(void)
 {
 	//create objects
 	Pacman *pacman = new Pacman();	
+	// Add ghosts
 	Blinky *blinky = new Blinky();
+	Pinky *pinky = new Pinky();
+
 	Food *food = new Food();
 	_score = food->getScore();
 
@@ -26,6 +32,7 @@ void GameController::Start(void)
 	_gameObjectManager.Add("NFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
 	_gameObjectManager.Add("_Blinky", blinky);
+	_gameObjectManager.Add("_Pinky", pinky);
 
 	if (_gameState != Uninitialized)
 		return;
@@ -126,8 +133,9 @@ void GameController::GameLoop()
 				_gameState = GameController::Win;
 			}
 			sf::Vector2f pacPos = pacman.GetPosition();
+			GameObject::Facing facing = pacman.GetFacing();
 			sf::Time elapsed = _clock.restart();
-			_gameObjectManager.UpdateAll(pacPos, elapsed);
+			_gameObjectManager.UpdateAll(pacPos, elapsed, facing);
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);

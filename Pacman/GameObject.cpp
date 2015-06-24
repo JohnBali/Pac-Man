@@ -72,7 +72,7 @@ sf::Vector2f GameObject::GetPosition()
 	return _sprite.getPosition();
 }
 
-void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed)
+void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing)
 {
 
 }
