@@ -4,10 +4,13 @@
 // Walk
 void Ghostclass::walk(sf::Vector2f pacPos)
 {
+	// set variables
 	float target = 0.0;
 	float distance = 0.0;
+	sf::Vector2f posPac;
+	posPac.x = pacPos.y;
+	posPac.y = pacPos.x;
 	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
-	sf::Vector2i prev = this->getPrevTile();
 	std::vector<sf::Vector2i> exits = map->getExits(pos.x, pos.y);
 	std::vector<sf::Vector2i>::iterator it;
 
@@ -15,10 +18,13 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 	{
 		for (it = exits.begin(); it != exits.end(); it++)
 		{
-			if (it->x == prev.x && it->y == prev.y);
+			sf::Vector2i prev;
+			prev.x = it->x;
+			prev.y = it->y;
+			if (checkPrevTile(prev));
 			else
 			{
-				distance = vm::magnitude(sf::Vector2f(it->x*16 - pacPos.x, it->y*16 - pacPos.y));
+				distance = vm::magnitude(sf::Vector2f(it->x * 16 - posPac.x, it->y * 16 - posPac.y));
 				if (target == 0.0)
 				{
 					target = distance;
@@ -90,12 +96,26 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 
 void Ghostclass::setPrevTile(sf::Vector2i pos)
 {
-	this->previousTile = pos;
+	previousTile03 = previousTile02;
+	previousTile02 = previousTile01;
+	previousTile01 = pos;
 }
 
 sf::Vector2i Ghostclass::getPrevTile()
 {
-	return this->previousTile;
+	return this->previousTile01;
+}
+
+bool Ghostclass::checkPrevTile(sf::Vector2i pos)
+{
+	if (pos.x == previousTile01.x && pos.y == previousTile01.y)
+		return true;
+	else if (pos.x == previousTile02.x && pos.y == previousTile02.y)
+		return true;
+	else if (pos.x == previousTile03.x && pos.y == previousTile03.y)
+		return true;
+	else
+		return false;
 }
 
 void Ghostclass::setNextTile(sf::Vector2i pos)

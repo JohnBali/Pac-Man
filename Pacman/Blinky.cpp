@@ -11,7 +11,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed)
 		this->walk(pacPos);
 		break;
 	case 1:							// Scatter mode
-		this->SetSpeed(2);
+		this->SetSpeed(8);
 		pacPos.x = (int)this->getScatterTile().x * 16;
 		pacPos.y = (int)this->getScatterTile().y * 16;
 		this->walk(pacPos);
@@ -39,8 +39,8 @@ Blinky::Blinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 	SetSpeed(1);
-	setMode(2);
-	setScatterTile(sf::Vector2i(0, 24));
+	setMode(1);
+	setScatterTile(sf::Vector2i(24, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(16, 16);
 	SetTile();
