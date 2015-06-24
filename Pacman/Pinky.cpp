@@ -60,10 +60,10 @@ Pinky::Pinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 
-	setMode(2);
+	setMode(0);
 	setScatterTile(sf::Vector2i(5, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
-	SetPosition(16, 16); //(208, 224)
+	SetPosition(216, 224);
 	SetTile();
 	setPrevTile(sf::Vector2i(0, 1));
 }

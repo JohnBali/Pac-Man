@@ -4,11 +4,13 @@
 #include "Debug.h"
 #include "HomeScreen.h"
 #include "MainMenu.h"
+#include "Food.h"
 
 // Add ghost includes
 #include "Blinky.h"
 #include "Pinky.h"
-#include "Food.h"
+#include "Inky.h"
+#include "Clyde.h"
 
 void GameController::Start(void)
 {
@@ -17,6 +19,8 @@ void GameController::Start(void)
 	// Add ghosts
 	Blinky *blinky = new Blinky();
 	Pinky *pinky = new Pinky();
+	Inky *inky = new Inky();
+	Clyde *clyde = new Clyde();
 
 	Food *food = new Food();
 	_score = food->getScore();
@@ -31,8 +35,11 @@ void GameController::Start(void)
 	_gameObjectManager.Add("Map", _map);
 	_gameObjectManager.Add("NFood", food);
 	_gameObjectManager.Add("Pacman", pacman);
+	// Add ghosts
 	_gameObjectManager.Add("_Blinky", blinky);
 	_gameObjectManager.Add("_Pinky", pinky);
+	_gameObjectManager.Add("_Inky", inky);
+	_gameObjectManager.Add("_Clyde", clyde);
 
 	if (_gameState != Uninitialized)
 		return;

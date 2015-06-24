@@ -43,10 +43,10 @@ Blinky::Blinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 	
-	setMode(2);
+	setMode(0);
 	setScatterTile(sf::Vector2i(22, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
-	SetPosition(208, 176);
+	SetPosition(216, 176);
 	SetTile();
 	setPrevTile(sf::Vector2i(0, 1));
 }

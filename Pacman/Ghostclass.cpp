@@ -55,11 +55,17 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 	if (facing == RIGHT)
 	{
 		ghostPos.x += this->GetSpeed();
+		// Go through side gate (buggy)
+		if (GetColumn() > 27)
+			ghostPos.x = -32;
 		this->_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == LEFT)
 	{
 		ghostPos.x -= this->GetSpeed();
+		// Go through side gate (buggy)
+		if (GetColumn() < 0)
+			ghostPos.x = 448;
 		this->_sprite.setTextureRect(sf::IntRect(left[frame] * 16, 0, 16, 16));
 	}
 	else if (facing == DOWN)

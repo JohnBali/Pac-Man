@@ -1,10 +1,51 @@
-﻿Build started 24/06/2015 16:37:35.
+﻿Build started 24/06/2015 17:33:47.
      1>Project "C:\Users\Draco\Documents\GitHub\Pac-Man\Pacman\Pacman.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\include" /I"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Map.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\include" /I"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Blinky.cpp Clyde.cpp Debug.cpp Food.cpp game.cpp GameController.cpp GameObject.cpp GameObjectManager.cpp Ghostclass.cpp HomeScreen.cpp Inky.cpp MainMenu.cpp Map.cpp Pacman.cpp Pinky.cpp
+         Pinky.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\pinky.cpp(18): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\pinky.cpp(19): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         Pacman.cpp
          Map.cpp
+         MainMenu.cpp
+         Inky.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\inky.cpp(18): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\inky.cpp(19): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         HomeScreen.cpp
+         Ghostclass.cpp
+         GameObjectManager.cpp
+         GameObject.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\gameobject.cpp(125): warning C4244: 'return' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\gameobject.cpp(130): warning C4244: 'return' : conversion from 'const float' to 'int', possible loss of data
+         GameController.cpp
+         game.cpp
+         Food.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\food.cpp(31): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\food.cpp(32): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\food.cpp(42): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\food.cpp(43): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\food.cpp(58): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\food.cpp(61): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         Debug.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(20): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(31): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(34): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(35): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(35): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(40): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(43): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(44): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\debug.cpp(44): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Clyde.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\clyde.cpp(18): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\clyde.cpp(19): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         Blinky.cpp
+     1>c:\users\draco\documents\github\pac-man\pacman\blinky.cpp(18): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\draco\documents\github\pac-man\pacman\blinky.cpp(19): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Draco\Documents\GitHub\Pac-Man\Debug\Pacman.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\lib" /LIBPATH:"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-main-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Draco\Documents\GitHub\Pac-Man\Debug\Pacman.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Draco\Documents\GitHub\Pac-Man\Debug\Pacman.lib" /MACHINE:X86 Debug\Blinky.obj
+         Debug\Clyde.obj
          Debug\Debug.obj
          Debug\Food.obj
          Debug\game.obj
@@ -13,6 +54,7 @@
          Debug\GameObjectManager.obj
          Debug\Ghostclass.obj
          Debug\HomeScreen.obj
+         Debug\Inky.obj
          Debug\MainMenu.obj
          Debug\Map.obj
          Debug\Pacman.obj
@@ -22,4 +64,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.46
+Time Elapsed 00:00:09.35
