@@ -179,7 +179,7 @@ void GameController::GameLoop()
 				}
 			}
 			//check if all dots are eaten and game is won
-			if (*_score == 10)
+			if (*_score == 246)
 			{				
 				_gameState = GameController::Win;
 			}
