@@ -74,6 +74,16 @@ void GameController::DisplayHomeScreen()
 	_gameState = GameController::DisplayingMenu;
 }
 
+void GameController::DisplayWinScreen()
+{
+	std::cout << "WIN" << std::endl;
+}
+
+void GameController::DisplayLoseScreen()
+{
+	std::cout << "LOSE" << std::endl;
+}
+
 void GameController::DisplayMenu()
 {
 	MainMenu mainMenu;
@@ -115,12 +125,12 @@ void GameController::GameLoop()
 		}
 		case GameController::Win:
 		{
-			std::cout << "WIN" << std::endl;
+			DisplayWinScreen();
 			break;
 		}
 		case GameController::Lose:
 		{
-			std::cout << "LOSE" << std::endl;
+			DisplayLoseScreen();
 			break;
 		}
 		case GameController::Playing:
@@ -136,18 +146,19 @@ void GameController::GameLoop()
 			}
 			//check if all dots are eaten and game is won
 			if (*_score == 246)
-			{
+			{				
 				_gameState = GameController::Win;
 			}
 
+			/*
+			if (pacmanDead())
+			{
+				_gameState = GameController::Lose;
+			}
+			*/
+
 			GameObject pacman = *_gameObjectManager.Get("Pacman");
 			GameObject blinky = *_gameObjectManager.Get("_Blinky");
-			
-			//check if all dots are eaten and game is won
-			if (*_score == 246)
-			{
-				_gameState = GameController::Win;
-			}
 
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Vector2f blinkyPos = blinky.GetPosition();

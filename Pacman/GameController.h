@@ -19,6 +19,8 @@ private:
 
 	static void DisplayHomeScreen();
 	static void DisplayMenu();
+	static void DisplayWinScreen();
+	static void DisplayLoseScreen();
 
 	static sf::Event GetInput();
 
