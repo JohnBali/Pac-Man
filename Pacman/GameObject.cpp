@@ -25,6 +25,13 @@ void GameObject::Load(std::string filename)
 	}
 	else
 	{
+		sf::Image pacmanImage = _texture.copyToImage();
+		pacmanImage.createMaskFromColor(sf::Color(0, 0, 0), 0);
+
+		if (!_texture.loadFromImage(pacmanImage))
+		{
+			std::cout << "Error masking image resource pacman.png" << std::endl;
+		}
 		_filename = filename;
 		_sprite.setTexture(_texture);
 		_isLoaded = true;
@@ -122,10 +129,10 @@ bool GameObject::ColumnBoundary()
 
 int GameObject::GetColumn()
 {
-	return _sprite.getPosition().x / 16;
+	return (int)_sprite.getPosition().x / 16;
 }
 
 int GameObject::GetRow()
 {
-	return _sprite.getPosition().y / 16;
+	return (int)_sprite.getPosition().y / 16;
 }

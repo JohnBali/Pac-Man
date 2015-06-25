@@ -19,8 +19,8 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 			break;
 		case 1:							// Scatter mode
 			this->SetSpeed(4);
-			pacPos.x = (int)this->getScatterTile().x * 16;
-			pacPos.y = (int)this->getScatterTile().y * 16;
+			pacPos.x = (float)this->getScatterTile().x * 16;
+			pacPos.y = (float)this->getScatterTile().y * 16;
 			this->walk(pacPos);
 			break;
 		case 2:							// Chase mode
@@ -46,11 +46,12 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 			pacPos.y += temp.y;
 			this->walk(pacPos);
 			break;
-		case 3:							// Fritened mode
-			this->SetSpeed(4);
+		case 3:							/// Frightened mode
+			this->SetSpeed(2);
+			_sprite.setColor(sf::Color(16, 32, 128));
 			sf::Vector2i runaway = frightMode();
-			pacPos.x = runaway.x;
-			pacPos.y = runaway.y;
+			pacPos.x = (float)runaway.x;
+			pacPos.y = (float)runaway.y;
 			this->walk(pacPos);
 			break;
 		}

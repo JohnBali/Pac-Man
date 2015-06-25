@@ -28,8 +28,8 @@ void Food::readMap()
 void Food::drawDot(int rows, int columns)
 {
 	sf::Vector2f pos;
-	pos.x = (columns * 16) + 6;
-	pos.y = (rows * 16) + 6;
+	pos.x = (float)(columns * 16) + 6;
+	pos.y = (float)(rows * 16) + 6;
 	dot.setRadius(2);
 	dot.setFillColor(sf::Color(100, 250, 50));
 	dot.setPosition(pos);
@@ -39,8 +39,8 @@ void Food::drawDot(int rows, int columns)
 void Food::drawEnergizer(int rows, int columns)
 {
 	sf::Vector2f pos;
-	pos.x = (columns * 16) + 2;
-	pos.y = (rows * 16) + 2;
+	pos.x = (float)(columns * 16) + 2;
+	pos.y = (float)(rows * 16) + 2;
 	dot.setRadius(6);
 	dot.setFillColor(sf::Color(100, 250, 50));
 	dot.setPosition(pos);
@@ -55,10 +55,10 @@ int* Food::getScore()
 void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
 {
 	//check if the tile contains dot or energizer and eat it
-	Map::Tile tile = map->getTile(pacPos.y / 16, pacPos.x / 16);
+	Map::Tile tile = map->getTile((int)pacPos.y / 16, (int)pacPos.x / 16);
 	if (tile == Map::Tile::TileDot || tile == Map::Tile::TileEnergizer)
 	{
-		map->updateTileToEmpty(pacPos.y / 16, pacPos.x / 16);
+		map->updateTileToEmpty((int)pacPos.y / 16, (int)pacPos.x / 16);
 		score++;
 		readMap();
 	}

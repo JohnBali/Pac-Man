@@ -17,7 +17,7 @@ void Debug::Draw(sf::RenderWindow &window)
 			if ((tile == Map::Tile::TileEmpty || tile == Map::Tile::TileDot) || tile == Map::Tile::TileEnergizer)
 			{
 				sf::RectangleShape rectangle;
-				rectangle.setPosition(row * 16, col * 16);
+				rectangle.setPosition((float)row * 16, (float)col * 16);
 				rectangle.setSize(sf::Vector2f(16, 16));
 
 				rectangle.setFillColor(sf::Color::Cyan);
@@ -28,20 +28,20 @@ void Debug::Draw(sf::RenderWindow &window)
 	}
 
 	//draw grid
-	for (int y = 16; y < window.getSize().y; y += 16)
+	for (unsigned int y = 16; y < window.getSize().y; y += 16)
 	{
 		sf::Vertex line[2] = {
-			sf::Vertex(sf::Vector2f(0.0f, y), sf::Color(159, 159, 159, 255)),
-			sf::Vertex(sf::Vector2f(window.getSize().x, y), sf::Color(159, 159, 159, 255))
+			sf::Vertex(sf::Vector2f(0.0f, (float)y), sf::Color(159, 159, 159, 255)),
+			sf::Vertex(sf::Vector2f((float)window.getSize().x, (float)y), sf::Color(159, 159, 159, 255))
 		};
 		window.draw(line, 2, sf::Lines);
 	}
 
-	for (int x = 16; x < window.getSize().x; x += 16)
+	for (unsigned int x = 16; x < window.getSize().x; x += 16)
 	{
 		sf::Vertex line[2] = {
-			sf::Vertex(sf::Vector2f(x, 0), sf::Color(159, 159, 159, 255)),
-			sf::Vertex(sf::Vector2f(x, window.getSize().y), sf::Color(159, 159, 159, 255))
+			sf::Vertex(sf::Vector2f((float)x, 0), sf::Color(159, 159, 159, 255)),
+			sf::Vertex(sf::Vector2f((float)x, (float)window.getSize().y), sf::Color(159, 159, 159, 255))
 		};
 		window.draw(line, 2, sf::Lines);
 	}

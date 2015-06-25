@@ -18,19 +18,20 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 			break;
 		case 1:							// Scatter mode
 			this->SetSpeed(4);
-			pacPos.x = (int)this->getScatterTile().x * 16;
-			pacPos.y = (int)this->getScatterTile().y * 16;
+			pacPos.x = (float)getScatterTile().x * 16;
+			pacPos.y = (float)getScatterTile().y * 16;
 			this->walk(pacPos);
 			break;
 		case 2:							// Chase mode
 			this->SetSpeed(4);
 			this->walk(pacPos);
 			break;
-		case 3:							// Fritened mode
-			this->SetSpeed(4);
+		case 3:							// Frightened mode
+			this->SetSpeed(2);
+			_sprite.setColor(sf::Color(16, 0, 255));
 			sf::Vector2i runaway = frightMode();
-			pacPos.x = runaway.x;
-			pacPos.y = runaway.y;
+			pacPos.x = (float)runaway.x;
+			pacPos.y = (float)runaway.y;
 			this->walk(pacPos);
 			break;
 		}
@@ -49,7 +50,7 @@ Blinky::Blinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 	
-	setMode(3);
+	setMode(0);
 	setScatterTile(sf::Vector2i(22, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(216, 176);

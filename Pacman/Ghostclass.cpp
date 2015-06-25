@@ -7,7 +7,7 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 	// set variables
 	float target = 0.0;
 	float distance = 0.0;
-	sf::Vector2f posPac;
+	sf::Vector2f posPac;		// Need to switch coordinates to work with the map coordinate system
 	posPac.x = pacPos.y;
 	posPac.y = pacPos.x;
 	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
@@ -189,11 +189,14 @@ sf::Vector2i Ghostclass::frightMode()
 {
 	// Variables
 	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
-	std::vector<sf::Vector2i> exits = map->getExits(pos.x, pos.y);
-	int sze = exits.size();
-	std::srand((unsigned)time(0));
-	int random_int = std::rand() % sze;
-	return exits.at(random_int);
+	int sze = 0;
+	std::random_device rand_dev;
+	std::mt19937 generator(rand_dev());
+	std::uniform_int_distribution<int> distr(0, 28);
+	pos.x = distr(generator);
+	pos.y = distr(generator);
+
+	return pos;
 }
 
 Ghostclass::Ghostclass()

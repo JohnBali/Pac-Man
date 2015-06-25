@@ -20,8 +20,8 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 			break;
 		case 1:							// Scatter mode
 			this->SetSpeed(4);
-			pacPos.x = (int)this->getScatterTile().x * 16;
-			pacPos.y = (int)this->getScatterTile().y * 16;
+			pacPos.x = (float)this->getScatterTile().x * 16;
+			pacPos.y = (float)this->getScatterTile().y * 16;
 			this->walk(pacPos);
 			break;
 		case 2:							// Chase mode
@@ -29,16 +29,17 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 			distance = vm::magnitude(sf::Vector2f(ghostPos.x - pacPos.x, ghostPos.y - pacPos.y));
 			if (distance < 128)
 			{
-				pacPos.x = (int)this->getScatterTile().x * 16;
-				pacPos.y = (int)this->getScatterTile().y * 16;
+				pacPos.x = (float)this->getScatterTile().x * 16;
+				pacPos.y = (float)this->getScatterTile().y * 16;
 			}
 			walk(pacPos);
 			break;
-		case 3:							// Fritened mode
-			this->SetSpeed(4);
+		case 3:							// Frightened mode
+			this->SetSpeed(2);
+			_sprite.setColor(sf::Color(16, 16, 255));
 			sf::Vector2i runaway = frightMode();
-			pacPos.x = runaway.x;
-			pacPos.y = runaway.y;
+			pacPos.x = (float)runaway.x;
+			pacPos.y = (float)runaway.y;
 			this->walk(pacPos);
 			break;
 		}
