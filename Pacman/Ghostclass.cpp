@@ -154,16 +154,6 @@ sf::Vector2i Ghostclass::getScatterTile()
 	return this->scatterTile;
 }
 
-void Ghostclass::setMode(int mode)
-{
-	this->mode = mode;
-}
-
-int Ghostclass::getMode()
-{
-	return this->mode;
-}
-
 void Ghostclass::modeSwitch()
 {
 	clearPrevTiles();

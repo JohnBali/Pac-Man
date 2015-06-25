@@ -22,8 +22,6 @@ public:
 	void setScatterTile(sf::Vector2i pos);
 	sf::Vector2i getScatterTile();
 
-	void setMode(int mode);
-	int getMode();
 	void modeSwitch();
 	sf::Vector2i frightMode();
 
@@ -33,7 +31,7 @@ public:
 
 protected:
 	// Variables
-	int mode;
+	
 	sf::Clock clock;
 	sf::Vector2f previousPosition;
 	sf::Vector2f nextPosition;

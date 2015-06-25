@@ -7,7 +7,7 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int mode = this->getMode();
+		int modes = this->getMode();
 
 		// Check ghost Win
 		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
@@ -16,7 +16,7 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && mode != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -25,7 +25,7 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 			else
 			{
 				// Mode and path switch
-				switch (mode)
+				switch (modes)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);
@@ -82,7 +82,7 @@ Pinky::Pinky()
 	SetOrigin(4, 4);
 	SetFacing(LEFT);
 
-	setMode(1);
+	setMode(0);
 	setScatterTile(sf::Vector2i(5, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(216, 224);

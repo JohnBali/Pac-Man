@@ -51,11 +51,15 @@ public:
 	void SetWin();
 	bool GetWin();
 
+	virtual void setMode(int mode);
+	virtual int getMode();
+
+
 protected:
 	Facing facing;
 	
 	sf::Time timeBetweenMoves;
-
+	int ghostMode;
 	int frame = 0;
 	float speed = 4;
 	sf::Vector2i tile;

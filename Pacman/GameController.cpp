@@ -1,16 +1,4 @@
 #include "GameController.h"
-#include "Pacman.h"
-#include "Map.h"
-#include "Debug.h"
-#include "HomeScreen.h"
-#include "MainMenu.h"
-#include "Food.h"
-
-// Add ghost includes
-#include "Blinky.h"
-#include "Pinky.h"
-#include "Inky.h"
-#include "Clyde.h"
 
 void GameController::Start(void)
 {
@@ -96,7 +84,7 @@ void GameController::DisplayFinishScreen(std::string finString)
 	textLineTwo.setColor(sf::Color::Red);
 	textLineTwo.setPosition(pos);
 	// Draw it
-	sf::Event event;
+	//sf::Event event;
 	while (_gameState != GameController::DisplayingMenu)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -168,6 +156,7 @@ void GameController::GameLoop()
 		}
 		case GameController::DisplayingMenu:
 		{
+			_ghostSwitch = 0;
 			DisplayMenu();
 			break;
 		}
@@ -183,6 +172,16 @@ void GameController::GameLoop()
 		}
 		case GameController::Playing:
 		{
+			// Set game timer
+			sf::Time ghostModes;
+			if (_ghostSwitch == 0)
+			{
+				std::cout << "Mode: " << std::endl;
+				_gameTime.restart();
+				_ghostSwitch = 1;
+			}
+
+			// Game handles
 			sf::Event event;
 			GameObject pacman = *_gameObjectManager.Get("Pacman");
 			GameObject blinky = *_gameObjectManager.Get("_Blinky");
@@ -210,7 +209,18 @@ void GameController::GameLoop()
 				_gameState = GameController::Lose;
 			}
 			
+			// Ghost Mode Set
+			ghostModes = _gameTime.getElapsedTime();
+			if (ghostModes.asSeconds() < 2)
+			{
+				blinky.setMode(1);
+				pinky.setMode(1);
+				std::cout << "Mode: " << blinky.getMode() << std::endl;
+			}
+			else
+				std::cout << "Mode: " << blinky.getMode() << std::endl;
 
+			// Game Updates
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Vector2f blinkyPos = blinky.GetPosition();
 			GameObject::Facing facing = pacman.GetFacing();
@@ -246,3 +256,5 @@ GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
 sf::Clock GameController::_clock;
 int* GameController::_score;
+sf::Clock GameController::_gameTime;
+int GameController::_ghostSwitch;

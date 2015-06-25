@@ -7,7 +7,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int mode = this->getMode();
+		int modes = this->getMode();
 
 		// Check ghost Win
 		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
@@ -17,7 +17,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && mode != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -25,7 +25,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 			}
 			else
 			{
-				switch (mode)
+				switch (modes)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);
@@ -67,7 +67,7 @@ Blinky::Blinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 	
-	setMode(1);
+	setMode(0);
 	setScatterTile(sf::Vector2i(22, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(216, 176);

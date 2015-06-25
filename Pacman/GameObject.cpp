@@ -146,3 +146,14 @@ bool GameObject::GetWin()
 {
 	return ghostWin;
 }
+
+void GameObject::setMode(int mode)
+{
+	this->ghostMode = mode;
+}
+
+int GameObject::getMode()
+{
+	return this->ghostMode;
+}
+

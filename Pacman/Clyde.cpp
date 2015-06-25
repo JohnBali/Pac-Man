@@ -7,7 +7,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int mode = this->getMode();
+		int modes = this->getMode();
 		sf::Vector2f ghostPos = GetPosition();
 		float distance = 0.0;
 
@@ -18,7 +18,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && mode != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -27,7 +27,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 			else
 			{
 				// Mode and path switch
-				switch (mode)
+				switch (modes)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);
@@ -75,7 +75,7 @@ Clyde::Clyde()
 	SetOrigin(4, 4);
 	SetFacing(LEFT);
 
-	setMode(1);
+	setMode(0);
 	setScatterTile(sf::Vector2i(5, 30));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(248, 224);
