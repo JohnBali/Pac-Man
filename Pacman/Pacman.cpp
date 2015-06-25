@@ -154,7 +154,7 @@ Pacman::Pacman()
 	Load("assets/pacman.png");
 	SetScale(2, 2);
 	SetOrigin(4, 4);	
-	GameObject::SetPosition(216, 80);
+	GameObject::SetPosition(216, 368);
 	SetTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetSpeed(4);
 	this->facing = RIGHT;

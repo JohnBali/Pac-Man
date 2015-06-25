@@ -7,6 +7,7 @@
 #include "MainMenu.h"
 #include "GameController.h"
 #include "GameObjectManager.h"
+#include <string>
 
 class GameController
 {
@@ -21,6 +22,7 @@ private:
 	static void DisplayMenu();
 	static void DisplayWinScreen();
 	static void DisplayLoseScreen();
+	static void DisplayFinishScreen(std::string finString);
 
 	static sf::Event GetInput();
 
@@ -33,4 +35,5 @@ private:
 	static GameObjectManager _gameObjectManager;
 	static bool _debug;
 	static sf::Clock _clock;
+	
 };

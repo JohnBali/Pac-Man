@@ -10,3 +10,4 @@ Debug/Pacman.exe
 *.obj
 *.tlog
 *.idb
+*.bak

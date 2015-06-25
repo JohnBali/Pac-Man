@@ -10,52 +10,66 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 		int mode = this->getMode();
 		sf::Vector2f temp = pacPos;
 
-		// Mode and path switch
-		switch (mode)
+		// Check ghost Win
+		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
+			SetWin();
+
+		if (!GetWin())
 		{
-		case 0:							// Stopped
-			this->SetSpeed(0);
-			this->walk(pacPos);
-			break;
-		case 1:							// Scatter mode
-			this->SetSpeed(4);
-			pacPos.x = (float)this->getScatterTile().x * 16;
-			pacPos.y = (float)this->getScatterTile().y * 16;
-			this->walk(pacPos);
-			break;
-		case 2:							// Chase mode
-			this->SetSpeed(4);
-			switch (facing)
+			// Test if ghost is in ghost house
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 12)
 			{
-			case GameObject::LEFT:
-				temp.x -= 32;
+				clearPrevTiles();
+				pacPos = (sf::Vector2f(216, 80));
+			}
+
+			// Mode and path switch
+			switch (mode)
+			{
+			case 0:							// Stopped
+				this->SetSpeed(0);
+				this->walk(pacPos);
 				break;
-			case GameObject::RIGHT:
-				temp.x += 32;
+			case 1:							// Scatter mode
+				this->SetSpeed(4);
+				pacPos.x = (float)this->getScatterTile().x * 16;
+				pacPos.y = (float)this->getScatterTile().y * 16;
+				this->walk(pacPos);
 				break;
-			case GameObject::UP:
-				temp.y -= 32;
+			case 2:							// Chase mode
+				this->SetSpeed(4);
+				switch (facing)
+				{
+				case GameObject::LEFT:
+					temp.x -= 32;
+					break;
+				case GameObject::RIGHT:
+					temp.x += 32;
+					break;
+				case GameObject::UP:
+					temp.y -= 32;
+					break;
+				case GameObject::DOWN:
+					temp.y += 32;
+					break;
+				}
+				temp.x = (temp.x - blinkyPos.x) * 2;
+				temp.y = (temp.y - blinkyPos.y) * 2;
+				pacPos.x += temp.x;
+				pacPos.y += temp.y;
+				this->walk(pacPos);
 				break;
-			case GameObject::DOWN:
-				temp.y += 32;
+			case 3:							/// Frightened mode
+				this->SetSpeed(2);
+				_sprite.setColor(sf::Color(16, 32, 128));
+				sf::Vector2i runaway = frightMode();
+				pacPos.x = (float)runaway.x;
+				pacPos.y = (float)runaway.y;
+				this->walk(pacPos);
 				break;
 			}
-			temp.x = (temp.x - blinkyPos.x) * 2;
-			temp.y = (temp.y - blinkyPos.y) * 2;
-			pacPos.x += temp.x;
-			pacPos.y += temp.y;
-			this->walk(pacPos);
-			break;
-		case 3:							/// Frightened mode
-			this->SetSpeed(2);
-			_sprite.setColor(sf::Color(16, 32, 128));
-			sf::Vector2i runaway = frightMode();
-			pacPos.x = (float)runaway.x;
-			pacPos.y = (float)runaway.y;
-			this->walk(pacPos);
-			break;
+			timeBetweenMoves = sf::milliseconds(25);
 		}
-		timeBetweenMoves = sf::milliseconds(25);
 	}
 }
 
@@ -63,7 +77,7 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 Inky::Inky()
 {
 	//turn debug on or off
-	debug = false;
+	debug = true;
 
 	Load("assets/ghostCyan.png");
 	SetScale(2, 2);

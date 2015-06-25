@@ -32,6 +32,7 @@ public:
 	virtual void GameObject::SetOrigin(float x, float y);
 	virtual void GameObject::SetTextureRect(sf::IntRect rect);
 
+
 	void SetFacing(Facing facing);
 	Facing GetFacing();
 
@@ -47,9 +48,12 @@ public:
 	int GetColumn();
 	int GetRow();
 
+	void SetWin();
+	bool GetWin();
+
 protected:
 	Facing facing;
-
+	
 	sf::Time timeBetweenMoves;
 
 	int frame = 0;
@@ -60,6 +64,7 @@ protected:
 	sf::Texture _texture;
 	std::string _filename;
 	bool _isLoaded;
+	bool ghostWin = false;
 
 	static const int left[FRAMES];
 	static const int right[FRAMES];

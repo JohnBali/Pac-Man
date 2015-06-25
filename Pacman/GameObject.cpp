@@ -136,3 +136,13 @@ int GameObject::GetRow()
 {
 	return (int)_sprite.getPosition().y / 16;
 }
+
+void GameObject::SetWin()
+{
+	ghostWin = true;
+}
+
+bool GameObject::GetWin()
+{
+	return ghostWin;
+}
