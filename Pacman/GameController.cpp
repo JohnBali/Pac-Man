@@ -74,7 +74,7 @@ void GameController::DisplayHomeScreen()
 	_gameState = GameController::DisplayingMenu;
 }
 
-void GameController::DisplayWinScreen()
+void GameController::DisplayFinishScreen(std::string finString)
 {
 	// Declare and load a font
 	sf::Font font;
@@ -83,7 +83,7 @@ void GameController::DisplayWinScreen()
 	pos.y = 264;
 	font.loadFromFile("assets/8-BIT WONDER.ttf");
 	// Create a text
-	sf::Text textLineOne("You Win", font);
+	sf::Text textLineOne(finString, font);
 	textLineOne.setCharacterSize(26);
 	textLineOne.setStyle(sf::Text::Bold);
 	textLineOne.setColor(sf::Color::Red);
@@ -124,7 +124,12 @@ void GameController::DisplayWinScreen()
 
 void GameController::DisplayLoseScreen()
 {
-	std::cout << "LOSE" << std::endl;
+	DisplayFinishScreen("You Lost");
+}
+
+void GameController::DisplayWinScreen()
+{
+	DisplayFinishScreen("You Win");
 }
 
 void GameController::DisplayMenu()
@@ -179,6 +184,12 @@ void GameController::GameLoop()
 		case GameController::Playing:
 		{
 			sf::Event event;
+			GameObject pacman = *_gameObjectManager.Get("Pacman");
+			GameObject blinky = *_gameObjectManager.Get("_Blinky");
+			GameObject pinky = *_gameObjectManager.Get("_Pinky");
+			GameObject inky = *_gameObjectManager.Get("_Inky");
+			GameObject clyde = *_gameObjectManager.Get("_Clyde");
+
 			while (_window.pollEvent(event))
 			{
 				// "close requested" event: we close the window
@@ -193,15 +204,12 @@ void GameController::GameLoop()
 				_gameState = GameController::Win;
 			}
 
-			/*
-			if (pacmanDead())
+			
+			if (blinky.GetWin() || pinky.GetWin() || inky.GetWin() || clyde.GetWin())
 			{
 				_gameState = GameController::Lose;
 			}
-			*/
-
-			GameObject pacman = *_gameObjectManager.Get("Pacman");
-			GameObject blinky = *_gameObjectManager.Get("_Blinky");
+			
 
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Vector2f blinkyPos = blinky.GetPosition();

@@ -17,36 +17,39 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() == 14)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && mode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
+				this->walk(pacPos);
 			}
-
-			switch (mode)
+			else
 			{
-			case 0:							// Stopped
-				this->SetSpeed(0);
-				this->walk(pacPos);
-				break;
-			case 1:							// Scatter mode
-				this->SetSpeed(4);
-				pacPos.x = (float)getScatterTile().x * 16;
-				pacPos.y = (float)getScatterTile().y * 16;
-				this->walk(pacPos);
-				break;
-			case 2:							// Chase mode
-				this->SetSpeed(4);
-				this->walk(pacPos);
-				break;
-			case 3:							// Frightened mode
-				this->SetSpeed(2);
-				_sprite.setColor(sf::Color(16, 0, 255));
-				sf::Vector2i runaway = frightMode();
-				pacPos.x = (float)runaway.x;
-				pacPos.y = (float)runaway.y;
-				this->walk(pacPos);
-				break;
+				switch (mode)
+				{
+				case 0:							// Stopped
+					this->SetSpeed(0);
+					this->walk(pacPos);
+					break;
+				case 1:							// Scatter mode
+					this->SetSpeed(4);
+					pacPos.x = (float)getScatterTile().x * 16;
+					pacPos.y = (float)getScatterTile().y * 16;
+					this->walk(pacPos);
+					break;
+				case 2:							// Chase mode
+					this->SetSpeed(4);
+					this->walk(pacPos);
+					break;
+				case 3:							// Frightened mode
+					this->SetSpeed(2);
+					_sprite.setColor(sf::Color(16, 0, 255));
+					sf::Vector2i runaway = frightMode();
+					pacPos.x = (float)runaway.x;
+					pacPos.y = (float)runaway.y;
+					this->walk(pacPos);
+					break;
+				}
 			}
 			timeBetweenMoves = sf::milliseconds(25);
 		}
@@ -64,7 +67,7 @@ Blinky::Blinky()
 	SetOrigin(4, 4);
 	SetFacing(RIGHT);
 	
-	setMode(0);
+	setMode(1);
 	setScatterTile(sf::Vector2i(22, 0));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
 	SetPosition(216, 176);
