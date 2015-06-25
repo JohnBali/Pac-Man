@@ -25,6 +25,30 @@ void Food::readMap()
 	}
 }
 
+void Food::resetBoard()
+{
+	int rows = 0;
+	int columns = 0;
+	while (rows < map->ROW_COUNT)
+	{
+		while (columns < map->COLUMN_COUNT)
+		{
+			Map::Tile tile = map->getTile(rows, columns);
+			if (tile == Map::Tile::DotEaten)
+			{
+				map->updateTileToDot(rows, columns);
+			}
+			if (tile == Map::Tile::EnergizerEaten)
+			{
+				map->updateTileToEnergizer(rows, columns);
+			}
+			columns++;
+		}
+		columns = 0;
+		rows++;
+	}
+}
+
 void Food::drawDot(int rows, int columns)
 {
 	sf::Vector2f pos;
@@ -56,9 +80,15 @@ void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 {
 	//check if the tile contains dot or energizer and eat it
 	Map::Tile tile = map->getTile((int)pacPos.y / 16, (int)pacPos.x / 16);
-	if (tile == Map::Tile::TileDot || tile == Map::Tile::TileEnergizer)
+	if (tile == Map::Tile::TileDot)
 	{
-		map->updateTileToEmpty((int)pacPos.y / 16, (int)pacPos.x / 16);
+		map->updateDotToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
+		score++;
+		readMap();
+	}
+	if (tile == Map::Tile::TileEnergizer)
+	{
+		map->updateEnergizerToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
 		score++;
 		readMap();
 	}
@@ -74,6 +104,7 @@ void Food::Draw(sf::RenderWindow &window)
 
 Food::Food()
 {
+	resetBoard();
 	readMap();
 }
 

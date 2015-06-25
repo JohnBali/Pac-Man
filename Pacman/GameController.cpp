@@ -83,11 +83,18 @@ void GameController::DisplayWinScreen()
 	pos.y = 264;
 	font.loadFromFile("assets/8-BIT WONDER.ttf");
 	// Create a text
-	sf::Text text("You Win\nPress Space", font);
-	text.setCharacterSize(26);
-	text.setStyle(sf::Text::Bold);
-	text.setColor(sf::Color::Red);
-	text.setPosition(pos);
+	sf::Text textLineOne("You Win", font);
+	textLineOne.setCharacterSize(26);
+	textLineOne.setStyle(sf::Text::Bold);
+	textLineOne.setColor(sf::Color::Red);
+	textLineOne.setPosition(pos);
+	pos.x = 78;
+	pos.y = 313;
+	sf::Text textLineTwo("Press  Space", font);
+	textLineTwo.setCharacterSize(26);
+	textLineTwo.setStyle(sf::Text::Bold);
+	textLineTwo.setColor(sf::Color::Red);
+	textLineTwo.setPosition(pos);
 	// Draw it
 	sf::Event event;
 	while (_gameState != GameController::DisplayingMenu)
@@ -95,6 +102,7 @@ void GameController::DisplayWinScreen()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			*_score = 0;
+
 			_gameObjectManager.Remove("NFood");
 			_gameObjectManager.Remove("Pacman");
 			_gameObjectManager.Remove("_Blinky");
@@ -107,7 +115,8 @@ void GameController::DisplayWinScreen()
 		}
 		else
 		{
-			_window.draw(text);
+			_window.draw(textLineOne);
+			_window.draw(textLineTwo);
 			_window.display();
 		}
 	}

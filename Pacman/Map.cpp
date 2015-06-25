@@ -55,9 +55,24 @@ bool Map::isCollision(int row, int column)
 	return true;
 }
 
-void Map::updateTileToEmpty(int row, int column)
+void Map::updateDotToEaten(int row, int column)
 {
-	Map::DEFAULT_MAP[row][column] = 0;
+	Map::DEFAULT_MAP[row][column] = Map::Tile::DotEaten;
+}
+
+void Map::updateEnergizerToEaten(int row, int column)
+{
+	Map::DEFAULT_MAP[row][column] = Map::Tile::EnergizerEaten;
+}
+
+void Map::updateTileToDot(int row, int column)
+{
+	Map::DEFAULT_MAP[row][column] = Map::Tile::TileDot;
+}
+
+void Map::updateTileToEnergizer(int row, int column)
+{
+	Map::DEFAULT_MAP[row][column] = Map::Tile::TileEnergizer;
 }
 
 std::vector<sf::Vector2i> Map::getExits(int row, int column)

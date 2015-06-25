@@ -19,10 +19,15 @@ public:
 		TileRed = 6,
 		TileCyan = 7,
 		TilePink = 8,
-		TileOrange = 9
+		TileOrange = 9,
+		DotEaten = 10,
+		EnergizerEaten = 11
 	};
 
-	void updateTileToEmpty(int row, int column);
+	void updateDotToEaten(int row, int column);
+	void updateEnergizerToEaten(int row, int column);
+	void updateTileToDot(int row, int column);
+	void updateTileToEnergizer(int row, int column);
 	Tile getTile(int row, int column);
 	bool isCollision(int row, int column);
 	std::vector<sf::Vector2i> getExits(int row, int column);
