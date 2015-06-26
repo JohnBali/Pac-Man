@@ -83,11 +83,14 @@ void GameController::DisplayFinishScreen(std::string finString)
 	textLineTwo.setStyle(sf::Text::Bold);
 	textLineTwo.setColor(sf::Color::Red);
 	textLineTwo.setPosition(pos);
-	// Draw it
-	//sf::Event event;
-	while (_gameState != GameController::DisplayingMenu)
+	_window.draw(textLineOne);
+	_window.draw(textLineTwo);
+	_window.display();
+	
+	sf::Event menuEvent;
+	while (_window.pollEvent(menuEvent))
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (menuEvent.type == sf::Event::KeyPressed)
 		{
 			*_score = 0;
 
@@ -101,13 +104,11 @@ void GameController::DisplayFinishScreen(std::string finString)
 			Start();
 			_gameState = GameController::DisplayingMenu;
 		}
-		else
+		if (menuEvent.type == sf::Event::Closed)
 		{
-			_window.draw(textLineOne);
-			_window.draw(textLineTwo);
-			_window.display();
+			_gameState = GameController::Exiting;
 		}
-	}
+	}		
 }
 
 void GameController::DisplayLoseScreen()
