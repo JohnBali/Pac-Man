@@ -35,7 +35,7 @@ void GameController::Start(void)
 	if (_gameState != Uninitialized)
 		return;
 
-	_window.create(sf::VideoMode(448, 496), "Pacman");
+	_window.create(sf::VideoMode(448, 534), "Pacman");
 	_window.setFramerateLimit(60);
 
 	_gameState = GameController::DisplayingHomeScreen;
