@@ -1,13 +1,17 @@
 #include "Blinky.h"
 
 // Set the path
-void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
+void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int modes = this->getMode();
+		if (getMode() != ghostMode)
+		{
+			setMode(ghostMode);
+			modeSwitch();
+		}
 
 		// Check ghost Win
 		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
@@ -17,7 +21,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && ghostMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -25,7 +29,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 			}
 			else
 			{
-				switch (modes)
+				switch (ghostMode)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);
@@ -33,8 +37,8 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 					break;
 				case 1:							// Scatter mode
 					this->SetSpeed(4);
-					pacPos.x = (float)getScatterTile().x * 16;
-					pacPos.y = (float)getScatterTile().y * 16;
+					//pacPos.x = (float)getScatterTile().x * 16;			Blinky doesn't have a Scatter Mode
+					//pacPos.y = (float)getScatterTile().y * 16;
 					this->walk(pacPos);
 					break;
 				case 2:							// Chase mode

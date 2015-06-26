@@ -1,14 +1,24 @@
 #include "Inky.h"
 
 // Set the path
-void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
+void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int modes = this->getMode();
+		int localMode = ghostMode;
 		sf::Vector2f temp = pacPos;
+
+		if (score < 30)
+			localMode = 0;
+		
+		if (getMode() != localMode)
+		{
+			setMode(localMode);
+			modeSwitch();
+		}
+
 
 		// Check ghost Win
 		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
@@ -17,7 +27,7 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && localMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -26,7 +36,7 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 			else
 			{
 				// Mode and path switch
-				switch (modes)
+				switch (localMode)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);

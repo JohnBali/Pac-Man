@@ -1,13 +1,17 @@
 #include "Pinky.h"
 
 // Set the path
-void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::Vector2f blinkyPos)
+void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::Vector2f blinkyPos, int ghostMode, int &score)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int modes = this->getMode();
+		if (getMode() != ghostMode)
+		{
+			setMode(ghostMode);
+			modeSwitch();
+		}
 
 		// Check ghost Win
 		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
@@ -16,7 +20,7 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && ghostMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -25,7 +29,7 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 			else
 			{
 				// Mode and path switch
-				switch (modes)
+				switch (ghostMode)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);

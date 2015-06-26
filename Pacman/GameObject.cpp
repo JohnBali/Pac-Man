@@ -79,7 +79,7 @@ sf::Vector2f GameObject::GetPosition()
 	return _sprite.getPosition();
 }
 
-void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
+void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
 {
 
 }

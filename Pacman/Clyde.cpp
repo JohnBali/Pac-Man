@@ -1,13 +1,22 @@
 #include "Clyde.h"
 
 // Set the path
-void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos)
+void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
-		int modes = this->getMode();
+		int localMode = ghostMode;
+
+		if (score < 82)
+			localMode = 0;
+
+		if (getMode() != localMode)
+		{
+			setMode(localMode);
+			modeSwitch();
+		}
 		sf::Vector2f ghostPos = GetPosition();
 		float distance = 0.0;
 
@@ -18,7 +27,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && modes != 0)
+			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && localMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -27,7 +36,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 			else
 			{
 				// Mode and path switch
-				switch (modes)
+				switch (localMode)
 				{
 				case 0:							// Stopped
 					this->SetSpeed(0);
