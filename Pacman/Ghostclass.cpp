@@ -1,5 +1,4 @@
 #include "Ghostclass.h"
-#include "VectorMath.h"
 
 // Walk
 void Ghostclass::walk(sf::Vector2f pacPos)
@@ -179,12 +178,10 @@ sf::Vector2i Ghostclass::frightMode()
 {
 	// Variables
 	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
-	int sze = 0;
-	std::random_device rand_dev;
-	std::mt19937 generator(rand_dev());
-	std::uniform_int_distribution<int> distr(0, 28);
-	pos.x = distr(generator);
-	pos.y = distr(generator);
+	std::vector<sf::Vector2i> exits = map->getExits(pos.x, pos.y); 
+	int sze = exits.size();
+	int random_int = rand()%sze;
+	pos = exits[random_int];
 
 	return pos;
 }

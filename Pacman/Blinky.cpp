@@ -48,9 +48,12 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 				case 3:							// Frightened mode
 					this->SetSpeed(2);
 					_sprite.setColor(sf::Color(16, 0, 255));
-					sf::Vector2i runaway = frightMode();
-					pacPos.x = (float)runaway.x;
-					pacPos.y = (float)runaway.y;
+					if (RowBoundary() && ColumnBoundary())
+					{
+						sf::Vector2i runaway = frightMode();
+						pacPos.x = (float)runaway.x;
+						pacPos.y = (float)runaway.y;
+					}
 					this->walk(pacPos);
 					break;
 				}

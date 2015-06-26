@@ -8,10 +8,11 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 	{
 		// Variables
 		int localMode = ghostMode;
+		int localScore = score;
 		sf::Vector2f temp = pacPos;
 
-		if (score < 30)
-			localMode = 0;
+		//if (localScore < 30)
+		//	localMode = 0;
 		
 		if (getMode() != localMode)
 		{
@@ -74,9 +75,12 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 				case 3:							/// Frightened mode
 					this->SetSpeed(2);
 					_sprite.setColor(sf::Color(16, 32, 128));
-					sf::Vector2i runaway = frightMode();
-					pacPos.x = (float)runaway.x;
-					pacPos.y = (float)runaway.y;
+					if (RowBoundary() && ColumnBoundary())
+					{
+						sf::Vector2i runaway = frightMode();
+						pacPos.x = (float)runaway.x;
+						pacPos.y = (float)runaway.y;
+					}
 					this->walk(pacPos);
 					break;
 				}

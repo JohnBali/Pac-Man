@@ -63,9 +63,12 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 				case 3:							// Frightened mode
 					this->SetSpeed(2);
 					_sprite.setColor(sf::Color(16, 32, 128));
-					sf::Vector2i runaway = frightMode();
-					pacPos.x = (float)runaway.x;
-					pacPos.y = (float)runaway.y;
+					if (RowBoundary() && ColumnBoundary())
+					{
+						sf::Vector2i runaway = frightMode();
+						pacPos.x = (float)runaway.x;
+						pacPos.y = (float)runaway.y;
+					}
 					this->walk(pacPos);
 					break;
 				}

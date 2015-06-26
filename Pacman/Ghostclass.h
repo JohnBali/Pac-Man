@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "Map.h"
 #include <random>
+#include "VectorMath.h"
+
 
 class Ghostclass : public GameObject
 {

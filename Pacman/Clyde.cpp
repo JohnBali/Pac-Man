@@ -9,8 +9,8 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 		// Variables
 		int localMode = ghostMode;
 
-		if (score < 82)
-			localMode = 0;
+		//if (score < 82)
+		//	localMode = 0;
 
 		if (getMode() != localMode)
 		{
@@ -61,9 +61,12 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 				case 3:							// Frightened mode
 					this->SetSpeed(2);
 					_sprite.setColor(sf::Color(16, 16, 255));
-					sf::Vector2i runaway = frightMode();
-					pacPos.x = (float)runaway.x;
-					pacPos.y = (float)runaway.y;
+					if (RowBoundary() && ColumnBoundary())
+					{
+						sf::Vector2i runaway = frightMode();
+						pacPos.x = (float)runaway.x;
+						pacPos.y = (float)runaway.y;
+					}
 					this->walk(pacPos);
 					break;
 				}
