@@ -12,6 +12,7 @@ void GameController::Start(void)
 
 	Food *food = new Food();
 	_score = food->getScore();
+	_pacmanEnergized = food->getEnergizerState();
 
 	//create a pointer to the score in the food class which is used to work out when the level is complete
 	_score = food->getScore();
@@ -239,6 +240,10 @@ void GameController::GameLoop()
 			sf::Time elapsed = _clock.restart();
 			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos, ghostMode, *_score);
 
+			if (*_pacmanEnergized)
+			{
+				//update mode to frightened
+			}
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);
@@ -269,5 +274,6 @@ GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
 sf::Clock GameController::_clock;
 int* GameController::_score;
+bool* GameController::_pacmanEnergized = false;
 sf::Clock GameController::_gameTime;
 int GameController::_ghostSwitch;

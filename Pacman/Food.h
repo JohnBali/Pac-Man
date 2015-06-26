@@ -9,6 +9,7 @@ public:
 	~Food();
 
 	int* getScore();
+	bool* getEnergizerState();
 
 private:
 	void readMap();
@@ -24,4 +25,5 @@ private:
 	std::vector<sf::CircleShape> dots;
 	std::vector<sf::CircleShape> energizers;
 	int score = 0;
+	bool pacmanEnergized = false;
 };

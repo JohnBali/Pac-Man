@@ -76,8 +76,14 @@ int* Food::getScore()
 	return &score;
 }
 
+bool* Food::getEnergizerState()
+{
+	return &pacmanEnergized;
+}
+
 void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
 {
+	pacmanEnergized = false;
 	//check if the tile contains dot or energizer and eat it
 	Map::Tile tile = map->getTile((int)pacPos.y / 16, (int)pacPos.x / 16);
 	if (tile == Map::Tile::TileDot)
@@ -88,6 +94,7 @@ void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 	}
 	if (tile == Map::Tile::TileEnergizer)
 	{
+		pacmanEnergized = true;
 		map->updateEnergizerToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
 		score++;
 		readMap();
