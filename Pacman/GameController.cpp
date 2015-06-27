@@ -218,7 +218,7 @@ void GameController::GameLoop()
 			if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 7)				//First Scatter mode
 				ghostMode = 1;
 			else if (ghostModes.asSeconds() > 7 && ghostModes.asSeconds() <= 27)		// First Chase mode
-				ghostMode = 2;
+				ghostMode = 3;
 			else if (ghostModes.asSeconds() > 27 && ghostModes.asSeconds() <= 34)		// Second Scatter mode
 				ghostMode = 1;
 			else if (ghostModes.asSeconds() > 34 && ghostModes.asSeconds() <= 54)		// Second Chase mode

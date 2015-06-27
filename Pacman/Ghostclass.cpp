@@ -186,6 +186,13 @@ sf::Vector2i Ghostclass::frightMode()
 	return pos;
 }
 
+void Ghostclass::setGhostBlue()
+{
+	Load("assets/ghostFright.png");
+	SetScale(2, 2);
+	SetOrigin(4, 4);
+}
+
 Ghostclass::Ghostclass()
 {}
 

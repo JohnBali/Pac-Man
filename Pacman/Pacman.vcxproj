@@ -103,6 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\ghostCyan.png" />
+    <Image Include="assets\ghostEyes.png" />
+    <Image Include="assets\ghostFright.png" />
     <Image Include="assets\ghostMask.png" />
     <Image Include="assets\ghostOrange.png" />
     <Image Include="assets\ghostPink.png" />

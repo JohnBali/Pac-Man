@@ -26,6 +26,7 @@ public:
 
 	void modeSwitch();
 	sf::Vector2i frightMode();
+	void setGhostBlue();
 
 	// constructors
 	Ghostclass();
@@ -42,6 +43,7 @@ protected:
 	sf::Vector2i scatterTile;
 	Map* map;
 	bool debug;
+	bool frightened;
 
 	void Ghostclass::Debug(std::vector<sf::Vector2i> exits);
 };

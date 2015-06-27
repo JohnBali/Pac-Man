@@ -95,6 +95,12 @@
     <Image Include="assets\ghostPink.png">
       <Filter>assets</Filter>
     </Image>
+    <Image Include="assets\ghostFright.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ghostEyes.png">
+      <Filter>assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pacman.h">

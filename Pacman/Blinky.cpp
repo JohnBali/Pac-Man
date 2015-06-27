@@ -14,7 +14,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 		}
 
 		// Check ghost Win
-		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
+		if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow())
 			SetWin();
 
 		// Mode and path switch
@@ -36,18 +36,23 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 					this->walk(pacPos);
 					break;
 				case 1:							// Scatter mode
+					if (frightened)
+						setGhostColor();
 					this->SetSpeed(4);
 					//pacPos.x = (float)getScatterTile().x * 16;			Blinky doesn't have a Scatter Mode
 					//pacPos.y = (float)getScatterTile().y * 16;
 					this->walk(pacPos);
 					break;
 				case 2:							// Chase mode
+					if (frightened)
+						setGhostColor();
 					this->SetSpeed(4);
 					this->walk(pacPos);
 					break;
 				case 3:							// Frightened mode
 					this->SetSpeed(2);
-					_sprite.setColor(sf::Color(16, 0, 255));
+					setGhostBlue();
+					frightened = true;
 					if (RowBoundary() && ColumnBoundary())
 					{
 						sf::Vector2i runaway = frightMode();
@@ -63,15 +68,22 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 	}
 }
 
+void Blinky::setGhostColor()
+{
+	Load("assets/ghostRed.png");
+	SetScale(2, 2);
+	SetOrigin(4, 4);
+
+}
+
 // Constructors
 Blinky::Blinky()
 {
 	//turn debug on or off
 	debug = false;
+	frightened = false;
 
-	Load("assets/ghostRed.png");
-	SetScale(2, 2);
-	SetOrigin(4, 4);
+	setGhostColor();
 	SetFacing(RIGHT);
 	
 	setMode(0);

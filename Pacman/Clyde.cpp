@@ -21,7 +21,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 		float distance = 0.0;
 
 		// Check ghost Win
-		if (pacPos.x / 16 == GetColumn() && pacPos.y / 16 == GetRow())
+		if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow())
 			SetWin();
 
 		if (!GetWin())
@@ -43,12 +43,16 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 					this->walk(pacPos);
 					break;
 				case 1:							// Scatter mode
+					if (frightened)
+						setGhostColor();
 					this->SetSpeed(4);
 					pacPos.x = (float)this->getScatterTile().x * 16;
 					pacPos.y = (float)this->getScatterTile().y * 16;
 					this->walk(pacPos);
 					break;
 				case 2:							// Chase mode
+					if (frightened)
+						setGhostColor();
 					this->SetSpeed(4);
 					distance = vm::magnitude(sf::Vector2f(ghostPos.x - pacPos.x, ghostPos.y - pacPos.y));
 					if (distance < 128)
@@ -60,7 +64,8 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 					break;
 				case 3:							// Frightened mode
 					this->SetSpeed(2);
-					_sprite.setColor(sf::Color(16, 16, 255));
+					setGhostBlue();
+					frightened = true;
 					if (RowBoundary() && ColumnBoundary())
 					{
 						sf::Vector2i runaway = frightMode();
@@ -76,15 +81,22 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 	}
 }
 
+void Clyde::setGhostColor()
+{
+	Load("assets/ghostOrange.png");
+	SetScale(2, 2);
+	SetOrigin(4, 4);
+
+}
+
 // Constructors
 Clyde::Clyde()
 {
 	//turn debug on or off
 	debug = false;
+	frightened = false;
 
-	Load("assets/ghostOrange.png");
-	SetScale(2, 2);
-	SetOrigin(4, 4);
+	setGhostColor();
 	SetFacing(LEFT);
 
 	setMode(0);
