@@ -47,5 +47,8 @@ private:
 	static bool _debug;
 	static sf::Clock _clock;
 	static sf::Clock _gameTime;
+	static sf::Clock _frightTime;
+	static sf::Color spriteColor;
 	static int _ghostSwitch;
+	static int ghostMode;
 };

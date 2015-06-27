@@ -56,6 +56,11 @@ void GameObject::SetScale(float x, float y)
 	_sprite.setScale(x, y);
 }
 
+void GameObject::SetColor(int r, int g, int b)
+{
+	_sprite.setColor(sf::Color(r, g, b));
+}
+
 void GameObject::SetOrigin(float x, float y)
 {
 	_sprite.setOrigin(x, y);
@@ -79,7 +84,7 @@ sf::Vector2f GameObject::GetPosition()
 	return _sprite.getPosition();
 }
 
-void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
+void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 
 }

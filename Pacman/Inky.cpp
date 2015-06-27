@@ -1,7 +1,7 @@
 #include "Inky.h"
 
 // Set the path
-void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
+void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
@@ -9,7 +9,6 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 		// Variables
 		int localMode = ghostMode;
 		int localScore = score;
-		sf::Vector2f temp = pacPos;
 
 		//if (localScore < 30)
 		//	localMode = 0;
@@ -28,7 +27,7 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house and exit if it is
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && localMode != 0)
+			if (ghostHouse() && localMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -40,53 +39,14 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 				switch (localMode)
 				{
 				case 0:							// Stopped
-					this->SetSpeed(0);
-					this->walk(pacPos);
 					break;
 				case 1:							// Scatter mode
-					if (frightened)
-						setGhostColor();
-					this->SetSpeed(4);
-					pacPos.x = (float)this->getScatterTile().x * 16;
-					pacPos.y = (float)this->getScatterTile().y * 16;
-					this->walk(pacPos);
 					break;
 				case 2:							// Chase mode
-					if (frightened)
-						setGhostColor();
-					this->SetSpeed(4);
-					switch (facing)
-					{
-					case GameObject::LEFT:
-						temp.x -= 32;
-						break;
-					case GameObject::RIGHT:
-						temp.x += 32;
-						break;
-					case GameObject::UP:
-						temp.y -= 32;
-						break;
-					case GameObject::DOWN:
-						temp.y += 32;
-						break;
-					}
-					temp.x = (temp.x - blinkyPos.x) * 2;
-					temp.y = (temp.y - blinkyPos.y) * 2;
-					pacPos.x += temp.x;
-					pacPos.y += temp.y;
-					this->walk(pacPos);
 					break;
 				case 3:							/// Frightened mode
-					this->SetSpeed(2);
-					setGhostBlue();
-					frightened = true;
-					if (RowBoundary() && ColumnBoundary())
-					{
-						sf::Vector2i runaway = frightMode();
-						pacPos.x = (float)runaway.x;
-						pacPos.y = (float)runaway.y;
-					}
-					this->walk(pacPos);
+					break;
+				case 4:
 					break;
 				}
 			}
@@ -95,13 +55,55 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 	}
 }
 
-void Inky::setGhostColor()
+
+
+
+void Inky::scatterMode(sf::Vector2f pacPos)		// Scatter Mode
 {
-	Load("assets/ghostCyan.png");
-	SetScale(2, 2);
-	SetOrigin(4, 4);
+	if (frightened)
+	{
+		setGhostColor("assets/ghostCyan.png");
+		frightened = false;
+	}
+	this->SetSpeed(4);
+	pacPos.x = (float)this->getScatterTile().x * 16;
+	pacPos.y = (float)this->getScatterTile().y * 16;
+	this->walk(pacPos);
 
 }
+void Inky::chaseMode(sf::Vector2f pacPos, sf::Vector2f blinkyPos)		// Chase Mode
+{
+	sf::Vector2f temp = pacPos;
+
+	if (frightened)
+	{
+		setGhostColor("assets/ghostCyan.png");
+		frightened = false;
+	}
+	this->SetSpeed(4);
+	switch (facing)
+	{
+	case GameObject::LEFT:
+		temp.x -= 32;
+		break;
+	case GameObject::RIGHT:
+		temp.x += 32;
+		break;
+	case GameObject::UP:
+		temp.y -= 32;
+		break;
+	case GameObject::DOWN:
+		temp.y += 32;
+		break;
+	}
+	temp.x = (temp.x - blinkyPos.x) * 2;
+	temp.y = (temp.y - blinkyPos.y) * 2;
+	pacPos.x += temp.x;
+	pacPos.y += temp.y;
+	this->walk(pacPos);
+
+}
+
 
 // Constructors
 Inky::Inky()
@@ -110,7 +112,7 @@ Inky::Inky()
 	debug = false;
 	frightened = false;
 
-	setGhostColor();
+	setGhostColor("assets/ghostCyan.png");
 	SetFacing(RIGHT);
 
 	setMode(0);

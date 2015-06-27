@@ -1,7 +1,7 @@
 #include "Blinky.h"
 
 // Set the path
-void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
+void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
@@ -21,7 +21,7 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && ghostMode != 0)
+			if (ghostHouse() && ghostMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -32,34 +32,14 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 				switch (ghostMode)
 				{
 				case 0:							// Stopped
-					this->SetSpeed(0);
-					this->walk(pacPos);
 					break;
 				case 1:							// Scatter mode
-					if (frightened)
-						setGhostColor();
-					this->SetSpeed(4);
-					//pacPos.x = (float)getScatterTile().x * 16;			Blinky doesn't have a Scatter Mode
-					//pacPos.y = (float)getScatterTile().y * 16;
-					this->walk(pacPos);
 					break;
 				case 2:							// Chase mode
-					if (frightened)
-						setGhostColor();
-					this->SetSpeed(4);
-					this->walk(pacPos);
 					break;
 				case 3:							// Frightened mode
-					this->SetSpeed(2);
-					setGhostBlue();
-					frightened = true;
-					if (RowBoundary() && ColumnBoundary())
-					{
-						sf::Vector2i runaway = frightMode();
-						pacPos.x = (float)runaway.x;
-						pacPos.y = (float)runaway.y;
-					}
-					this->walk(pacPos);
+					break;
+				case 4:
 					break;
 				}
 			}
@@ -68,13 +48,30 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 	}
 }
 
-void Blinky::setGhostColor()
-{
-	Load("assets/ghostRed.png");
-	SetScale(2, 2);
-	SetOrigin(4, 4);
 
+void Blinky::scatterMode(sf::Vector2f pacPos)	//Blinky doesn't have a Scatter Mode
+{
+	if (frightened)
+	{
+		setGhostColor("assets/ghostRed.png");
+		frightened = false;
+	}
+	this->SetSpeed(4);
+	this->walk(pacPos);
 }
+
+void Blinky::chaseMode(sf::Vector2f pacPos)		// Chase Mode
+{
+	if (frightened)
+	{
+		setGhostColor("assets/ghostRed.png");
+		frightened = false;
+	}
+	this->SetSpeed(4);
+	this->walk(pacPos);
+}
+
+
 
 // Constructors
 Blinky::Blinky()
@@ -83,7 +80,7 @@ Blinky::Blinky()
 	debug = false;
 	frightened = false;
 
-	setGhostColor();
+	setGhostColor("assets/ghostRed.png");
 	SetFacing(RIGHT);
 	
 	setMode(0);

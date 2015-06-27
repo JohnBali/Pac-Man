@@ -174,7 +174,7 @@ void Ghostclass::modeSwitch()
 	}
 }
 
-sf::Vector2i Ghostclass::frightMode()
+sf::Vector2i Ghostclass::frightExits()
 {
 	// Variables
 	sf::Vector2i pos = sf::Vector2i(GetRow(), GetColumn());
@@ -191,6 +191,63 @@ void Ghostclass::setGhostBlue()
 	Load("assets/ghostFright.png");
 	SetScale(2, 2);
 	SetOrigin(4, 4);
+}
+
+void Ghostclass::setGhostEyes()
+{
+	Load("assets/ghostEyes.png");
+	SetScale(2, 2);
+	SetOrigin(4, 4);
+}
+
+bool Ghostclass::ghostHouse()
+{
+	if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() >11)
+		return true;
+	return false;
+}
+
+void Ghostclass::stoppedMode(sf::Vector2f pacPos)	// Stopped
+{
+	this->SetSpeed(0);
+	this->walk(pacPos);
+}
+
+void Ghostclass::frightMode(sf::Vector2f pacPos)			// Fright Mode
+{
+	this->SetSpeed(2);
+	setGhostBlue();
+	frightened = true;
+	if (RowBoundary() && ColumnBoundary())
+	{
+		sf::Vector2i runaway = frightExits();
+		pacPos.x = (float)runaway.x;
+		pacPos.y = (float)runaway.y;
+	}
+	this->walk(pacPos);
+
+}
+
+void Ghostclass::eyeMode(sf::Vector2f pacPos)			// Eye Mode
+{
+	this->SetSpeed(4);
+	setGhostEyes();
+	pacPos = (sf::Vector2f(224, 224));
+	if (GetPosition() == pacPos)
+	{
+		setGhostColor("assets/ghostOrange.png");
+		setMode(1);
+	}
+	this->walk(pacPos);
+
+}
+
+void Ghostclass::setGhostColor(std::string filename)
+{
+	Load(filename);
+	SetScale(2, 2);
+	SetOrigin(4, 4);
+
 }
 
 Ghostclass::Ghostclass()

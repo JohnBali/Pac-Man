@@ -23,7 +23,7 @@ public:
 
 	virtual void Load(std::string filename);
 	virtual void Draw(sf::RenderWindow &window);
-	virtual void Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score);
+	virtual void Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor);
 
 	virtual void SetPosition(float x, float y);
 	virtual sf::Vector2f GetPosition();
@@ -54,6 +54,7 @@ public:
 	virtual void setMode(int mode);
 	virtual int getMode();
 
+	void SetColor(int r, int g, int b);
 
 protected:
 	Facing facing;

@@ -176,6 +176,7 @@ void GameController::GameLoop()
 		{
 			// Set game timer
 			sf::Time ghostModes;
+			sf::Time frightModes;
 			if (_ghostSwitch == 0)
 			{
 				std::cout << "Mode: " << std::endl;
@@ -213,37 +214,53 @@ void GameController::GameLoop()
 			}
 			
 			// Ghost Mode Set
-			int ghostMode = 0;
 			ghostModes = _gameTime.getElapsedTime();
-			if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 7)				//First Scatter mode
-				ghostMode = 1;
-			else if (ghostModes.asSeconds() > 7 && ghostModes.asSeconds() <= 27)		// First Chase mode
-				ghostMode = 3;
-			else if (ghostModes.asSeconds() > 27 && ghostModes.asSeconds() <= 34)		// Second Scatter mode
-				ghostMode = 1;
-			else if (ghostModes.asSeconds() > 34 && ghostModes.asSeconds() <= 54)		// Second Chase mode
-				ghostMode = 2;
-			else if (ghostModes.asSeconds() > 54 && ghostModes.asSeconds() <= 59)		// Third Scatter mode
-				ghostMode = 1;
-			else if (ghostModes.asSeconds() > 59 && ghostModes.asSeconds() <= 79)		// Third Chase mode
-				ghostMode = 2;
-			else if (ghostModes.asSeconds() > 79 && ghostModes.asSeconds() <= 84)		// Fourth Scatter mode
-				ghostMode = 1;
-			else if (ghostModes.asSeconds() > 84)										// Fourth and final Chase mode
-				ghostMode = 2;
 
+			if (*_pacmanEnergized)
+			{
+				//update mode to frightened
+				ghostMode = 3;
+				frightModes = _frightTime.restart();
+				*_pacmanEnergized = false;
+			}
+			else if (ghostMode == 3)
+			{
+				if (frightModes.asSeconds() > 2.5 && frightModes.asSeconds() < 3)
+					spriteColor = (sf::Color(255, 255, 0));
+				else if (frightModes.asSeconds() > 3 && frightModes.asSeconds() < 3.5)
+					spriteColor = (sf::Color(255, 255, 255));
+				else if (frightModes.asSeconds() > 3.5 && frightModes.asSeconds() < 4)
+					spriteColor = (sf::Color(255, 255, 0));
+				else if (frightModes.asSeconds() > 4)
+					ghostMode = 1;
+			}
+			else
+			{
+				if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 7)			//First Scatter mode
+					ghostMode = 1;
+				else if (ghostModes.asSeconds() > 7 && ghostModes.asSeconds() <= 27)		// First Chase mode
+					ghostMode = 2;
+				else if (ghostModes.asSeconds() > 27 && ghostModes.asSeconds() <= 34)		// Second Scatter mode
+					ghostMode = 1;
+				else if (ghostModes.asSeconds() > 34 && ghostModes.asSeconds() <= 54)		// Second Chase mode
+					ghostMode = 2;
+				else if (ghostModes.asSeconds() > 54 && ghostModes.asSeconds() <= 59)		// Third Scatter mode
+					ghostMode = 1;
+				else if (ghostModes.asSeconds() > 59 && ghostModes.asSeconds() <= 79)		// Third Chase mode
+					ghostMode = 2;
+				else if (ghostModes.asSeconds() > 79 && ghostModes.asSeconds() <= 84)		// Fourth Scatter mode
+					ghostMode = 1;
+				else if (ghostModes.asSeconds() > 84)										// Fourth and final Chase mode
+					ghostMode = 2;
+			}
 
 			// Game Updates
 			sf::Vector2f pacPos = pacman.GetPosition();
 			sf::Vector2f blinkyPos = blinky.GetPosition();
 			GameObject::Facing facing = pacman.GetFacing();
 			sf::Time elapsed = _clock.restart();
-			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos, ghostMode, *_score);
+			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos, ghostMode, *_score, spriteColor);
 
-			if (*_pacmanEnergized)
-			{
-				//update mode to frightened
-			}
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);
@@ -276,4 +293,7 @@ sf::Clock GameController::_clock;
 int* GameController::_score;
 bool* GameController::_pacmanEnergized = false;
 sf::Clock GameController::_gameTime;
+sf::Clock GameController::_frightTime;
+sf::Color GameController::spriteColor = (sf::Color(255, 255, 255));
 int GameController::_ghostSwitch;
+int GameController::ghostMode = 0;

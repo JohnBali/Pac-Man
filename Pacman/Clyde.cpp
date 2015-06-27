@@ -1,13 +1,14 @@
 #include "Clyde.h"
 
 // Set the path
-void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
+void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 	timeBetweenMoves -= elapsed;
 	if (timeBetweenMoves <= sf::Time::Zero)
 	{
 		// Variables
 		int localMode = ghostMode;
+		SetColor(spriteColor.r, spriteColor.g, spriteColor.b);
 
 		//if (score < 82)
 		//	localMode = 0;
@@ -17,8 +18,6 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 			setMode(localMode);
 			modeSwitch();
 		}
-		sf::Vector2f ghostPos = GetPosition();
-		float distance = 0.0;
 
 		// Check ghost Win
 		if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow())
@@ -27,7 +26,7 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 		if (!GetWin())
 		{
 			// Test if ghost is in ghost house
-			if (GetColumn() > 10 && GetColumn() < 17 && GetRow() < 15 && GetRow() > 11 && localMode != 0)
+			if (ghostHouse() && localMode != 0)
 			{
 				clearPrevTiles();
 				pacPos = (sf::Vector2f(216, 80));
@@ -39,41 +38,21 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 				switch (localMode)
 				{
 				case 0:							// Stopped
-					this->SetSpeed(0);
-					this->walk(pacPos);
+					stoppedMode(pacPos);
 					break;
 				case 1:							// Scatter mode
-					if (frightened)
-						setGhostColor();
-					this->SetSpeed(4);
-					pacPos.x = (float)this->getScatterTile().x * 16;
-					pacPos.y = (float)this->getScatterTile().y * 16;
-					this->walk(pacPos);
+					scatterMode(pacPos);
 					break;
 				case 2:							// Chase mode
-					if (frightened)
-						setGhostColor();
-					this->SetSpeed(4);
-					distance = vm::magnitude(sf::Vector2f(ghostPos.x - pacPos.x, ghostPos.y - pacPos.y));
-					if (distance < 128)
-					{
-						pacPos.x = (float)this->getScatterTile().x * 16;
-						pacPos.y = (float)this->getScatterTile().y * 16;
-					}
-					walk(pacPos);
+					chaseMode(pacPos);
 					break;
 				case 3:							// Frightened mode
-					this->SetSpeed(2);
-					setGhostBlue();
-					frightened = true;
-					if (RowBoundary() && ColumnBoundary())
-					{
-						sf::Vector2i runaway = frightMode();
-						pacPos.x = (float)runaway.x;
-						pacPos.y = (float)runaway.y;
-					}
-					this->walk(pacPos);
+					frightMode(pacPos);
 					break;
+				case 4:							// Eye Mode
+					eyeMode(pacPos);
+					break;
+
 				}
 			}
 			timeBetweenMoves = sf::milliseconds(25);
@@ -81,13 +60,45 @@ void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vec
 	}
 }
 
-void Clyde::setGhostColor()
+
+
+
+void Clyde::scatterMode(sf::Vector2f pacPos)		// Scatter Mode
 {
-	Load("assets/ghostOrange.png");
-	SetScale(2, 2);
-	SetOrigin(4, 4);
+	if (frightened)
+	{
+		setGhostColor("assets/ghostOrange.png");
+		frightened = false;
+	}
+	this->SetSpeed(4);
+	pacPos.x = (float)this->getScatterTile().x * 16;
+	pacPos.y = (float)this->getScatterTile().y * 16;
+	this->walk(pacPos);
 
 }
+
+void Clyde::chaseMode(sf::Vector2f pacPos)			// Chase Mode
+{
+	float distance = 0.0;
+	sf::Vector2f ghostPos = GetPosition();
+
+	if (frightened)
+	{
+		setGhostColor("assets/ghostOrange.png");
+		frightened = false;
+	}
+	this->SetSpeed(4);
+	distance = vm::magnitude(sf::Vector2f(ghostPos.x - pacPos.x, ghostPos.y - pacPos.y));
+	if (distance < 128)
+	{
+		pacPos.x = (float)this->getScatterTile().x * 16;
+		pacPos.y = (float)this->getScatterTile().y * 16;
+	}
+	walk(pacPos);
+
+}
+
+
 
 // Constructors
 Clyde::Clyde()
@@ -96,7 +107,7 @@ Clyde::Clyde()
 	debug = false;
 	frightened = false;
 
-	setGhostColor();
+	setGhostColor("assets/ghostOrange.png");
 	SetFacing(LEFT);
 
 	setMode(0);

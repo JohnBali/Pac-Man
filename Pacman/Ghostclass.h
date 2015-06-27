@@ -25,8 +25,15 @@ public:
 	sf::Vector2i getScatterTile();
 
 	void modeSwitch();
-	sf::Vector2i frightMode();
+	sf::Vector2i frightExits();
 	void setGhostBlue();
+	void setGhostEyes();
+	void setGhostColor(std::string filename);
+	bool ghostHouse();
+	
+	void stoppedMode(sf::Vector2f pacPos);
+	void frightMode(sf::Vector2f pacPos);
+	void eyeMode(sf::Vector2f pacPos);
 
 	// constructors
 	Ghostclass();

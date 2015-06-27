@@ -48,7 +48,7 @@ void Pacman::walk(Map* map)
 	frame = (frame + 1) % 3;
 }
 
-void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score)
+void Pacman::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
