@@ -4,87 +4,102 @@
 void Clyde::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 	timeBetweenMoves -= elapsed;
-	if (timeBetweenMoves <= sf::Time::Zero)
+	SetColor(spriteColor.r, spriteColor.g, spriteColor.b);
+	
+	// Check ghost Win//Eaten
+	if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow() && localMode == 3)
 	{
-		// Variables
-		int localMode = ghostMode;
-		SetColor(spriteColor.r, spriteColor.g, spriteColor.b);
+		SetEaten(true);
+		localMode = 4;
+		sf::Vector2f posx = _sprite.getPosition();
+		if (GetFacing() == RIGHT)
+		{
+			posx.x = (float)(GetColumn() + 1) * 16;
+		}
+		if (GetFacing() == LEFT)
+		{
+			posx.x = (float)(GetColumn() - 1) * 16;
+		}
+		if (GetFacing() == UP)
+		{
+			posx.y = (float)(GetRow() - 1) * 16;
+		}
+		if (GetFacing() == DOWN)
+		{
+			posx.y = (float)(GetRow() + 1) * 16;
+		}
+		_sprite.setPosition(posx.x, posx.y);
+	}
+	else if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow() && localMode < 3)
+		SetWin();
 
-		//if (score < 82)
-		//	localMode = 0;
-
+	if (RowBoundary() && ColumnBoundary())
+	{
+		if (localMode != 4)
+			localMode = ghostMode;
 		if (getMode() != localMode)
 		{
 			setMode(localMode);
 			modeSwitch();
 		}
+	}
 
-		// Check ghost Win
-		if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow())
-			SetWin();
+	// Ghost sequencing just isn't working and I don't know why
+	//if (score < 82)
+	//	localMode = 0;
 
-		if (!GetWin())
+	if (!GetWin())
+	{
+		// Test if ghost is in ghost house
+		if (ghostHouse() && localMode > 0 && localMode < 3)
 		{
-			// Test if ghost is in ghost house
-			if (ghostHouse() && localMode != 0)
+			clearPrevTiles();
+			pacPos = (sf::Vector2f(216, 80));
+			this->walk(pacPos);
+		}
+		else
+		{
+			// Mode and path switch
+			switch (localMode)
 			{
-				clearPrevTiles();
-				pacPos = (sf::Vector2f(216, 80));
-				this->walk(pacPos);
-			}
-			else
-			{
-				// Mode and path switch
-				switch (localMode)
-				{
-				case 0:							// Stopped
-					stoppedMode(pacPos);
-					break;
-				case 1:							// Scatter mode
-					scatterMode(pacPos);
-					break;
-				case 2:							// Chase mode
-					chaseMode(pacPos);
-					break;
-				case 3:							// Frightened mode
-					frightMode(pacPos);
-					break;
-				case 4:							// Eye Mode
-					eyeMode(pacPos);
-					break;
+			case 0:							// Stopped
+				pacPos = stoppedMode(pacPos);
+				break;
+			case 1:							// Scatter mode
+				setGhostImage("assets/ghostOrange.png");
+				frightened = false;
+				pacPos = scatterMode(pacPos);
+				break;
+			case 2:							// Chase mode
+				pacPos = chaseMode(pacPos);
+				break;
+			case 3:							// Frightened mode
+				pacPos = frightMode(pacPos);
+				break;
+			case 4:							// Eye Mode
+				pacPos = eyeMode(pacPos);
+				break;
 
-				}
 			}
-			timeBetweenMoves = sf::milliseconds(25);
 		}
 	}
-}
-
-
-
-
-void Clyde::scatterMode(sf::Vector2f pacPos)		// Scatter Mode
-{
-	if (frightened)
+	if (timeBetweenMoves <= sf::Time::Zero)
 	{
-		setGhostColor("assets/ghostOrange.png");
-		frightened = false;
+		walk(pacPos);
+		timeBetweenMoves = sf::milliseconds(25);
 	}
-	this->SetSpeed(4);
-	pacPos.x = (float)this->getScatterTile().x * 16;
-	pacPos.y = (float)this->getScatterTile().y * 16;
-	this->walk(pacPos);
-
 }
 
-void Clyde::chaseMode(sf::Vector2f pacPos)			// Chase Mode
+
+
+sf::Vector2f Clyde::chaseMode(sf::Vector2f pacPos)			// Chase Mode
 {
 	float distance = 0.0;
 	sf::Vector2f ghostPos = GetPosition();
 
 	if (frightened)
 	{
-		setGhostColor("assets/ghostOrange.png");
+		setGhostImage("assets/ghostOrange.png");
 		frightened = false;
 	}
 	this->SetSpeed(4);
@@ -94,8 +109,8 @@ void Clyde::chaseMode(sf::Vector2f pacPos)			// Chase Mode
 		pacPos.x = (float)this->getScatterTile().x * 16;
 		pacPos.y = (float)this->getScatterTile().y * 16;
 	}
-	walk(pacPos);
 
+	return pacPos;
 }
 
 
@@ -107,13 +122,13 @@ Clyde::Clyde()
 	debug = false;
 	frightened = false;
 
-	setGhostColor("assets/ghostOrange.png");
+	setGhostImage("assets/ghostOrange.png");
 	SetFacing(LEFT);
 
 	setMode(0);
 	setScatterTile(sf::Vector2i(5, 30));
 	_sprite.setTextureRect(sf::IntRect(right[frame] * 16, 0, 16, 16));
-	SetPosition(248, 224);
+	SetPosition(240, 224);
 	SetTile();
 	setPrevTile(sf::Vector2i(0, 1));
 }

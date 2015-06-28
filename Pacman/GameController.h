@@ -51,4 +51,5 @@ private:
 	static sf::Color spriteColor;
 	static int _ghostSwitch;
 	static int ghostMode;
+	static int ghostModeTimer;
 };

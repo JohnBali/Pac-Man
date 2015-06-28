@@ -28,12 +28,14 @@ public:
 	sf::Vector2i frightExits();
 	void setGhostBlue();
 	void setGhostEyes();
-	void setGhostColor(std::string filename);
+	void setGhostImage(std::string filename);
 	bool ghostHouse();
+	bool ghostHouseTwo();
 	
-	void stoppedMode(sf::Vector2f pacPos);
-	void frightMode(sf::Vector2f pacPos);
-	void eyeMode(sf::Vector2f pacPos);
+	sf::Vector2f stoppedMode(sf::Vector2f pacPos);
+	sf::Vector2f Ghostclass::scatterMode(sf::Vector2f pacPos);
+	sf::Vector2f frightMode(sf::Vector2f pacPos);
+	sf::Vector2f eyeMode(sf::Vector2f pacPos);
 
 	// constructors
 	Ghostclass();
@@ -51,6 +53,7 @@ protected:
 	Map* map;
 	bool debug;
 	bool frightened;
+	int localMode;
 
 	void Ghostclass::Debug(std::vector<sf::Vector2i> exits);
 };

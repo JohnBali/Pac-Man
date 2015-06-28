@@ -49,25 +49,12 @@ void Pinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing pacFacing, sf::
 }
 
 
-void Pinky::scatterMode(sf::Vector2f pacPos)	// Scatter Mode
-{
-	if (frightened)
-	{
-		setGhostColor("assets/ghostPink.png");
-		frightened = false;
-	}
-	this->SetSpeed(4);
-	pacPos.x = (float)this->getScatterTile().x * 16;
-	pacPos.y = (float)this->getScatterTile().y * 16;
-	this->walk(pacPos);
-
-}
 
 void Pinky::chaseMode(sf::Vector2f pacPos, Facing pacFacing)		// Chase Mode
 {
 	if (frightened)
 	{
-		setGhostColor("assets/ghostPink.png");
+		setGhostImage("assets/ghostPink.png");
 		frightened = false;
 	}
 	this->SetSpeed(4);
@@ -98,7 +85,7 @@ Pinky::Pinky()
 	debug = false;
 	frightened = false;
 
-	setGhostColor("assets/ghostPink.png");
+	setGhostImage("assets/ghostPink.png");
 	SetFacing(LEFT);
 
 	setMode(0);

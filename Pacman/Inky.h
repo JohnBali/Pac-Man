@@ -6,7 +6,6 @@ class Inky : public Ghostclass
 {
 private:
 
-	void scatterMode(sf::Vector2f pacPos);
 	void chaseMode(sf::Vector2f pacPos, sf::Vector2f blinkyPos);
 
 public:

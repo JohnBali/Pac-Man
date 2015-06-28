@@ -51,6 +51,9 @@ public:
 	void SetWin();
 	bool GetWin();
 
+	void SetEaten(bool state);
+	bool GetEaten();
+
 	virtual void setMode(int mode);
 	virtual int getMode();
 
@@ -70,6 +73,7 @@ protected:
 	std::string _filename;
 	bool _isLoaded;
 	bool ghostWin = false;
+	bool ghostEaten = false;
 
 	static const int left[FRAMES];
 	static const int right[FRAMES];

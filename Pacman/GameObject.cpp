@@ -162,3 +162,13 @@ int GameObject::getMode()
 	return this->ghostMode;
 }
 
+void GameObject::SetEaten(bool state)
+{
+	ghostEaten = state;
+}
+
+bool GameObject::GetEaten()
+{
+	return ghostEaten;
+}
+

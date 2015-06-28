@@ -49,22 +49,12 @@ void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Ve
 }
 
 
-void Blinky::scatterMode(sf::Vector2f pacPos)	//Blinky doesn't have a Scatter Mode
-{
-	if (frightened)
-	{
-		setGhostColor("assets/ghostRed.png");
-		frightened = false;
-	}
-	this->SetSpeed(4);
-	this->walk(pacPos);
-}
 
 void Blinky::chaseMode(sf::Vector2f pacPos)		// Chase Mode
 {
 	if (frightened)
 	{
-		setGhostColor("assets/ghostRed.png");
+		setGhostImage("assets/ghostRed.png");
 		frightened = false;
 	}
 	this->SetSpeed(4);
@@ -80,7 +70,7 @@ Blinky::Blinky()
 	debug = false;
 	frightened = false;
 
-	setGhostColor("assets/ghostRed.png");
+	setGhostImage("assets/ghostRed.png");
 	SetFacing(RIGHT);
 	
 	setMode(0);

@@ -5,7 +5,6 @@ class Blinky : public Ghostclass
 {
 private:
 
-	void scatterMode(sf::Vector2f pacPos);
 	void chaseMode(sf::Vector2f pacPos);
 
 public:

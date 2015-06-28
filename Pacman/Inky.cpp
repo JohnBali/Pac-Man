@@ -56,28 +56,13 @@ void Inky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vect
 }
 
 
-
-
-void Inky::scatterMode(sf::Vector2f pacPos)		// Scatter Mode
-{
-	if (frightened)
-	{
-		setGhostColor("assets/ghostCyan.png");
-		frightened = false;
-	}
-	this->SetSpeed(4);
-	pacPos.x = (float)this->getScatterTile().x * 16;
-	pacPos.y = (float)this->getScatterTile().y * 16;
-	this->walk(pacPos);
-
-}
 void Inky::chaseMode(sf::Vector2f pacPos, sf::Vector2f blinkyPos)		// Chase Mode
 {
 	sf::Vector2f temp = pacPos;
 
 	if (frightened)
 	{
-		setGhostColor("assets/ghostCyan.png");
+		setGhostImage("assets/ghostCyan.png");
 		frightened = false;
 	}
 	this->SetSpeed(4);
@@ -112,7 +97,7 @@ Inky::Inky()
 	debug = false;
 	frightened = false;
 
-	setGhostColor("assets/ghostCyan.png");
+	setGhostImage("assets/ghostCyan.png");
 	SetFacing(RIGHT);
 
 	setMode(0);
