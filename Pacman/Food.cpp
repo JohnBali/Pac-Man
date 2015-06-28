@@ -76,9 +76,9 @@ int* Food::getScore()
 	return &score;
 }
 
-bool* Food::getEnergizerState()
+bool Food::getEnergizerState()
 {
-	return &pacmanEnergized;
+	return pacmanEnergized;
 }
 
 void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &nscore, sf::Color spriteColor)

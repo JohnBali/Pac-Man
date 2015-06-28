@@ -9,7 +9,7 @@ public:
 	~Food();
 
 	int* getScore();
-	bool* getEnergizerState();
+	bool getEnergizerState();
 
 private:
 	void readMap();

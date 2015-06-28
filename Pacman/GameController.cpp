@@ -11,8 +11,6 @@ void GameController::Start(void)
 	Clyde *clyde = new Clyde();
 	Food *food = new Food();
 
-	_pacmanEnergized = food->getEnergizerState();
-
 	if (_debug)
 	{
 		Debug *debug = new Debug(_gameObjectManager);
@@ -185,13 +183,13 @@ void GameController::GameLoop()
 			// Ghost Mode Set
 			ghostModes = _gameTime.getElapsedTime();
 
-			if (*_pacmanEnergized)															// Check if Pacman has eaten an Energiser
+			if (food->getEnergizerState())															// Check if Pacman has eaten an Energiser
 			{
 				//update mode to frightened
 				ghostMode = 3;
 				ghostModeTimer += 4;
 				frightModes = _frightTime.restart();
-				*_pacmanEnergized = false;
+				//*_pacmanEnergized = false;
 			}
 			else if (ghostMode == 3)														// Flash the frightened ghosts
 			{
@@ -267,7 +265,7 @@ GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
 sf::Clock GameController::_clock;
 int* GameController::_score;
-bool* GameController::_pacmanEnergized = false;
+//bool* GameController::_pacmanEnergized = false;
 sf::Clock GameController::_gameTime;
 sf::Clock GameController::_frightTime;
 sf::Color GameController::spriteColor = (sf::Color(255, 255, 255));
