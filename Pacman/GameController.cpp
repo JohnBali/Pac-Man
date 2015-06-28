@@ -240,23 +240,25 @@ void GameController::GameLoop()
 				}
 			}
 			else
-			{																				// Set standard ghost modes
-				if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 7 + ghostModeTimer)				//First Scatter mode
+			{																												// Set standard ghost modes
+				if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 4 + ghostModeTimer)								//First Scatter mode
 					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 7 + ghostModeTimer && ghostModes.asSeconds() <= 27 + ghostModeTimer)		// First Chase mode
+				else if (ghostModes.asSeconds() > 4 + ghostModeTimer && ghostModes.asSeconds() <= 24 + ghostModeTimer)		// First Chase mode
 					ghostMode = 2;
-				else if (ghostModes.asSeconds() > 27 + ghostModeTimer && ghostModes.asSeconds() <= 34 + ghostModeTimer)		// Second Scatter mode
+				else if (ghostModes.asSeconds() > 24 + ghostModeTimer && ghostModes.asSeconds() <= 28 + ghostModeTimer)		// Second Scatter mode
 					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 34 + ghostModeTimer && ghostModes.asSeconds() <= 54 + ghostModeTimer)		// Second Chase mode
+				else if (ghostModes.asSeconds() > 28 + ghostModeTimer && ghostModes.asSeconds() <= 48 + ghostModeTimer)		// Second Chase mode
 					ghostMode = 2;
-				else if (ghostModes.asSeconds() > 54 + ghostModeTimer && ghostModes.asSeconds() <= 59 + ghostModeTimer)		// Third Scatter mode
+				else if (ghostModes.asSeconds() > 48 + ghostModeTimer && ghostModes.asSeconds() <= 52 + ghostModeTimer)		// Third Scatter mode
 					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 59 + ghostModeTimer && ghostModes.asSeconds() <= 79 + ghostModeTimer)		// Third Chase mode
+				else if (ghostModes.asSeconds() > 52 + ghostModeTimer && ghostModes.asSeconds() <= 72 + ghostModeTimer)		// Third Chase mode
 					ghostMode = 2;
-				else if (ghostModes.asSeconds() > 79 + ghostModeTimer && ghostModes.asSeconds() <= 84 + ghostModeTimer)		// Fourth Scatter mode
+				else if (ghostModes.asSeconds() > 72 + ghostModeTimer && ghostModes.asSeconds() <= 76 + ghostModeTimer)		// Fourth Scatter mode
 					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 84 + ghostModeTimer)										// Fourth and final Chase mode
+				else if (ghostModes.asSeconds() > 76 + ghostModeTimer)														// Fourth and final Chase mode
 					ghostMode = 2;
+
+				// std::cout << "Ghoist Mode Timer: " << ghostModeTimer << " , Game Time: " << ghostModes.asSeconds() << " , Ghost Mode: " << ghostMode << std::endl;
 			}
 
 			// Game Updates

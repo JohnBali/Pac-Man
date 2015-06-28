@@ -4,53 +4,96 @@
 void Blinky::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
 {
 	timeBetweenMoves -= elapsed;
-	if (timeBetweenMoves <= sf::Time::Zero)
+	SetColor(spriteColor.r, spriteColor.g, spriteColor.b);
+
+	// Check ghost Win//Eaten
+	if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow() && localMode == 3)
 	{
-		// Variables
-		if (getMode() != ghostMode)
+		SetEaten(true);
+		localMode = 4;
+		sf::Vector2f posx = _sprite.getPosition();
+		if (GetFacing() == RIGHT)
 		{
-			setMode(ghostMode);
+			posx.x = (float)(GetColumn() + 1) * 16;
+		}
+		if (GetFacing() == LEFT)
+		{
+			posx.x = (float)(GetColumn() - 1) * 16;
+		}
+		if (GetFacing() == UP)
+		{
+			posx.y = (float)(GetRow() - 1) * 16;
+		}
+		if (GetFacing() == DOWN)
+		{
+			posx.y = (float)(GetRow() + 1) * 16;
+		}
+		_sprite.setPosition(posx.x, posx.y);
+	}
+	else if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow() && localMode < 3)
+		SetWin();
+
+	if (RowBoundary() && ColumnBoundary())
+	{
+		if (localMode != 4)
+			localMode = ghostMode;
+		if (getMode() != localMode)
+		{
+			setMode(localMode);
 			modeSwitch();
 		}
+	}
 
-		// Check ghost Win
-		if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow())
-			SetWin();
+	// Ghost sequencing just isn't working and I don't know why
+	//if (score < 82)
+	//	localMode = 0;
 
-		// Mode and path switch
-		if (!GetWin())
+	if (!GetWin())
+	{
+		// Test if ghost is in ghost house
+		if (ghostHouse() && localMode > 0 && localMode < 3)
 		{
-			// Test if ghost is in ghost house
-			if (ghostHouse() && ghostMode != 0)
-			{
-				clearPrevTiles();
-				pacPos = (sf::Vector2f(216, 80));
-				this->walk(pacPos);
-			}
-			else
-			{
-				switch (ghostMode)
-				{
-				case 0:							// Stopped
-					break;
-				case 1:							// Scatter mode
-					break;
-				case 2:							// Chase mode
-					break;
-				case 3:							// Frightened mode
-					break;
-				case 4:
-					break;
-				}
-			}
-			timeBetweenMoves = sf::milliseconds(25);
+			clearPrevTiles();
+			pacPos = (sf::Vector2f(216, 80));
+			this->walk(pacPos);
 		}
+		else
+		{
+			// Mode and path switch
+			switch (localMode)
+			{
+			case 0:							// Stopped
+				pacPos = stoppedMode(pacPos);
+				break;
+			case 1:							// Scatter mode
+				setGhostImage("assets/ghostRed.png");
+				frightened = false;
+				pacPos = chaseMode(pacPos);	// Blinky doesn't have a scatter mode
+				break;
+			case 2:							// Chase mode
+				pacPos = chaseMode(pacPos);
+				break;
+			case 3:							// Frightened mode
+				pacPos = frightMode(pacPos);
+				break;
+			case 4:							// Eye Mode
+				pacPos = eyeMode(pacPos);
+				break;
+
+			}
+		}
+	}
+	if (timeBetweenMoves <= sf::Time::Zero)
+	{
+		walk(pacPos);
+		timeBetweenMoves = sf::milliseconds(25);
 	}
 }
 
 
 
-void Blinky::chaseMode(sf::Vector2f pacPos)		// Chase Mode
+
+sf::Vector2f Blinky::chaseMode(sf::Vector2f pacPos)		// Chase Mode
 {
 	if (frightened)
 	{
@@ -58,7 +101,8 @@ void Blinky::chaseMode(sf::Vector2f pacPos)		// Chase Mode
 		frightened = false;
 	}
 	this->SetSpeed(4);
-	this->walk(pacPos);
+	
+	return pacPos;
 }
 
 
