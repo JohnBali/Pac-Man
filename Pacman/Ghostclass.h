@@ -52,7 +52,6 @@ public:
 protected:
 	// Variables
 	
-	sf::Clock clock;
 	sf::Vector2f previousPosition;
 	sf::Vector2f nextPosition;
 	sf::Vector2i previousTile [6];

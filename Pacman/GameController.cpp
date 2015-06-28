@@ -191,7 +191,7 @@ void GameController::GameLoop()
 				frightModes = _frightTime.restart();
 				//*_pacmanEnergized = false;
 			}
-			else if (ghostMode == 3)														// Flash the frightened ghosts
+			else if (ghostMode == 3)																// Flash the frightened ghosts
 			{
 				frightModes = _frightTime.getElapsedTime();
 				if (frightModes.asSeconds() > 2.5 && frightModes.asSeconds() < 3)
