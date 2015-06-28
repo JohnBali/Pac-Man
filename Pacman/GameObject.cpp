@@ -142,33 +142,33 @@ int GameObject::GetRow()
 	return (int)_sprite.getPosition().y / 16;
 }
 
-void GameObject::SetWin()
-{
-	ghostWin = true;
-}
+//void GameObject::SetWin()
+//{
+//	ghostWin = true;
+//}
 
-bool GameObject::GetWin()
-{
-	return ghostWin;
-}
+//bool GameObject::GetWin()
+//{
+//	return ghostWin;
+//}
 
-void GameObject::setMode(int mode)
-{
-	this->ghostMode = mode;
-}
-
-int GameObject::getMode()
-{
-	return this->ghostMode;
-}
-
-void GameObject::SetEaten(bool state)
-{
-	ghostEaten = state;
-}
-
-bool GameObject::GetEaten()
-{
-	return ghostEaten;
-}
+//void GameObject::setMode(int mode)
+//{
+//	this->ghostMode = mode;
+//}
+//
+//int GameObject::getMode()
+//{
+//	return this->ghostMode;
+//}
+//
+//void GameObject::SetEaten(bool state)
+//{
+//	ghostEaten = state;
+//}
+//
+//bool GameObject::GetEaten()
+//{
+//	return ghostEaten;
+//}
 

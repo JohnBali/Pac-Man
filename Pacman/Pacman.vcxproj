@@ -88,6 +88,7 @@
     <ClCompile Include="Blinky.cpp" />
     <ClCompile Include="Clyde.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="FinishScreen.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Blinky.h" />
     <ClInclude Include="Clyde.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="FinishScreen.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameObject.h" />

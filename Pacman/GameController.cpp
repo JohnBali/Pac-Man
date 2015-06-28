@@ -9,13 +9,9 @@ void GameController::Start(void)
 	Pinky *pinky = new Pinky();
 	Inky *inky = new Inky();
 	Clyde *clyde = new Clyde();
-
 	Food *food = new Food();
-	_score = food->getScore();
-	_pacmanEnergized = food->getEnergizerState();
 
-	//create a pointer to the score in the food class which is used to work out when the level is complete
-	_score = food->getScore();
+	_pacmanEnergized = food->getEnergizerState();
 
 	if (_debug)
 	{
@@ -65,51 +61,16 @@ void GameController::DisplayHomeScreen()
 
 void GameController::DisplayFinishScreen(std::string finString)
 {
-	// Declare and load a font
-	sf::Font font;
-	sf::Vector2f pos;
-	pos.x = 139;
-	pos.y = 264;
-	font.loadFromFile("assets/8-BIT WONDER.ttf");
-	// Create a text
-	sf::Text textLineOne(finString, font);
-	textLineOne.setCharacterSize(26);
-	textLineOne.setStyle(sf::Text::Bold);
-	textLineOne.setColor(sf::Color::Red);
-	textLineOne.setPosition(pos);
-	pos.x = 78;
-	pos.y = 313;
-	sf::Text textLineTwo("Press  Space", font);
-	textLineTwo.setCharacterSize(26);
-	textLineTwo.setStyle(sf::Text::Bold);
-	textLineTwo.setColor(sf::Color::Red);
-	textLineTwo.setPosition(pos);
-	_window.draw(textLineOne);
-	_window.draw(textLineTwo);
-	_window.display();
-	
-	sf::Event menuEvent;
-	while (_window.pollEvent(menuEvent))
+	FinishScreen finishScreen;
+	std::string result = finishScreen.Show(_window, finString, _gameObjectManager);
+	if (result == "menu")
 	{
-		if (menuEvent.type == sf::Event::KeyPressed)
-		{
-			*_score = 0;
-
-			_gameObjectManager.Remove("NFood");
-			_gameObjectManager.Remove("Pacman");
-			_gameObjectManager.Remove("_Blinky");
-			_gameObjectManager.Remove("_Pinky");
-			_gameObjectManager.Remove("_Inky");
-			_gameObjectManager.Remove("_Clyde");
-
-			Start();
-			_gameState = GameController::DisplayingMenu;
-		}
-		if (menuEvent.type == sf::Event::Closed)
-		{
-			_gameState = GameController::Exiting;
-		}
-	}		
+		_gameState = GameController::DisplayingMenu;
+	}
+	else if (result == "exit")
+	{
+		_gameState = GameController::Exiting;
+	}
 }
 
 void GameController::DisplayLoseScreen()
@@ -184,14 +145,7 @@ void GameController::GameLoop()
 				_ghostSwitch = 1;
 			}
 
-			// Object handles																These are temporary, only exist in this method
 			sf::Event event;
-			GameObject pacman = *_gameObjectManager.Get("Pacman");
-			GameObject blinky = *_gameObjectManager.Get("_Blinky");
-			GameObject pinky = *_gameObjectManager.Get("_Pinky");
-			GameObject inky = *_gameObjectManager.Get("_Inky");
-			GameObject clyde = *_gameObjectManager.Get("_Clyde");
-
 			while (_window.pollEvent(event))
 			{
 				// "close requested" event: we close the window
@@ -202,13 +156,28 @@ void GameController::GameLoop()
 				}
 			}
 			//check if all dots are eaten and game is won
-			if (*_score == 246)
-			{				
-				_gameState = GameController::Win;
-			}
+			Food* food = dynamic_cast<Food*>(_gameObjectManager.Get("NFood"));
+			if (food != NULL)
+			{
+				if (*food->getScore() == 246)
+				{
+					_gameState = GameController::Win;
+				}
+			}			
 
+			// Object handles																These are temporary, only exist in this method
+			Ghostclass* blinky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Blinky"));
+			Ghostclass* pinky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Pinky"));
+			Ghostclass* inky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Inky"));
+			Ghostclass* clyde = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Clyde"));
 			
-			if (blinky.GetWin() || pinky.GetWin() || inky.GetWin() || clyde.GetWin())
+			GameObject pacman = *_gameObjectManager.Get("Pacman");
+			//GameObject blinky = *_gameObjectManager.Get("_Blinky");
+			//GameObject pinky = *_gameObjectManager.Get("_Pinky");
+			//GameObject inky = *_gameObjectManager.Get("_Inky");
+			//GameObject clyde = *_gameObjectManager.Get("_Clyde");
+
+			if (blinky->GetWin() || pinky->GetWin() || inky->GetWin() || clyde->GetWin())
 			{
 				_gameState = GameController::Lose;
 			}
@@ -263,7 +232,7 @@ void GameController::GameLoop()
 
 			// Game Updates
 			sf::Vector2f pacPos = pacman.GetPosition();
-			sf::Vector2f blinkyPos = blinky.GetPosition();
+			sf::Vector2f blinkyPos = blinky->GetPosition();
 			GameObject::Facing facing = pacman.GetFacing();
 			sf::Time elapsed = _clock.restart();
 			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos, ghostMode, *_score, spriteColor);
@@ -277,7 +246,7 @@ void GameController::GameLoop()
 				sf::RectangleShape boundingBox;
 				boundingBox.setSize(sf::Vector2f(32, 32));
 				boundingBox.setOrigin(8, 8);
-				boundingBox.setPosition(blinky.GetPosition());
+				boundingBox.setPosition(blinky->GetPosition());
 				boundingBox.setFillColor(sf::Color(0, 0, 0, 0));
 				boundingBox.setOutlineColor(sf::Color::Red);
 				boundingBox.setOutlineThickness(3);

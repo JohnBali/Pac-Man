@@ -81,7 +81,7 @@ bool* Food::getEnergizerState()
 	return &pacmanEnergized;
 }
 
-void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
+void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &nscore, sf::Color spriteColor)
 {
 	pacmanEnergized = false;
 	//check if the tile contains dot or energizer and eat it

@@ -98,6 +98,35 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 
 }
 // Setters/Getters
+void Ghostclass::setMode(int mode)
+{
+	this->ghostMode = mode;
+}
+
+int Ghostclass::getMode()
+{
+	return this->ghostMode;
+}
+
+void Ghostclass::SetEaten(bool state)
+{
+	ghostEaten = state;
+}
+
+bool Ghostclass::GetEaten()
+{
+	return ghostEaten;
+}
+
+void Ghostclass::SetWin()
+{
+	ghostWin = true;
+}
+
+bool Ghostclass::GetWin()
+{
+	return ghostWin;
+}
 
 void Ghostclass::setPrevTile(sf::Vector2i pos)
 {

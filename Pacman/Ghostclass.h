@@ -12,7 +12,15 @@ public:
 	void walk(sf::Vector2f pacPos);
 
 	// Setters/Getters
+	void SetWin();
+	bool GetWin();
 
+	void SetEaten(bool state);
+	bool GetEaten();
+	
+	virtual void setMode(int mode);
+	virtual int getMode();
+	
 	void setPrevTile(sf::Vector2i pos);
 	sf::Vector2i getPrevTile();
 	bool checkPrevTile(sf::Vector2i pos);
@@ -54,6 +62,8 @@ protected:
 	bool debug;
 	bool frightened;
 	int localMode;
+	bool ghostWin = false;
+	bool ghostEaten = false;
 
 	void Ghostclass::Debug(std::vector<sf::Vector2i> exits);
 };

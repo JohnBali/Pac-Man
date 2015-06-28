@@ -7,8 +7,10 @@
 #include "Pacman.h"
 #include "HomeScreen.h"
 #include "MainMenu.h"
+#include "FinishScreen.h"
 #include "GameController.h"
 #include "GameObjectManager.h"
+#include "Ghostclass.h"
 #include <string>
 #include "Food.h"
 #include "Debug.h"
