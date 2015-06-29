@@ -103,6 +103,11 @@ sf::Event GameController::GetInput()
 	return event;
 }
 
+const GameObjectManager& GameController::GetGameObjectManager()
+{
+	return GameController::_gameObjectManager;
+}
+
 void GameController::GameLoop()
 {
 	bool drawGridCells = true;
@@ -133,16 +138,6 @@ void GameController::GameLoop()
 		}
 		case GameController::Playing:
 		{
-			// Set game timer
-			sf::Time ghostModes;
-			sf::Time frightModes;
-			if (_ghostSwitch == 0)
-			{
-				std::cout << "Mode: " << std::endl;
-				_gameTime.restart();
-				_ghostSwitch = 1;
-			}
-
 			sf::Event event;
 			while (_window.pollEvent(event))
 			{
@@ -169,17 +164,20 @@ void GameController::GameLoop()
 			Ghostclass* inky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Inky"));
 			Ghostclass* clyde = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Clyde"));
 			
-			GameObject pacman = *_gameObjectManager.Get("Pacman");
-			//GameObject blinky = *_gameObjectManager.Get("_Blinky");
-			//GameObject pinky = *_gameObjectManager.Get("_Pinky");
-			//GameObject inky = *_gameObjectManager.Get("_Inky");
-			//GameObject clyde = *_gameObjectManager.Get("_Clyde");
-
 			if (blinky->GetWin() || pinky->GetWin() || inky->GetWin() || clyde->GetWin())
 			{
 				_gameState = GameController::Lose;
 			}
 			
+			// Set game timer
+			sf::Time ghostModes;
+			sf::Time frightModes;
+			if (_ghostSwitch == 0)
+			{
+				std::cout << "Mode: " << std::endl;
+				_gameTime.restart();
+				_ghostSwitch = 1;
+			}
 			// Ghost Mode Set
 			ghostModes = _gameTime.getElapsedTime();
 
@@ -223,18 +221,12 @@ void GameController::GameLoop()
 				else if (ghostModes.asSeconds() > 72 + ghostModeTimer && ghostModes.asSeconds() <= 76 + ghostModeTimer)		// Fourth Scatter mode
 					ghostMode = 1;
 				else if (ghostModes.asSeconds() > 76 + ghostModeTimer)														// Fourth and final Chase mode
-					ghostMode = 2;
-
-				// std::cout << "Ghoist Mode Timer: " << ghostModeTimer << " , Game Time: " << ghostModes.asSeconds() << " , Ghost Mode: " << ghostMode << std::endl;
+					ghostMode = 2;			
 			}
 
 			// Game Updates
-			sf::Vector2f pacPos = pacman.GetPosition();
-			sf::Vector2f blinkyPos = blinky->GetPosition();
-			GameObject::Facing facing = pacman.GetFacing();
 			sf::Time elapsed = _clock.restart();
-			_gameObjectManager.UpdateAll(pacPos, elapsed, facing, blinkyPos, ghostMode, *_score, spriteColor);
-
+			_gameObjectManager.UpdateAll(elapsed, ghostMode, spriteColor);
 
 			_window.clear();		
 			_gameObjectManager.DrawAll(_window);
@@ -264,8 +256,6 @@ Map* GameController::_map = Map::instance();
 GameObjectManager GameController::_gameObjectManager;
 bool GameController::_debug = false;
 sf::Clock GameController::_clock;
-int* GameController::_score;
-//bool* GameController::_pacmanEnergized = false;
 sf::Clock GameController::_gameTime;
 sf::Clock GameController::_frightTime;
 sf::Color GameController::spriteColor = (sf::Color(255, 255, 255));

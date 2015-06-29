@@ -81,23 +81,28 @@ bool Food::getEnergizerState()
 	return pacmanEnergized;
 }
 
-void Food::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &nscore, sf::Color spriteColor)
+void Food::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 {
-	pacmanEnergized = false;
-	//check if the tile contains dot or energizer and eat it
-	Map::Tile tile = map->getTile((int)pacPos.y / 16, (int)pacPos.x / 16);
-	if (tile == Map::Tile::TileDot)
+	Pacman* pacman = dynamic_cast<Pacman*>(GameController::GetGameObjectManager().Get("Pacman"));
+	if (pacman != NULL)
 	{
-		map->updateDotToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
-		score++;
-		readMap();
-	}
-	if (tile == Map::Tile::TileEnergizer)
-	{
-		pacmanEnergized = true;
-		map->updateEnergizerToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
-		score++;
-		readMap();
+		sf::Vector2f pacPos = pacman->GetPosition();
+		pacmanEnergized = false;
+		//check if the tile contains dot or energizer and eat it
+		Map::Tile tile = map->getTile((int)pacPos.y / 16, (int)pacPos.x / 16);
+		if (tile == Map::Tile::TileDot)
+		{
+			map->updateDotToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
+			score++;
+			readMap();
+		}
+		if (tile == Map::Tile::TileEnergizer)
+		{
+			pacmanEnergized = true;
+			map->updateEnergizerToEaten((int)pacPos.y / 16, (int)pacPos.x / 16);
+			score++;
+			readMap();
+		}
 	}
 }
 

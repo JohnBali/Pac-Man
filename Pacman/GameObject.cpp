@@ -84,7 +84,7 @@ sf::Vector2f GameObject::GetPosition()
 	return _sprite.getPosition();
 }
 
-void GameObject::Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor)
+void GameObject::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 {
 
 }
@@ -141,34 +141,3 @@ int GameObject::GetRow()
 {
 	return (int)_sprite.getPosition().y / 16;
 }
-
-//void GameObject::SetWin()
-//{
-//	ghostWin = true;
-//}
-
-//bool GameObject::GetWin()
-//{
-//	return ghostWin;
-//}
-
-//void GameObject::setMode(int mode)
-//{
-//	this->ghostMode = mode;
-//}
-//
-//int GameObject::getMode()
-//{
-//	return this->ghostMode;
-//}
-//
-//void GameObject::SetEaten(bool state)
-//{
-//	ghostEaten = state;
-//}
-//
-//bool GameObject::GetEaten()
-//{
-//	return ghostEaten;
-//}
-

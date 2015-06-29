@@ -25,6 +25,7 @@ class GameController
 {
 public:
 	static void Start();
+	const static GameObjectManager& GetGameObjectManager();
 
 private:
 	static bool IsExiting();
@@ -40,8 +41,6 @@ private:
 
 	enum GameState { Uninitialized, DisplayingHomeScreen, Paused, DisplayingMenu, Playing, Win, Lose, Exiting };
 
-	static int* _score;
-	//static bool* _pacmanEnergized;
 	static GameState _gameState;
 	static sf::RenderWindow _window;
 	static Map* _map;

@@ -23,7 +23,7 @@ public:
 
 	virtual void Load(std::string filename);
 	virtual void Draw(sf::RenderWindow &window);
-	virtual void Update(sf::Vector2f pacPos, sf::Time elapsed, Facing facing, sf::Vector2f blinkyPos, int ghostMode, int &score, sf::Color spriteColor);
+	virtual void Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor);
 
 	virtual void SetPosition(float x, float y);
 	virtual sf::Vector2f GetPosition();
@@ -48,15 +48,6 @@ public:
 	int GetColumn();
 	int GetRow();
 
-	//void SetWin();
-	//bool GetWin();
-
-	//void SetEaten(bool state);
-	//bool GetEaten();
-
-	/*virtual void setMode(int mode);
-	virtual int getMode();*/
-
 	void SetColor(int r, int g, int b);
 
 protected:
@@ -72,8 +63,6 @@ protected:
 	sf::Texture _texture;
 	std::string _filename;
 	bool _isLoaded;
-	//bool ghostWin = false;
-	//bool ghostEaten = false;
 
 	static const int left[FRAMES];
 	static const int right[FRAMES];
