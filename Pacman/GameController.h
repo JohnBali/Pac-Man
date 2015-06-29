@@ -32,6 +32,7 @@ public:
 private:
 	static bool IsExiting();
 	static void GameLoop();
+	static void UpdateGhostModes(Food* food);
 
 	static void DisplayHomeScreen();
 	static void DisplayMenu();
