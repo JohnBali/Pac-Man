@@ -12,7 +12,6 @@
 #include "GameObjectManager.h"
 #include "Ghostclass.h"
 #include <string>
-#include "Food.h"
 #include "Debug.h"
 
 // Add ghost includes
@@ -32,7 +31,6 @@ public:
 private:
 	static bool IsExiting();
 	static void GameLoop();
-	static void UpdateGhostModes(Food* food);
 
 	static void DisplayHomeScreen();
 	static void DisplayMenu();
