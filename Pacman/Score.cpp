@@ -21,7 +21,7 @@ void Score::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 	if (calc > bestScore)
 	{
 		bestScore = calc;
-		bestScoreLabel.setString(std::to_string(bestScore));
+		bestScoreLabel.setString("HS " + std::to_string(bestScore));
 	}
 
 }
@@ -34,6 +34,7 @@ void Score::ResetBonus()
 void Score::Draw(sf::RenderWindow &window)
 {
 	window.draw(scoreLabel);
+	window.draw(bestScoreLabel);
 }
 
 Score::Score()
@@ -45,7 +46,9 @@ Score::Score()
 	scoreLabel.setPosition(pos);
 	scoreLabel.setColor(color);
 	scoreLabel.setFont(font);
-	
+	bestScoreLabel.setPosition(pos.x + 265, pos.y);
+	bestScoreLabel.setColor(color);
+	bestScoreLabel.setFont(font);	
 }
 
 Score::~Score()
