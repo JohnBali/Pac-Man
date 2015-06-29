@@ -1,45 +1,9 @@
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\vc120.pdb
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\vc120.idb
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\blinky.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\clyde.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\debug.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\finishscreen.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\food.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\gameobject.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\gameobjectmanager.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\ghostclass.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\homescreen.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\inky.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\mainmenu.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\map.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\pacman.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\pinky.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\game.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\gamecontroller.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\pacman\debug\score.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\vc120.pdb
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\vc120.idb
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\blinky.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\clyde.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\debug.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\finishscreen.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\game.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\gamecontroller.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\gameobject.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\gameobjectmanager.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\ghostclass.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\homescreen.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\inky.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\mainmenu.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\map.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\pacman.obj
-c:\users\sunny\desktop\pacman\pac-man\pacman\debug\pinky.obj
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\debug\pacman.ilk
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\debug\pacman.exe
-c:\users\john\documents\visual studio 2013\projects\pac-man\pac-man\debug\pacman.pdb
+c:\users\draco\documents\github\pac-man\pacman\debug\vc120.pdb
+c:\users\draco\documents\github\pac-man\pacman\debug\vc120.idb
 c:\users\draco\documents\github\pac-man\pacman\debug\blinky.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\clyde.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\debug.obj
+c:\users\draco\documents\github\pac-man\pacman\debug\finishscreen.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\game.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\gamecontroller.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\gameobject.obj
@@ -51,8 +15,11 @@ c:\users\draco\documents\github\pac-man\pacman\debug\mainmenu.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\map.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\pacman.obj
 c:\users\draco\documents\github\pac-man\pacman\debug\pinky.obj
-c:\users\draco\documents\github\pac-man\pacman\debug\vc120.idb
-c:\users\draco\documents\github\pac-man\pacman\debug\vc120.pdb
+c:\users\draco\documents\github\pac-man\pacman\debug\food.obj
+c:\users\draco\documents\github\pac-man\pacman\debug\score.obj
+c:\users\draco\documents\github\pac-man\debug\pacman.ilk
+c:\users\draco\documents\github\pac-man\debug\pacman.exe
+c:\users\draco\documents\github\pac-man\debug\pacman.pdb
 c:\users\draco\documents\github\pac-man\pacman\debug\pacman.tlog\cl.command.1.tlog
 c:\users\draco\documents\github\pac-man\pacman\debug\pacman.tlog\cl.read.1.tlog
 c:\users\draco\documents\github\pac-man\pacman\debug\pacman.tlog\cl.write.1.tlog

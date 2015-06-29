@@ -31,7 +31,7 @@ public:
 private:
 	static bool IsExiting();
 	static void GameLoop();
-
+	static void GhostModeControl(bool IsEnergised);
 	static void DisplayHomeScreen();
 	static void DisplayMenu();
 	static void DisplayWinScreen();

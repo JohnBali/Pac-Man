@@ -1,13 +1,12 @@
-﻿  Score.cpp
-  GameController.cpp
-  Food.cpp
+﻿  GameController.cpp
   Generating Code...
-  Compiling...
+  Skipping... (no relevant changes detected)
   game.cpp
+  Score.cpp
   Pinky.cpp
   Inky.cpp
+  Food.cpp
   FinishScreen.cpp
   Clyde.cpp
   Blinky.cpp
-  Generating Code...
   Pacman.vcxproj -> C:\Users\Draco\Documents\GitHub\Pac-Man\Debug\Pacman.exe

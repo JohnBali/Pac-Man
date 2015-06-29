@@ -15,13 +15,20 @@ void Score::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 		pinky->SetEaten(false);
 		clyde->SetEaten(false);
 	}
-	std::string score = "Score " + std::to_string(bonusScore + *food->getScore());
+	int calc = (bonusScore + *food->getScore());
+	std::string score = "Score " + std::to_string(calc);
 	scoreLabel.setString(score);
-	bestScoreLabel.setString(std::to_string(bestScore));
-	if (score > std::to_string(bestScore))
+	if (calc > bestScore)
 	{
-		bestScore = std::stoi(score);
+		bestScore = calc;
+		bestScoreLabel.setString(std::to_string(bestScore));
 	}
+
+}
+
+void Score::ResetBonus()
+{
+	bonusScore = 0;
 }
 
 void Score::Draw(sf::RenderWindow &window)
@@ -38,7 +45,7 @@ Score::Score()
 	scoreLabel.setPosition(pos);
 	scoreLabel.setColor(color);
 	scoreLabel.setFont(font);
-	bonusScore = 0;
+	
 }
 
 Score::~Score()

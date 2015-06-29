@@ -124,6 +124,8 @@ void GameController::GameLoop()
 		}
 		case GameController::DisplayingMenu:
 		{
+			Score* score = dynamic_cast<Score*>(_gameObjectManager.Get("Score"));
+			score->ResetBonus();
 			_ghostSwitch = 0;
 			DisplayMenu();
 			break;
@@ -160,7 +162,7 @@ void GameController::GameLoop()
 				}
 			}			
 
-			// Object handles																These are temporary, only exist in this method
+			// Object handles
 			Ghostclass* blinky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Blinky"));
 			Ghostclass* pinky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Pinky"));
 			Ghostclass* inky = dynamic_cast<Ghostclass*>(_gameObjectManager.Get("_Inky"));
@@ -171,60 +173,11 @@ void GameController::GameLoop()
 				_gameState = GameController::Lose;
 			}			
 			
-			// Set game timer
-			sf::Time ghostModes;
-			sf::Time frightModes;
-			if (_ghostSwitch == 0)
-			{
-				std::cout << "Mode: " << std::endl;
-				_gameTime.restart();
-				_ghostSwitch = 1;
-			}
-			// Ghost Mode Set
-			ghostModes = _gameTime.getElapsedTime();
-
-			if (food->getEnergizerState())															// Check if Pacman has eaten an Energiser
-			{
-				//update mode to frightened
-				ghostMode = 3;
-				ghostModeTimer += 4;
-				frightModes = _frightTime.restart();
-				//*_pacmanEnergized = false;
-			}
-			else if (ghostMode == 3)																// Flash the frightened ghosts
-			{
-				frightModes = _frightTime.getElapsedTime();
-				if (frightModes.asSeconds() > 2.5 && frightModes.asSeconds() < 3)
-					spriteColor = (sf::Color(0, 64, 64));
-				else if (frightModes.asSeconds() > 3 && frightModes.asSeconds() < 3.5)
-					spriteColor = (sf::Color(255, 255, 255));
-				else if (frightModes.asSeconds() > 3.5 && frightModes.asSeconds() < 4)
-					spriteColor = (sf::Color(0, 64, 64));
-				else if (frightModes.asSeconds() > 4)
-				{
-					ghostMode = 1;
-					spriteColor = (sf::Color(255, 255, 255));
-				}
-			}
-			else
-			{																												// Set standard ghost modes
-				if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 4 + ghostModeTimer)								//First Scatter mode
-					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 4 + ghostModeTimer && ghostModes.asSeconds() <= 24 + ghostModeTimer)		// First Chase mode
-					ghostMode = 2;
-				else if (ghostModes.asSeconds() > 24 + ghostModeTimer && ghostModes.asSeconds() <= 28 + ghostModeTimer)		// Second Scatter mode
-					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 28 + ghostModeTimer && ghostModes.asSeconds() <= 48 + ghostModeTimer)		// Second Chase mode
-					ghostMode = 2;
-				else if (ghostModes.asSeconds() > 48 + ghostModeTimer && ghostModes.asSeconds() <= 52 + ghostModeTimer)		// Third Scatter mode
-					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 52 + ghostModeTimer && ghostModes.asSeconds() <= 72 + ghostModeTimer)		// Third Chase mode
-					ghostMode = 2;
-				else if (ghostModes.asSeconds() > 72 + ghostModeTimer && ghostModes.asSeconds() <= 76 + ghostModeTimer)		// Fourth Scatter mode
-					ghostMode = 1;
-				else if (ghostModes.asSeconds() > 76 + ghostModeTimer)														// Fourth and final Chase mode
-					ghostMode = 2;
-			}
+			// Ghost Mode Control
+			bool IsEnergised = false;
+			if (food->getEnergizerState())
+				IsEnergised = true;
+			GhostModeControl(IsEnergised);
 
 			// Game Updates
 			sf::Time elapsed = _clock.restart();
@@ -250,6 +203,64 @@ void GameController::GameLoop()
 			break;
 		}
 	}	
+}
+
+void GameController::GhostModeControl(bool IsEnergised)
+{
+	// Set game timer
+	sf::Time ghostModes;
+	sf::Time frightModes;
+	if (_ghostSwitch == 0)
+	{
+		_gameTime.restart();
+		_ghostSwitch = 1;
+	}
+	// Ghost Mode Set
+	ghostModes = _gameTime.getElapsedTime();
+
+	if (IsEnergised)															// Check if Pacman has eaten an Energiser
+	{
+		//update mode to frightened
+		ghostMode = 3;
+		ghostModeTimer += 4;
+		frightModes = _frightTime.restart();
+		//*_pacmanEnergized = false;
+	}
+	else if (ghostMode == 3)																// Flash the frightened ghosts
+	{
+		frightModes = _frightTime.getElapsedTime();
+		if (frightModes.asSeconds() > 2.5 && frightModes.asSeconds() < 3)
+			spriteColor = (sf::Color(0, 64, 64));
+		else if (frightModes.asSeconds() > 3 && frightModes.asSeconds() < 3.5)
+			spriteColor = (sf::Color(255, 255, 255));
+		else if (frightModes.asSeconds() > 3.5 && frightModes.asSeconds() < 4)
+			spriteColor = (sf::Color(0, 64, 64));
+		else if (frightModes.asSeconds() > 4)
+		{
+			ghostMode = 1;
+			spriteColor = (sf::Color(255, 255, 255));
+		}
+	}
+	else
+	{																												// Set standard ghost modes
+		if (ghostModes.asSeconds() > 0 && ghostModes.asSeconds() <= 4 + ghostModeTimer)								//First Scatter mode
+			ghostMode = 1;
+		else if (ghostModes.asSeconds() > 4 + ghostModeTimer && ghostModes.asSeconds() <= 24 + ghostModeTimer)		// First Chase mode
+			ghostMode = 2;
+		else if (ghostModes.asSeconds() > 24 + ghostModeTimer && ghostModes.asSeconds() <= 28 + ghostModeTimer)		// Second Scatter mode
+			ghostMode = 1;
+		else if (ghostModes.asSeconds() > 28 + ghostModeTimer && ghostModes.asSeconds() <= 48 + ghostModeTimer)		// Second Chase mode
+			ghostMode = 2;
+		else if (ghostModes.asSeconds() > 48 + ghostModeTimer && ghostModes.asSeconds() <= 52 + ghostModeTimer)		// Third Scatter mode
+			ghostMode = 1;
+		else if (ghostModes.asSeconds() > 52 + ghostModeTimer && ghostModes.asSeconds() <= 72 + ghostModeTimer)		// Third Chase mode
+			ghostMode = 2;
+		else if (ghostModes.asSeconds() > 72 + ghostModeTimer && ghostModes.asSeconds() <= 76 + ghostModeTimer)		// Fourth Scatter mode
+			ghostMode = 1;
+		else if (ghostModes.asSeconds() > 76 + ghostModeTimer)														// Fourth and final Chase mode
+			ghostMode = 2;
+	}
+
 }
 
 

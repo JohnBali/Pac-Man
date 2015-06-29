@@ -12,6 +12,7 @@ public:
 	//methods
 	void Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor);
 	void Draw(sf::RenderWindow &window);
+	void ResetBonus();
 
 private:
 	sf::Font font;
