@@ -17,6 +17,11 @@ void Score::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 	}
 	std::string score = "Score " + std::to_string(bonusScore + *food->getScore());
 	scoreLabel.setString(score);
+	bestScoreLabel.setString(std::to_string(bestScore));
+	if (score > std::to_string(bestScore))
+	{
+		bestScore = std::stoi(score);
+	}
 }
 
 void Score::Draw(sf::RenderWindow &window)

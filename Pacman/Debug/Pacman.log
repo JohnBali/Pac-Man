@@ -1,9 +1,29 @@
-﻿Build started 29/06/2015 9:09:49 p.m..
-     1>Project "C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Pacman\Pacman.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         Pacman.vcxproj -> C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Debug\Pacman.exe
-     1>Done Building Project "C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Pacman\Pacman.vcxproj" (Build target(s)).
+﻿Build started 29/06/2015 10:14:54 p.m..
+     1>Project "C:\Users\Sunny\Desktop\Pacman\Pac-Man\Pacman\Pacman.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\include" /I"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include" /I"C:\Users\Sunny\Documents\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Blinky.cpp Clyde.cpp Debug.cpp FinishScreen.cpp Food.cpp game.cpp GameController.cpp GameObject.cpp GameObjectManager.cpp Ghostclass.cpp HomeScreen.cpp Inky.cpp MainMenu.cpp Map.cpp Pacman.cpp Pinky.cpp Score.cpp
+         Score.cpp
+     1>c:\users\sunny\desktop\pacman\pac-man\pacman\gamecontroller.h(35): error C2061: syntax error : identifier 'Food'
+         Pinky.cpp
+         Pacman.cpp
+         Map.cpp
+         MainMenu.cpp
+         Inky.cpp
+         HomeScreen.cpp
+         Ghostclass.cpp
+         GameObjectManager.cpp
+         GameObject.cpp
+         GameController.cpp
+         game.cpp
+         Food.cpp
+     1>c:\users\sunny\desktop\pacman\pac-man\pacman\gamecontroller.h(35): error C2061: syntax error : identifier 'Food'
+         FinishScreen.cpp
+         Debug.cpp
+         Clyde.cpp
+         Blinky.cpp
+         Generating Code...
+     1>Done Building Project "C:\Users\Sunny\Desktop\Pacman\Pac-Man\Pacman\Pacman.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:00.39
+Time Elapsed 00:00:11.03

@@ -17,5 +17,7 @@ private:
 	sf::Font font;
 	sf::Vector2f pos;
 	sf::Text scoreLabel;
+	sf::Text bestScoreLabel;
 	int bonusScore;
+	int bestScore;
 };
