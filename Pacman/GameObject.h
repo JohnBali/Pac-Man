@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: Header of GameObject Class
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>

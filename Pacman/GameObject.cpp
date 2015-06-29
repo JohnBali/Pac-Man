@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is GameObject class. This class draws the elements of the game.
+*/
+
 #include "GameObject.h"
 #include "Map.h"
 

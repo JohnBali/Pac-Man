@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: Header of GameObjectManager Class
+*/
+
 #pragma once
 #include "GameObject.h"
 #include "Map.h"

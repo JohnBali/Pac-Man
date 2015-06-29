@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is FinishScreen class. This class creates the FinishScreen in the game.
+*/
+
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include "FinishScreen.h"

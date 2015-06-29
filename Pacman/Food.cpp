@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Food class. This class draws the food on the map.
+*/
+
 #include "Food.h"
 
 void Food::readMap()

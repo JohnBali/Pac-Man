@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Clyde class. This class manages the actions of Clyde ghost.
+*/
+
 #include "Clyde.h"
 
 // Set the path

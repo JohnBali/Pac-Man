@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Ghostclass class. This class manages the operations of all ghosts.
+*/
+
 #include "Ghostclass.h"
 
 // Walk

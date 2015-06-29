@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Map class. This class constructs the game map.
+*/
+
 #include "Map.h"
 #include "GameObject.h"
 

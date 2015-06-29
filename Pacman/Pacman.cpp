@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Pacman class. This class manages the actions of Pacman.
+*/
+
 #include "Pacman.h"
 
 void Pacman::walk(Map* map)

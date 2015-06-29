@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Blinky class. This class manages the actions of Blinky ghost.
+*/
+
 #include "Blinky.h"
 
 // Set the path

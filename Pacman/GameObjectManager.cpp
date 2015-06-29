@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is GameObjectManager class. This class manages the game objects.
+*/
+
 #include "GameObjectManager.h"
 
 GameObjectManager::GameObjectManager()

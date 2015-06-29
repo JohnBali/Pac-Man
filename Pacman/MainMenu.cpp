@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is MainMaenu class. This class creats and handles the events on the main menu.
+*/
+
 #include "MainMenu.h" 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"

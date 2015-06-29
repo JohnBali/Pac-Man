@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is GameController class.  This class creates Pacman and ghosts object as well as doing the functional things of the game.
+*/
+
 #include "GameController.h"
 
 void GameController::Start(void)

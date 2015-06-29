@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is HomeScreen class. This class creates the home screen in the game.
+*/
+
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include "HomeScreen.h"

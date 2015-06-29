@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Pinky class. This class manages the actions of Pinky ghost.
+*/
+
 #include "Pinky.h"
 
 // Set the path

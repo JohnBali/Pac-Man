@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: Header of Blinky Class
+*/
+
 #pragma once
 #include "Ghostclass.h"
 #include "GameController.h"

@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is a Debug class. This class is for debugging.
+*/
+
 #include "Debug.h"
 
 Debug::Debug(GameObjectManager &gameObjectManager)

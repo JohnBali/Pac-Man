@@ -1,3 +1,9 @@
+/**
+* Developer: Team Six Pack
+* Game Name: Pacman
+* Description: This is Score class. This class draws and updates the score.
+*/
+
 #include "Score.h"
 
 void Score::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
