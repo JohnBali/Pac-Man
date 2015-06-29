@@ -21,6 +21,8 @@
 #include "Inky.h"
 #include "Clyde.h"
 
+#include "Score.h"
+
 class GameController
 {
 public:

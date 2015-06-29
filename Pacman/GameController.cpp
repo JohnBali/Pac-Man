@@ -10,6 +10,7 @@ void GameController::Start(void)
 	Inky *inky = new Inky();
 	Clyde *clyde = new Clyde();
 	Food *food = new Food();
+	Score *score = new Score();
 
 	if (_debug)
 	{
@@ -26,6 +27,7 @@ void GameController::Start(void)
 	_gameObjectManager.Add("_Pinky", pinky);
 	_gameObjectManager.Add("_Inky", inky);
 	_gameObjectManager.Add("_Clyde", clyde);
+	_gameObjectManager.Add("Score", score);
 
 	if (_gameState != Uninitialized)
 		return;

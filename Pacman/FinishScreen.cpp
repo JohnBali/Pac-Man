@@ -31,7 +31,7 @@ std::string FinishScreen::Show(sf::RenderWindow &window, std::string finString, 
 	sf::Event menuEvent;
 	while (window.pollEvent(menuEvent))
 	{
-		if (menuEvent.type == sf::Event::KeyPressed)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			gameObjectManager.Remove("NFood");
 			gameObjectManager.Remove("Pacman");

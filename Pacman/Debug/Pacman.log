@@ -1,17 +1,9 @@
-﻿Build started 29/06/2015 6:59:02 p.m..
+﻿Build started 29/06/2015 8:44:58 p.m..
      1>Project "C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Pacman\Pacman.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\include" /I"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Blinky.cpp Clyde.cpp FinishScreen.cpp Food.cpp GameController.cpp Inky.cpp Pinky.cpp game.cpp
-         GameController.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         game.cpp
-         Pinky.cpp
-         Inky.cpp
-         Food.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\include" /I"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FinishScreen.cpp
          FinishScreen.cpp
-         Clyde.cpp
-         Blinky.cpp
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Debug\Pacman.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Draco\Documents\Visual Studio 2013\SFML-2.2\lib" /LIBPATH:"C:\Users\John\Documents\SFML-2.3-windows-vc12-32-bit\SFML-2.3\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-main-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Debug\Pacman.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Debug\Pacman.lib" /MACHINE:X86 Debug\Blinky.obj
          Debug\Clyde.obj
@@ -29,9 +21,10 @@
          Debug\Map.obj
          Debug\Pacman.obj
          Debug\Pinky.obj
+         Debug\Score.obj
          Pacman.vcxproj -> C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Debug\Pacman.exe
      1>Done Building Project "C:\Users\John\Documents\Visual Studio 2013\Projects\Pac-Man\Pac-Man\Pacman\Pacman.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.54
+Time Elapsed 00:00:01.70
