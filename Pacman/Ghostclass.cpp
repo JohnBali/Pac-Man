@@ -104,6 +104,17 @@ void Ghostclass::walk(sf::Vector2f pacPos)
 
 }
 // Setters/Getters
+bool Ghostclass::collisionDetection(sf::Vector2f pacPos)
+{
+	sf::Vector2f ghostPos = _sprite.getPosition();
+	ghostPos = ghostPos - pacPos;
+	float distance = vm::magnitude(ghostPos);
+	if (distance < 16)
+		return true;
+	else
+		return false;
+}
+
 void Ghostclass::setMode(int mode)
 {
 	this->ghostMode = mode;
@@ -136,7 +147,7 @@ bool Ghostclass::GetWin()
 
 void Ghostclass::setPrevTile(sf::Vector2i pos)
 {
-	for (int i = 6; i > 0; i--)
+	for (int i = 5; i > 0; i--)
 	{
 		previousTile[i] = previousTile[i - 1];
 	}

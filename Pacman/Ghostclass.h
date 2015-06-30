@@ -45,6 +45,8 @@ public:
 	void setGhostImage(std::string filename);
 	bool ghostHouse();
 	bool ghostHouseTwo();
+
+	bool collisionDetection(sf::Vector2f pacPos);
 	
 	sf::Vector2f stoppedMode(sf::Vector2f pacPos);
 	sf::Vector2f Ghostclass::scatterMode(sf::Vector2f pacPos);

@@ -20,7 +20,7 @@ void Inky::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 		SetColor(spriteColor.r, spriteColor.g, spriteColor.b);
 
 		// Check ghost Win//Eaten
-		if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow() && localMode == 3)
+		if (collisionDetection(pacPos) && localMode == 3)
 		{
 			SetEaten(true);
 			localMode = 4;
@@ -43,7 +43,7 @@ void Inky::Update(sf::Time elapsed, int ghostMode, sf::Color spriteColor)
 			}
 			_sprite.setPosition(posx.x, posx.y);
 		}
-		else if ((int)pacPos.x / 16 == GetColumn() && (int)pacPos.y / 16 == GetRow() && localMode < 3)
+		else if (collisionDetection(pacPos) && localMode < 3)
 			SetWin();
 
 		if (RowBoundary() && ColumnBoundary())
